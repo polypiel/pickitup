@@ -1,0 +1,12 @@
+<p>
+  <strong>Date:</strong>
+  <%= @pickup.date %>
+</p>
+ 
+<p>
+  <strong>Comments:</strong>
+  <%= @pickup.comments %>
+</p>
+
+<%= link_to 'Back', pickups_path %>
+<%= link_to 'Edit', edit_pickup_path(@pickup) %>
