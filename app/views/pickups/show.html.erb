@@ -1,12 +1,4 @@
-<p>
-  <strong>Date:</strong>
-  <%= @pickup.date %>
-</p>
- 
-<p>
-  <strong>Comments:</strong>
-  <%= @pickup.comments %>
-</p>
+<p id="notice"><%= notice %></p>
 
+<%= link_to 'Edit', edit_pickup_path(@pickup) %> |
 <%= link_to 'Back', pickups_path %>
-<%= link_to 'Edit', edit_pickup_path(@pickup) %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710172147) do
+ActiveRecord::Schema.define(version: 20140723000001) do
 
   create_table "coins", force: true do |t|
     t.integer  "value"
@@ -19,8 +19,6 @@ ActiveRecord::Schema.define(version: 20140710172147) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "coins", ["currency_id"], name: "index_coins_on_currency_id"
 
   create_table "currencies", force: true do |t|
     t.string   "name"
@@ -32,25 +30,20 @@ ActiveRecord::Schema.define(version: 20140710172147) do
   create_table "pickups", force: true do |t|
     t.datetime "date"
     t.string   "comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.decimal  "longitude"
     t.decimal  "latitude"
     t.integer  "coin_id"
     t.integer  "wallet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "pickups", ["coin_id"], name: "index_pickups_on_coin_id"
-  add_index "pickups", ["wallet_id"], name: "index_pickups_on_wallet_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
+    t.integer  "wallet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "wallet_id"
   end
-
-  add_index "users", ["wallet_id"], name: "index_users_on_wallet_id"
 
   create_table "wallets", force: true do |t|
     t.string   "name"
@@ -58,7 +51,5 @@ ActiveRecord::Schema.define(version: 20140710172147) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "wallets", ["owner_id"], name: "index_wallets_on_owner_id"
 
 end
