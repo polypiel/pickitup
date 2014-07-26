@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724170507) do
+ActiveRecord::Schema.define(version: 20140726103723) do
 
   create_table "coins", force: true do |t|
     t.integer  "value"
     t.integer  "currency_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "short_name"
   end
 
   create_table "currencies", force: true do |t|
     t.string   "name"
-    t.string   "symbol"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
