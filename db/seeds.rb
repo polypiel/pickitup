@@ -12,5 +12,5 @@ Coin.create(value: 1, currency: euro)
 Coin.create(value: 2, currency: euro)
 Coin.create(value: 5, currency: euro)
 
-marielo = User.create(username: "Marielo", email: "marielo@email.com")
-#Wallet.create(name: "Marielo's wallet", owner: marielo)
+marielos_wallet = Wallet.create(name: "Marielo's wallet")
+marielo = User.create(username: "Marielo", email: "marielo@email.com", role: 0, wallet_id: marielos_wallet)

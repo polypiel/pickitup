@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723220408) do
+ActiveRecord::Schema.define(version: 20140724170507) do
 
   create_table "coins", force: true do |t|
     t.integer  "value"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140723220408) do
     t.integer  "wallet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "picker_id"
   end
 
   create_table "users", force: true do |t|
@@ -44,11 +45,11 @@ ActiveRecord::Schema.define(version: 20140723220408) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
+    t.integer  "role"
   end
 
   create_table "wallets", force: true do |t|
     t.string   "name"
-    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

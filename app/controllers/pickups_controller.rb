@@ -14,7 +14,10 @@ class PickupsController < ApplicationController
 
   # GET /pickups/new
   def new
-    @pickup = Pickup.new
+    @pickup = Pickup.new do |p|
+    	p.date = Time.now
+      p.picker = User.find_by(username: "Marielo")
+    end
   end
 
   # GET /pickups/1/edit

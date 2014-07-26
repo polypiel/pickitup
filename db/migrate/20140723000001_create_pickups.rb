@@ -5,7 +5,6 @@ class CreatePickups < ActiveRecord::Migration
     create_table :currencies do |t|
       t.string :name
       t.string :symbol
-
       t.timestamps
     end
 
@@ -13,15 +12,12 @@ class CreatePickups < ActiveRecord::Migration
     create_table :coins do |t|
       t.integer :value
       t.belongs_to :currency
-
       t.timestamps
     end
 
     drop_table :wallets
     create_table :wallets do |t|
       t.string :name
-      t.belongs_to :owner
-
       t.timestamps
     end
 
@@ -33,6 +29,7 @@ class CreatePickups < ActiveRecord::Migration
       t.decimal :latitude
       t.belongs_to :coin
       t.belongs_to :wallet
+      t.belongs_to :picker
       t.timestamps
     end
 
@@ -40,8 +37,8 @@ class CreatePickups < ActiveRecord::Migration
     create_table :users do |t|
       t.string :username
       t.string :email
+      t.integer :role
       t.belongs_to :wallet
-
       t.timestamps
     end
   end
