@@ -1,4 +1,4 @@
 class Currency < ActiveRecord::Base
-  validates :name, :symbol, presence: true
+  validates :name, presence: true
   has_many :coins, dependent: :destroy
 end
