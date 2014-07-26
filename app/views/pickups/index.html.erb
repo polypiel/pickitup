@@ -10,6 +10,8 @@
   <tbody>
     <% @pickups.each do |pickup| %>
       <tr>
+        <td><%= pickup.date.strftime("%m/%d/%Y %H:%M") %></td>
+        <td><%= pickup.coin %></td>
         <td><%= link_to 'Show', pickup %></td>
         <td><%= link_to 'Edit', edit_pickup_path(pickup) %></td>
         <td><%= link_to 'Destroy', pickup, method: :delete, data: { confirm: 'Are you sure?' } %></td>

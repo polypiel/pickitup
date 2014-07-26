@@ -12,8 +12,23 @@
   <% end %>
 
   <div class="field">
-    <% f.label :date %><br/>
-    <% f.text_field :date %>
+    <%= f.label :date %><br>
+    <%= f.text_field :date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :comments %><br>
+    <%= f.text_area :comments, rows: 4 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :longitude %><br>
+    <%= f.text_field :longitude %>
+  </div>
+
+  <div class="field">
+    <%= f.label :latitude %><br>
+    <%= f.text_field :latitude %>
   </div>
 
   <div class="actions">

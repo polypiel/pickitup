@@ -16,7 +16,6 @@ class PickupsController < ApplicationController
   def new
     @pickup = Pickup.new do |p|
     	p.date = Time.now
-      p.picker = User.find_by(username: "Marielo")
     end
   end
 
@@ -28,6 +27,8 @@ class PickupsController < ApplicationController
   # POST /pickups.json
   def create
     @pickup = Pickup.new(pickup_params)
+    @pickup.picker = User.find_by(username: "Marielo")
+    @pickup.coin = Coin.take
 
     respond_to do |format|
       if @pickup.save
@@ -72,6 +73,6 @@ class PickupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pickup_params
-      params[:pickup]
+      params.require(:pickup).permit(:date, :comments, :longitude, :latitude)
     end
 end
