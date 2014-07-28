@@ -3,3 +3,14 @@
 <%= render 'form' %>
 
 <%= link_to 'Back', pickups_path %>
+
+<script>
+$(document).ready(function() {
+
+  navigator.geolocation.getCurrentPosition(show_map);
+  function show_map(position) {
+    $("#pickup_latitude").val(position.coords.latitude);
+    $("#pickup_longitude").val(position.coords.longitude);
+  }
+});
+</script>
