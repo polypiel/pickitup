@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+one_cent:
   value: 1
-  currency_id: 
+  name: centimo
+  short_name: cent
+  currency_id: euro
 
-two:
+one_penny:
   value: 1
-  currency_id: 
+  name: penny
+  short_name: penny
+  currency_id: pound

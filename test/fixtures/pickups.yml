@@ -2,8 +2,13 @@
 
 one:
   date: 2014-07-07 23:26:24
-  comments: MyString
+  coin_id: one_cent
+  picker_id: polypiel
+  wallet_id: marielos_wallet
 
 two:
   date: 2014-07-07 23:26:24
   comments: MyString
+  coin_id: one_cent
+  picker_id: marielo
+  wallet_id: marielos_wallet
