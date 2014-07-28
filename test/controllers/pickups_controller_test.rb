@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class PickupsControllerTest < ActionController::TestCase
+  
   setup do
     @pickup = pickups(:one)
+    @update = {
+      date: Time.now,
+      comments: "It was on the pavement",
+      picker: users(:polypiel),
+      coin: coins(:one_cent),
+      wallet: wallets(:marielos)
+    }
   end
 
   test "should get index" do
@@ -18,7 +26,7 @@ class PickupsControllerTest < ActionController::TestCase
 
   test "should create pickup" do
     assert_difference('Pickup.count') do
-      post :create, pickup: {  }
+      post :create, pickup: @update
     end
 
     assert_redirected_to pickup_path(assigns(:pickup))
@@ -35,7 +43,7 @@ class PickupsControllerTest < ActionController::TestCase
   end
 
   test "should update pickup" do
-    patch :update, id: @pickup, pickup: {  }
+    patch :update, id: @pickup, pickup: @update
     assert_redirected_to pickup_path(assigns(:pickup))
   end
 
