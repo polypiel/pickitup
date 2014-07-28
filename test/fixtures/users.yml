@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+polypiel:
   username: polypiel
   email: polypiel@pickitup.com
   role: 2
-  wallet_id: marielos_wallet
+  wallet_id: marielos
 
-two:
+marielo:
   username: marielo
   email: marielo@pickitup.com
   role: 1
-  wallet_id: marielos_wallet
+  wallet_id: marielos
