@@ -15,5 +15,5 @@ Coin.create(value: 1, name: "céntimo", short_name: "cént", currency: euro)
 Coin.create(value: 2, name: "céntimo", short_name: "cént", currency: euro)
 Coin.create(value: 5, name: "céntimo", short_name: "cént", currency: euro)
 
-marielos_wallet = Wallet.create(name: "Marielo's wallet")
-marielo = User.create(username: "Marielo", email: "marielo@email.com", role: 0, wallet_id: marielos_wallet)
+marielos = Wallet.create(name: "Marielo's wallet")
+marielo = User.create(username: "Marielo", email: "marielo@email.com", role: 0, wallet: marielos)
