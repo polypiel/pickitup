@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+$max-width: 640px;
+
+.container-fluid {
+  max-width: $max-width;  
+}
+
+#main {
+  padding-top: 50px;
+}
