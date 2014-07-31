@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731204922) do
+ActiveRecord::Schema.define(version: 20140731224940) do
 
   create_table "coins", force: true do |t|
     t.integer  "value"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140731204922) do
   end
 
   create_table "pickups", force: true do |t|
-    t.datetime "date"
+    t.datetime "picked_at"
     t.string   "comments"
     t.decimal  "longitude"
     t.decimal  "latitude"

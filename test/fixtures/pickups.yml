@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  date: 2014-07-07 23:26:24
+  picked_at: 2014-07-07 23:26:24
   coin_id: one_cent
   picker_id: polypiel
   wallet_id: marielos
 
 two:
-  date: 2014-07-07 23:26:24
+  picked_at: 2014-07-07 23:26:24
   comments: Mira que bien
   coin_id: one_cent
   picker_id: marielo
