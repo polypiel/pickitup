@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726103723) do
+ActiveRecord::Schema.define(version: 20140731204922) do
 
   create_table "coins", force: true do |t|
     t.integer  "value"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140726103723) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "picker_id"
+    t.string   "location"
   end
 
   create_table "users", force: true do |t|
