@@ -27,8 +27,9 @@ class PickupsController < ApplicationController
   # POST /pickups.json
   def create
     @pickup = Pickup.new(pickup_params)
-    @pickup.picker = User.find_by(username: "Marielo")
-    @pickup.coin = Coin.take
+    logger.info "#{pickup_params[:coin_id]} - #{pickup_params[:picker_id]}"
+    @pickup.picker = User.find_by(username: "Marielo") # TODO from the session
+    @pickup.wallet = @pickup.picker.wallet
 
     respond_to do |format|
       if @pickup.save
@@ -73,6 +74,6 @@ class PickupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pickup_params
-      params.require(:pickup).permit(:date, :comments, :longitude, :latitude)
+      params.require(:pickup).permit(:date, :comments, :longitude, :latitude, :coin_id)
     end
 end
