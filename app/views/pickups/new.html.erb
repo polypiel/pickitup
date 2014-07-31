@@ -11,6 +11,12 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIs7REsewixFwKzkjgytbajoZ6eZDjENA"></script>
 <script>
 $(document).ready(function() {
+
+  // Date
+  $('#pickup_picked_at_date').datepicker({format: 'dd/mm/yyyy', weekStart: 1});
+  $('#pickup_picked_at_time').timepicker({showMeridian: false});
+
+  // Location 
   $('#search_coordinates_msg').show();
   $('#coords_part').hide();
   $('#search_location_msg').hide();

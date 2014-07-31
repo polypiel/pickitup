@@ -13,7 +13,7 @@
   <tbody>
     <% @pickups.each do |pickup| %>
       <tr>
-        <td><%= pickup.date.strftime("%m/%d/%Y %H:%M") %></td>
+        <td><%= pickup.picked_at.strftime("%m/%d/%Y %H:%M") %></td>
         <td><%= pickup.coin %></td>
         <td><%= pickup.picker.username %></td>
         <td style="text-align: right;">

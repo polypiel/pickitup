@@ -15,7 +15,7 @@ class PickupsController < ApplicationController
   # GET /pickups/new
   def new
     @pickup = Pickup.new do |p|
-    	p.date = Time.now
+    	p.picked_at = Time.now
     end
   end
 

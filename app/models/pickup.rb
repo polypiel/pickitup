@@ -1,8 +1,4 @@
-require 'date_time_attribute'
-
 class Pickup < ActiveRecord::Base
-  include DateTimeAttribute
-
 	validates :picked_at, :picker, :coin, presence: true
   validates :longitude, numericality: { greater_than: -180, less_than: 180 }
   validates :latitude, numericality: { greater_than: -90, less_than: 90 }

@@ -19,8 +19,11 @@
       </div>
 
       <div class="col-md-6">
-        <%= f.label :date %><br>
-        <%= f.datetime_field :date, :class => 'form-control' %>
+        <%= f.label :picked_at_date %><br>
+        <%= f.date_field :picked_at_date, :class => 'form-control' %>
+
+        <%= f.label :picked_at_time %><br>
+        <%= f.time_field :picked_at_time, :class => 'form-control' %>
       </div>
     </div>
   </div>

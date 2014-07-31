@@ -38,3 +38,5 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Splits access of DateTime attribute(s) into seperate Date, Time and TimeZone attributes.
+gem 'date_time_attribute'
