@@ -8,13 +8,39 @@
   </div>
 </div>
 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIs7REsewixFwKzkjgytbajoZ6eZDjENA"></script>
 <script>
 $(document).ready(function() {
+  $('#search_coordinates_msg').show();
+  $('#coords_part').hide();
+  $('#search_location_msg').hide();
+  $('#location_part').hide();
+  navigator.geolocation.getCurrentPosition(show_map, handle_error);
 
-  navigator.geolocation.getCurrentPosition(show_map);
   function show_map(position) {
+    $('#search_coordinates_msg').hide();
     $("#pickup_latitude").val(position.coords.latitude);
     $("#pickup_longitude").val(position.coords.longitude);
+    $('#coords_part').show();
+    $('#search_location_msg').show();
+
+    // Searching textual location
+    var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          $("#pickup_location").val(results[1].formatted_address);
+        }
+      }
+      $('#search_location_msg').hide();
+      $('#location_part').show();
+    });
+  }
+
+  function handle_error(err) {
+    $('#search_coordinates_msg').hide();
+    $('#location_part').show();
   }
 });
 </script>

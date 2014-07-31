@@ -27,11 +27,12 @@
 
   <div class="field form-group">
     <%= f.label :comments %><br>
-    <%= f.text_area :comments, rows: 4, class: 'form-control' %>
+    <%= f.text_area :comments, rows: 3, class: 'form-control' %>
   </div>
 
   <div class="field form-group">
-    <div class="row">
+    <span id="search_coordinates_msg" class="text-info"><i class="fa fa-circle-o-notch fa-spin"></i> Searching for coordinates...</span>
+    <div id="coords_part" class="row">
       <div class="col-md-6">
         <%= f.label :longitude %><br>
         <%= f.text_field :longitude, :class => 'form-control' %>
@@ -43,7 +44,15 @@
     </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit :class => 'btn btn-default' %>
+  <span id="search_location_msg" class="text-info"><i class="fa fa-circle-o-notch fa-spin"></i> Searching for location...</span>
+  <div id="location_part" class="field form-group">
+    <%= f.label :location %><br>
+    <%= f.text_field :location, :class => 'form-control' %>
+  </div>
+
+  <hr>
+
+  <div class="form-group actions">
+    <%= f.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>
