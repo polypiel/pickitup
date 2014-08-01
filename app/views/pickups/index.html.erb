@@ -6,6 +6,7 @@
       <th>Date</th>
       <th>Coin</th>
       <th>Picker</th>
+      <th>Location</th>
       <th></th>
     </tr>
   </thead>
@@ -16,10 +17,13 @@
         <td><%= pickup.picked_at.strftime("%m/%d/%Y %H:%M") %></td>
         <td><%= pickup.coin %></td>
         <td><%= pickup.picker.username %></td>
+        <td><%= pickup.location %></td>
         <td style="text-align: right;">
-          <%= link_to pickup, :title => "Show" do %><i class="fa fa-eye"></i><% end %>
-          <%= link_to edit_pickup_path(pickup), :title => "Edit" do %><i class="fa fa-edit"></i><% end %>
-          <%= link_to pickup, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete" do %><i class="fa fa-trash-o"></i><% end %>
+          <div class="btn-group">
+            <%= link_to pickup, :title => "Show", :class => 'btn btn-default' do %><i class="fa fa-eye"></i><% end %>
+            <%= link_to edit_pickup_path(pickup), :title => "Edit", :class => 'btn btn-default' do %><i class="fa fa-edit"></i><% end %>
+            <%= link_to pickup, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class => 'btn btn-default' do %><i class="fa fa-trash-o"></i><% end %>
+          </div>
         </td>
       </tr>
     <% end %>

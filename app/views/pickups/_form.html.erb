@@ -13,16 +13,18 @@
 
   <div class="field form-group">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <%= f.label :coin %><br>
         <%= f.collection_select :coin_id, Coin.all, :id, :to_s, {}, {:class => 'form-control'} %>
       </div>
 
-      <div class="col-md-6">
-        <%= f.label :picked_at_date %><br>
+      <div class="col-md-4">
+        <%= f.label 'Date' %><br>
         <%= f.date_field :picked_at_date, :class => 'form-control' %>
+      </div>
 
-        <%= f.label :picked_at_time %><br>
+      <div class="col-md-4">
+        <%= f.label 'Time' %><br>
         <%= f.time_field :picked_at_time, :class => 'form-control' %>
       </div>
     </div>
