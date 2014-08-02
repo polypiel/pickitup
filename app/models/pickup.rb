@@ -1,7 +1,7 @@
 class Pickup < ActiveRecord::Base
 	validates :picked_at, :picker, :coin, presence: true
-  validates :longitude, numericality: { greater_than: -180, less_than: 180 }
-  validates :latitude, numericality: { greater_than: -90, less_than: 90 }
+  validates :longitude, numericality: { greater_than: -180, less_than: 180 }, allow_nil: true
+  validates :latitude, numericality: { greater_than: -90, less_than: 90 }, allow_nil: true
   validate :location_complete
 
 	belongs_to :wallet
