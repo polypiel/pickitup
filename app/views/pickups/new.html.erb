@@ -8,13 +8,12 @@
   </div>
 </div>
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIs7REsewixFwKzkjgytbajoZ6eZDjENA"></script>
+<!--script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIs7REsewixFwKzkjgytbajoZ6eZDjENA"></script-->
 <script>
 $(document).ready(function() {
 
   // Date
   $('#pickup_picked_at_date').datepicker({format: 'dd/mm/yyyy', weekStart: 1});
-  $('#pickup_picked_at_time').timepicker({showMeridian: false});
 
   // Location 
   $('#search_coordinates_msg').show();
@@ -31,6 +30,7 @@ $(document).ready(function() {
     $('#search_location_msg').show();
 
     // Searching textual location
+    /*
     var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({'latLng': latlng}, function(results, status) {
@@ -42,6 +42,7 @@ $(document).ready(function() {
       $('#search_location_msg').hide();
       $('#location_part').show();
     });
+    */
   }
 
   function handle_error(err) {

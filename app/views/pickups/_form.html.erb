@@ -20,12 +20,12 @@
 
       <div class="col-md-4">
         <%= f.label 'Date' %><br>
-        <%= f.date_field :picked_at_date, :class => 'form-control' %>
+        <%= f.date_field :picked_at_date, :value => (@pickup.picked_at_date.strftime("%d/%m/%Y")), :class => 'form-control', title: 'Format: dd/mm/yyyy' %>
       </div>
 
       <div class="col-md-4">
         <%= f.label 'Time' %><br>
-        <%= f.time_field :picked_at_time, :class => 'form-control' %>
+        <%= f.time_field :picked_at_time, :value => (@pickup.picked_at_time.strftime("%H:%M")), :class => 'form-control', title: 'Format: hh:mm' %>
       </div>
     </div>
   </div>
