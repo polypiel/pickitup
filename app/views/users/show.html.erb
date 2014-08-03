@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+<p id="notice" class="alert alert-info"><%= notice %></p>
+<% end %>
+
 <div class="row">
   <div class="col-md-4 text-center">
     <img src="http://api.randomuser.me/portraits/women/21.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">

@@ -15,11 +15,18 @@
  */
 
 $max-width: 640px;
+$header-height: 58px;
 
 .container-fluid {
   max-width: $max-width;  
 }
 
 #main {
-  padding-top: 50px;
+  padding-top: $header-height;
+}
+
+.navbar-brand {
+  height: $header-height;
+  font-size: 2rem;
+  font-weight: bold;
 }

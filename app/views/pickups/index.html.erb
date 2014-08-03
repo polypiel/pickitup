@@ -1,5 +1,9 @@
 <h1>Listing pickups</h1>
 
+<% if notice %>
+<p id="notice" class="alert alert-info"><%= notice %></p>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -20,7 +24,7 @@
         <td><%= pickup.location %></td>
         <td style="text-align: right;">
           <div class="btn-group">
-            <%= link_to pickup, :title => "Show", :class => 'btn btn-default' do %><i class="fa fa-eye"></i><% end %>
+            <%#= link_to pickup, :title => "Show", :class => 'btn btn-default' do %><!--i class="fa fa-eye"></i--><%# end %>
             <%= link_to edit_pickup_path(pickup), :title => "Edit", :class => 'btn btn-default' do %><i class="fa fa-edit"></i><% end %>
             <%= link_to pickup, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class => 'btn btn-default' do %><i class="fa fa-trash-o"></i><% end %>
           </div>

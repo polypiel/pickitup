@@ -27,13 +27,12 @@ class PickupsController < ApplicationController
   # POST /pickups.json
   def create
     @pickup = Pickup.new(pickup_params)
-    logger.info "#{pickup_params[:coin_id]} - #{pickup_params[:picker_id]}"
     @pickup.picker = User.find_by(username: "Marielo") # TODO from the session
     @pickup.wallet = @pickup.picker.wallet
 
     respond_to do |format|
       if @pickup.save
-        format.html { redirect_to @pickup, notice: 'Pickup was successfully created.' }
+        format.html { redirect_to controller: 'pickups', notice: 'Pickup was successfully created.' }
         format.json { render :show, status: :created, location: @pickup }
       else
         format.html { render :new }

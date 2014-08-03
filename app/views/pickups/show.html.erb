@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @pickup.coin %></h1>
+<p>Picked by <%= @pickup.picker.username %> at <%= @pickup.picked_at %></p>
+
 <%= link_to 'Edit', edit_pickup_path(@pickup) %> |
 <%= link_to 'Back', pickups_path %>
