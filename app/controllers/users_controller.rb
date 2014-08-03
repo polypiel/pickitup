@@ -12,6 +12,11 @@ class UsersController < ApplicationController
   def show
   end
 
+  def profile
+    @user = User.find_by(username: "Marielo") # TODO
+    render "show"
+  end
+
   # GET /users/new
   def new
     @user = User.new

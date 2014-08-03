@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :pickups
   resources :users
+  get 'profile', to: 'users#profile'
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
