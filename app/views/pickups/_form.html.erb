@@ -33,19 +33,10 @@
     <%= f.text_area :comments, rows: 3, class: 'form-control' %>
   </div>
 
-  <div class="field form-group">
-    <span id="search_coordinates_msg" class="text-info"><i class="fa fa-circle-o-notch fa-spin"></i> Searching for coordinates...</span>
-    <div id="coords_part" class="row">
-      <div class="col-md-6">
-        <%= f.label :longitude %><br>
-        <%= f.text_field :longitude, :class => 'form-control' %>
-      </div>
-      <div class="col-md-6">
-        <%= f.label :latitude %><br>
-        <%= f.text_field :latitude, :class => 'form-control' %>
-      </div>
-    </div>
-  </div>
+
+  <%= f.hidden_field :longitude, :class => 'form-control' %>
+  <%= f.hidden_field :latitude, :class => 'form-control' %>
+
 
   <span id="search_location_msg" class="text-info"><i class="fa fa-circle-o-notch fa-spin"></i> Searching for location...</span>
   <div id="location_part" class="field form-group">
