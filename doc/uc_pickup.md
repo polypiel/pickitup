@@ -1,4 +1,4 @@
-# Use Case: New Pickup
+# Use Case: Picking up a coin
 
 ## Description
 Registering the pick up of a cent is the paramount behaviour of the system.
@@ -22,3 +22,4 @@ Users and owners
 ## Exceptional Flows
 
 ## Post Conditions
+ 1. The pickup is registered in the data base
