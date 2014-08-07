@@ -27,7 +27,7 @@ class PickupsController < ApplicationController
   # POST /pickups.json
   def create
     @pickup = Pickup.new(pickup_params)
-    @pickup.picker = User.find_by(username: "Marielo") # TODO from the session
+    @pickup.picker = User.find_by(id: session[:user_id])
     @pickup.wallet = @pickup.picker.wallet
 
     respond_to do |format|

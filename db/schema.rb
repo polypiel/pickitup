@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731224940) do
+ActiveRecord::Schema.define(version: 20140806220305) do
 
   create_table "coins", force: true do |t|
     t.integer  "value"
@@ -41,14 +41,8 @@ ActiveRecord::Schema.define(version: 20140731224940) do
     t.string   "location"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "username"
-    t.integer  "wallet_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "email"
-    t.integer  "role"
-  end
+# Could not dump table "users" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "wallets", force: true do |t|
     t.string   "name"

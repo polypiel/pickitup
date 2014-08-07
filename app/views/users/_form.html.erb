@@ -17,10 +17,14 @@
   </div>
 
   <div class="field form-group">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, class: 'form-control' %>
+    <%= f.label :password %><br>
+    <%= f.password_field :password, class: 'form-control' %>
   </div>
 
+  <div class="field form-group">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
   <hr/>
 
   <div class="actions form-group">
