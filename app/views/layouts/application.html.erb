@@ -12,6 +12,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if session[:user_id] %>
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -25,13 +26,15 @@
               <li><%= link_to controller: 'pickups' do %><i class="fa fa-money"></i> Pickups<% end %></li>
               <li><%= link_to  profile_path do %><i class="fa fa-user"></i> Profile<% end %></li>
               <li><%= link_to controller: 'users' do %><i class="fa fa-users"></i> Contributors<% end %></li>
+              <li><%= link_to 'Log out', logout_path, method: :delete %></li>
             </ul>
-          </li>
+          </li> 
           <li><%= link_to new_pickup_path, :title => "New pickup" do %><i class="fa fa-plus fa-2x"></i><% end %></li>
         </ul>
       </div>
     </div>
   </div>
+  <% end %>
 
   <section id="main" class="container-fluid">
     <%= yield %>
