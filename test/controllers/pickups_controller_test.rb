@@ -5,7 +5,7 @@ class PickupsControllerTest < ActionController::TestCase
   setup do
     @pickup = pickups(:one)
     @update = {
-      date: Time.now,
+      picked_at: Time.now,
       comments: "It was on the pavement",
       picker: users(:polypiel),
       coin: coins(:one_cent),

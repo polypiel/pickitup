@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806220305) do
+ActiveRecord::Schema.define(version: 20140808213640) do
 
   create_table "coins", force: true do |t|
     t.integer  "value"
+    t.string   "name"
+    t.string   "short_name"
     t.integer  "currency_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
-    t.string   "short_name"
   end
 
   create_table "currencies", force: true do |t|
@@ -33,16 +33,24 @@ ActiveRecord::Schema.define(version: 20140806220305) do
     t.string   "comments"
     t.decimal  "longitude"
     t.decimal  "latitude"
+    t.string   "location"
     t.integer  "coin_id"
+    t.integer  "wallet_id"
+    t.integer  "picker_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.integer  "role"
+    t.boolean  "active"
+    t.string   "password_digest"
     t.integer  "wallet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "picker_id"
-    t.string   "location"
   end
-
-# Could not dump table "users" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
 
   create_table "wallets", force: true do |t|
     t.string   "name"

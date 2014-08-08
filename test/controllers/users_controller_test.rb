@@ -8,6 +8,7 @@ class UsersControllerTest < ActionController::TestCase
       username: 'brettdomino',
       email: 'brett@brettdomino.com',
       role: 2,
+      active: true,
       wallet: wallets(:marielos)
     }
   end
