@@ -1,20 +1,20 @@
-<% if flash[:alert] %>
-<p id="notice"><%= flash[:alert] %></p>
-<% end %>
+  <% if flash[:alert] %>
+  <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
 
-<%= form_tag do %>
-  <div>
-    <%= label_tag :username, 'Userame:' %>
-    <%= text_field_tag :username, params[:username] %>
-  </div>
-  <div>
-    <%= label_tag :password, 'Password:' %>
-    <%= password_field_tag :password, params[:password] %>
-  </div>
+  <%= form_tag do %>
+    <div class="form-group">
+      <%= label_tag :username, 'Username' %>
+      <%= text_field_tag :username, params[:username], class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password, 'Password' %>
+      <%= password_field_tag :password, params[:password], class: 'form-control' %>
+    </div>
 
-  <hr>
+    <hr>
 
-  <div>
-    <%= submit_tag "Login" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= submit_tag "Login", class: 'btn btn-success' %>
+    </div>
+  <% end %>
