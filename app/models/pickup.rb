@@ -10,6 +10,12 @@ class Pickup < ActiveRecord::Base
 
   date_time_attribute :picked_at
 
+  after_initialize :default_values
+
+  def default_values
+    self.picked_at = Time.now
+  end
+
   def location_complete
     if latitude.nil? ^ longitude.nil?
       errors.add("Location is incomplete")
