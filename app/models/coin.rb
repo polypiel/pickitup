@@ -5,6 +5,6 @@ class Coin < ActiveRecord::Base
   belongs_to :currency
 
   def to_s
-    "#{self.value} #{self.short_name}"
+    "#{value} #{short_name}"
   end
 end

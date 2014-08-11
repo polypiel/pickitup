@@ -11,14 +11,14 @@ class Pickup < ActiveRecord::Base
   date_time_attribute :picked_at
 
   def location_complete
-    if @latitude.nil? ^ @longitude.nil?
+    if latitude.nil? ^ longitude.nil?
       errors.add("Location is incomplete")
     end
   end
 
   def wallet_owner
-    if @wallet != @picker.wallet
-      erros.add("Picker's wallet incorrect")
+    if wallet != picker.wallet
+      errors.add("Picker's wallet incorrect")
     end
   end
 end

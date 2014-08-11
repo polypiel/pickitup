@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   belongs_to :wallet, inverse_of: :contributors
 
   def active_user
-    if @active and (not @username.nil?)
+    if active and (not username.nil?)
       errors.add("Active users have to have username")
     end
   end
