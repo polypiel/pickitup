@@ -2,13 +2,13 @@
 
 one:
   picked_at: 2014-07-07 23:26:24
-  coin_id: one_cent
-  picker_id: polypiel
-  wallet_id: marielos
+  coin: one_cent
+  picker: polypiel
+  wallet: marielos
 
 two:
   picked_at: 2014-07-07 23:26:24
   comments: Mira que bien
-  coin_id: one_cent
-  picker_id: marielo
-  wallet_id: marielos
+  coin: one_cent
+  picker: marielo
+  wallet: marielos

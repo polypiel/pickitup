@@ -4,10 +4,10 @@ one_cent:
   value: 1
   name: centimo
   short_name: cent
-  currency_id: euro
+  currency: euro
 
 one_penny:
   value: 1
   name: penny
   short_name: penny
-  currency_id: pound
+  currency: pound

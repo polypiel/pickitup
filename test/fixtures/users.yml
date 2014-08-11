@@ -4,7 +4,7 @@ polypiel:
   username: polypiel
   email: polypiel@pickitup.com
   role: 2
-  wallet_id: marielos
+  wallet: marielos
   active: true
   password_digest: <%= BCrypt::Password.create('polypiel') %>
 
@@ -12,6 +12,6 @@ marielo:
   username: Marielo
   email: marielo@pickitup.com
   role: 1
-  wallet_id: marielos
+  wallet: marielos
   active: true
   password_digest: <%= BCrypt::Password.create('marielo') %>
