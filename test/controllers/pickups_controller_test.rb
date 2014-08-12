@@ -29,7 +29,7 @@ class PickupsControllerTest < ActionController::TestCase
       post :create, pickup: @update
     end
 
-    assert_redirected_to pickup_path(assigns(:pickup))
+    assert_redirected_to pickups_path
   end
 
   test "should show pickup" do
