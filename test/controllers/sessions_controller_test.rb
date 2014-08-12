@@ -19,6 +19,13 @@ class SessionsControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
+  test "should fail login (inactive user)" do
+    marielo = users(:marielo)
+    marielo.active = false
+    post :create, username: 'Marielo', password: 'marielo'
+    assert_redirected_to login_url
+  end
+
   test "should logout" do
     delete :destroy
     assert_redirected_to login_url
