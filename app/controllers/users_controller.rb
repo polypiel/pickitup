@@ -4,7 +4,10 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    # Finds only current wallet contributors
+    logged_user = User.find_by(id: session[:user_id])
+    @users = User.where(wallet_id: logged_user.wallet_id, role: 2)
+    puts @users.inspect
   end
 
   # GET /users/1
