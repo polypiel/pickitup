@@ -14,15 +14,12 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test "should fail login" do
-    marielo = users(:marielo)
     post :create, username: 'Marielo', password: 'wrong'
     assert_redirected_to login_url
   end
 
   test "should fail login (inactive user)" do
-    marielo = users(:marielo)
-    marielo.active = false
-    post :create, username: 'Marielo', password: 'marielo'
+    post :create, username: 'Brett', password: 'brett'
     assert_redirected_to login_url
   end
 

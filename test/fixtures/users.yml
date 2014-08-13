@@ -15,3 +15,11 @@ marielo:
   wallet: marielos
   active: true
   password_digest: <%= BCrypt::Password.create('marielo') %>
+
+brett:
+  username: Brett
+  email: brettdomino@pickitup.com
+  role: 2
+  wallet: marielos
+  active: false
+  password_digest: <%= BCrypt::Password.create('brett') %>
