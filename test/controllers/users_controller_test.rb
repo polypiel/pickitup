@@ -5,11 +5,8 @@ class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:polypiel)
     @update = {
-      username: 'brettdomino',
-      email: 'brett@brettdomino.com',
-      role: 2,
-      active: true,
-      wallet: wallets(:marielos)
+      username: 'foo',
+      email: 'foo@pickup.com'
     }
   end
 

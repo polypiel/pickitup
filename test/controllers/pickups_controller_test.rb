@@ -5,11 +5,10 @@ class PickupsControllerTest < ActionController::TestCase
   setup do
     @pickup = pickups(:one)
     @update = {
-      picked_at: Time.now,
+      picked_at_time: Time.now,
+      picked_at_date: Time.now,
       comments: "It was on the pavement",
-      picker: users(:polypiel),
-      coin: coins(:one_cent),
-      wallet: wallets(:marielos)
+      coin_id: coins(:one_cent).id
     }
   end
 
@@ -29,7 +28,7 @@ class PickupsControllerTest < ActionController::TestCase
       post :create, pickup: @update
     end
 
-    assert_redirected_to pickups_path
+    assert_redirected_to controller: 'pickups', action: 'index', notice: 'Pickup was successfully created.'
   end
 
   test "should show pickup" do
