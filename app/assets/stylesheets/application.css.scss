@@ -30,3 +30,17 @@ $header-height: 58px;
   font-size: 2rem;
   font-weight: bold;
 }
+
+.title-version {
+  vertical-align: super;
+  font-size: 50%;
+  text-transform: uppercase;
+}
+
+#main-menu {
+  font-size: 2rem;
+  i {
+    text-align: center;
+    width: 3rem;
+  }
+}
