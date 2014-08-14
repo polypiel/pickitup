@@ -1,8 +1,6 @@
 <%= form_for(@pickup, :html => {:role => 'form'}) do |f| %>
   <% if @pickup.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
-      <span><%= pluralize(@pickup.errors.count, "error") %> prohibited this pickup from being saved:</span>
-
       <ul>
       <% @pickup.errors.full_messages.each do |message| %>
         <li><%= message %></li>
