@@ -1,5 +1,5 @@
 class Pickup < ActiveRecord::Base
-	validates :picked_at, :picker, :coin, allow_nil: false
+	validates :picked_at, :picker, :coin, presence: true
   validates :longitude, numericality: { greater_than: -180, less_than: 180 }, allow_nil: true
   validates :latitude, numericality: { greater_than: -90, less_than: 90 }, allow_nil: true
   validate :location_complete, :wallet_owner

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :username, :email, uniqueness: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
-  validates :active, allow_nil: false
+  validates :active, inclusion: { in: [true, false] }
   validate :active_user
 
   has_secure_password

@@ -24,3 +24,28 @@
     <% end %>
   </tbody>
 </table>
+
+<h2>Invitations</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Sent on</th>
+      <th>To</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invitations.each do |user| %>
+      <tr>
+        <td><%= user.created_at.strftime("%m/%d/%Y %H:%M") %></td>
+        <td><%= user.email %></td>
+        <td style="text-align: right;">
+          <div class="btn-group">
+            <%= link_to user, method: :delete, data: { confirm: 'Are you sure?' }, :title => "Delete", :class => 'btn btn-default' do %><i class="fa fa-trash-o"></i><% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

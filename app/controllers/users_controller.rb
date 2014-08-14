@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     # Finds only current wallet contributors
-    logged_user = User.find_by(id: session[:user_id])
-    @users = User.where(wallet_id: logged_user.wallet_id, role: User::ROLE_CONTRIBUTOR)
+    @users = User.where(wallet_id: session[:wallet_id], role: User::ROLE_CONTRIBUTOR, active: true)
+    @invitations = User.where(wallet_id: session[:wallet_id], role: User::ROLE_CONTRIBUTOR, active: false)
   end
 
   # GET /users/1
@@ -34,13 +34,17 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.active = false
     @user.role = User::ROLE_CONTRIBUTOR
+    @user.wallet_id = session[:wallet_id]
+    @user.password = SecureRandom.hex(16)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_url, notice: 'User #{@user.username} was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        # TODO send email
+        format.html { redirect_to users_path, notice: 'An invitation was sent to #{@user.email}' }
+        format.json { render :show, status: :created, location: users_path }
       else
         format.html { render :new }
+
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -67,6 +71,28 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /signup
+  def signup_new
+    @user = User.find(params[:email])
+    if not @user or @user.active or not @user.authenticate(params[:key])
+      # error
+    end
+  end
+
+  # POST /signup
+  def signup
+    @user.active = true
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to login_path, notice: 'Your user has been confirmed. Pleas sign in.' }
+        format.json { render :show, status: :ok, location: location_path }
+      else
+        format.html { render :signup }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
