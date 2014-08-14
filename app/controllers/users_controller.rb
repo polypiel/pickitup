@@ -6,8 +6,7 @@ class UsersController < ApplicationController
   def index
     # Finds only current wallet contributors
     logged_user = User.find_by(id: session[:user_id])
-    @users = User.where(wallet_id: logged_user.wallet_id, role: User.ROLE_CONTRIBUTOR)
-    puts @users.inspect
+    @users = User.where(wallet_id: logged_user.wallet_id, role: User::ROLE_CONTRIBUTOR)
   end
 
   # GET /users/1
@@ -34,7 +33,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.active = false
-    @user.role = User.ROLE_CONTRIBUTOR
+    @user.role = User::ROLE_CONTRIBUTOR
 
     respond_to do |format|
       if @user.save
