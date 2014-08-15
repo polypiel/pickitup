@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :pickups
   resources :users
   get 'profile', to: 'users#profile'
+  get 'signup', to: 'users#signup_new'
+  post 'signup', to: 'users#signup'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

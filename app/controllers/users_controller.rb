@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorise, only: [:signup_new, :signup]
 
   # GET /users
   # GET /users.json
@@ -78,18 +79,36 @@ class UsersController < ApplicationController
 
   # GET /signup
   def signup_new
-    @user = User.find(params[:email])
-    if not @user or @user.active or not @user.authenticate(params[:key])
-      # error
+    error = true
+
+    if session[:user_id]
+      # TODO
+    end
+
+    if params[:u] and params[:p]
+      puts "#{params[:u]} #{params[:p]}"
+      @user = User.find_by(email: params[:u])
+      puts @user.inspect
+      if not @user or @user.active or not @user.authenticate(params[:p])
+        error = false
+      end
+    end
+
+    if error
+      respond_to do |format|
+        format.html { redirect_to login_path, notice: 'Something wrong happened.' }
+        format.json { head :no_content }
+      end
     end
   end
 
   # POST /signup
   def signup
+    @user = User.find_by(email: params[:email])
     @user.active = true
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to login_path, notice: 'Your user has been confirmed. Pleas sign in.' }
+      if @user.update(params.permit(:username, :password, :password_confirmation))
+        format.html { redirect_to login_path, notice: 'Your user has been confirmed. Please sign in.' }
         format.json { render :show, status: :ok, location: location_path }
       else
         format.html { render :signup }

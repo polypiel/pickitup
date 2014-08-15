@@ -1,5 +1,11 @@
-<h1>InvitationNotifier#invite</h1>
+<p>Hi,</p>
 
-<p>
-  <%= @greeting %>, find me in app/views/invitation_notifier/invite.html.erb
-</p>
+<p>You've been invited to join Pickitup! as contributor of <strong><%= @owner.username%></strong> (<%= @owner.email%>).</p>
+
+<p>Pickitup! is a application that lets  <%= @owner.username%> the registering and management of coins pickups. And <%= @owner.username%> would like to have you as contributor. When you find a coin you just have to use the app. It's easy and fast.</p>
+
+To join click the following link:
+<a href="<%= @link %>"><%= @link %></a>
+
+<p>We hope to see you soon!<br/>
+The Pickitup! team.</p>
