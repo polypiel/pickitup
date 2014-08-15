@@ -19,3 +19,6 @@
 /doc/*.bak
 *.sublime-*
 *.lock
+
+# file with passwords
+config/environment.rb
