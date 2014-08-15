@@ -1,5 +1,9 @@
 <h1>Contributors</h1>
 
+<% if notice %>
+<p id="notice" class="alert alert-info"><%= notice %></p>
+<% end %>
+
 <p><%= link_to new_user_path do %> <i class="fa fa-plus"></i> New contributor <% end %></p>
 
 <table class="table table-striped">

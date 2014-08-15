@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @user = User.find_by(id: session[:user_id])
+    @user = User.find(session[:user_id])
     render "show"
   end
 
@@ -39,8 +39,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        # TODO send email
-        format.html { redirect_to users_path, notice: 'An invitation was sent to #{@user.email}' }
+        owner = User.find(session[:user_id])
+        InvitationNotifier.invite(owner, @user).deliver
+
+        format.html { redirect_to users_path, notice: "An invitation was sent to #{@user.email}" }
         format.json { render :show, status: :created, location: users_path }
       else
         format.html { render :new }

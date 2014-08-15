@@ -5,16 +5,16 @@ require File.expand_path('../application', __FILE__)
 Rails.application.initialize!
 
 # Mail configuration
-# Depot::Application.configure do
-#   config.action_mailer.delivery_method = :smtp
+Pickitup::Application.configure do
+  config.action_mailer.delivery_method = :smtp
 
-#   config.action_mailer.smtp_settings = {
-#     address: "",
-#     port: ,
-#     domain: "",
-#     authentication: "plain",
-#     user_name: "",
-#     password: "",
-#     enable_starttls_auto: true
-#   }
-# end
+  config.action_mailer.smtp_settings = {
+    address: "smtp.1and1.es",
+    port: 587,
+    domain: "pickitup.angelcalvo.com",
+    authentication: "plain",
+    user_name: "admin",
+    password: "penY_pencE",
+    enable_starttls_auto: true
+  }
+end
