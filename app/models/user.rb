@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
       errors.add("Active users must have an username")
     end
   end
+
+  def owner?
+    return role == ROLE_OWNER
+  end
 end
