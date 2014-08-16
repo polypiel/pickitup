@@ -1,15 +1,13 @@
-<% if notice %>
-<p id="notice" class="alert alert-info"><%= notice %></p>
-<% end %>
-
 <div class="row">
   <div class="col-md-4 text-center">
-    <img src="http://api.randomuser.me/portraits/women/21.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">
+    <img src="/assets/profile-150x150.png" alt="Profile picture" class="center-block img-circle img-thumbnail img-responsive">
   </div>
   <div class="col-md-8">
     <h2><%= @user.username %></h2>
     <p><%= @user.email %></p>
-    <%= link_to edit_user_path(@user) do %> <i class="fa fa-edit"></i> Edit<% end %>
+
+    <% if @current_user %><%= link_to edit_user_path(@user) do %> <i class="fa fa-edit"></i> Edit<% end %><% end %>
   </div>
 </div>
 
+<%= link_to users_path do %> <i class="fa fa-back"></i> Back<% end %>

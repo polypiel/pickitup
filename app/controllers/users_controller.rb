@@ -13,10 +13,12 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @current_user = @user.id == session[:user_id]
   end
 
   def profile
     @user = User.find(session[:user_id])
+    @current_user = true
     render "show"
   end
 
@@ -56,6 +58,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    # Only the current user can update theirself
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -70,6 +73,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    # TODO An contributor can't delete other users
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
@@ -79,6 +83,7 @@ class UsersController < ApplicationController
 
   # GET /signup
   def signup_new
+    # TODO only owner
     error = true
 
     if session[:user_id]
@@ -104,6 +109,7 @@ class UsersController < ApplicationController
 
   # POST /signup
   def signup
+    # Only owner
     @user = User.find_by(email: params[:email])
     @user.active = true
     respond_to do |format|

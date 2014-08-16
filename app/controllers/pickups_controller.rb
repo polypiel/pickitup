@@ -1,5 +1,6 @@
 class PickupsController < ApplicationController
   before_action :set_pickup, only: [:show, :edit, :update, :destroy]
+  helper_method :can_edit
 
   # GET /pickups
   # GET /pickups.json
@@ -30,8 +31,8 @@ class PickupsController < ApplicationController
 
     respond_to do |format|
       if @pickup.save
-        format.html { redirect_to controller: 'pickups', notice: 'Pickup was successfully created.' }
-        format.json { render :show, status: :created, location: @pickup }
+        format.html { redirect_to pickups_url, notice: 'Pickup was created.' }
+        format.json { render :index, status: :created, location: @pickups }
       else
         format.html { render :new }
         format.json { render json: @pickup.errors, status: :unprocessable_entity }
@@ -44,8 +45,8 @@ class PickupsController < ApplicationController
   def update
     respond_to do |format|
       if @pickup.update(pickup_params)
-        format.html { redirect_to @pickup, notice: 'Pickup was successfully updated.' }
-        format.json { render :show, status: :ok, location: @pickup }
+        format.html { redirect_to pickups_url, notice: 'Pickup was updated.' }
+        format.json { render :index, status: :ok, location: @pickups }
       else
         format.html { render :edit }
         format.json { render json: @pickup.errors, status: :unprocessable_entity }
@@ -58,9 +59,15 @@ class PickupsController < ApplicationController
   def destroy
     @pickup.destroy
     respond_to do |format|
-      format.html { redirect_to pickups_url, notice: 'Pickup was successfully destroyed.' }
+      format.html { redirect_to pickups_url, notice: 'Pickup was destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # Helper
+  def can_edit(user_id)
+    user = get_logged_user
+    user.owner? or user.id == user_id
   end
 
   private
