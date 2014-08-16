@@ -4,6 +4,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authorise
+  helper_method :owner?
+
+  def get_logged_user
+    User.find(session[:user_id])
+  end
+
+  # Helper
+  def owner?
+    get_logged_user.owner?
+  end
 
   protected
     def authorise
