@@ -12,6 +12,8 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap.min
+ *= require-datepicker
  */
 
 $max-width: 640px;
@@ -22,7 +24,8 @@ $header-height: 58px;
 }
 
 #main {
-  padding-top: $header-height;
+  margin-top: $header-height;
+  padding-top: 2rem;
 }
 
 .navbar-brand {
