@@ -28,7 +28,7 @@ class PickupsControllerTest < ActionController::TestCase
       post :create, pickup: @update
     end
 
-    assert_redirected_to controller: 'pickups', action: 'index', notice: 'Pickup was successfully created.'
+    assert_redirected_to pickups_path, notice: 'Pickup was created.'
   end
 
   test "should show pickup" do
@@ -43,7 +43,7 @@ class PickupsControllerTest < ActionController::TestCase
 
   test "should update pickup" do
     patch :update, id: @pickup, pickup: @update
-    assert_redirected_to pickup_path(assigns(:pickup))
+    assert_redirected_to pickups_path, notice: 'Pickup was updated.'
   end
 
   test "should destroy pickup" do
