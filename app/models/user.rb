@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def active_user
     if active and username.nil?
-      errors.add("Active users must have an username")
+      errors.add(:username, "Active users must have an username")
     end
   end
 

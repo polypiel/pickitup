@@ -18,13 +18,13 @@ class Pickup < ActiveRecord::Base
 
   def location_complete
     if latitude.nil? ^ longitude.nil?
-      errors.add("Location is incomplete")
+      errors.add(:latitude, "Location is incomplete")
     end
   end
 
   def wallet_owner
     if wallet != picker.wallet
-      errors.add("Picker's wallet incorrect")
+      errors.add(:wallet, "Picker's wallet incorrect")
     end
   end
 end
