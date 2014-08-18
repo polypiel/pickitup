@@ -40,8 +40,3 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Splits access of DateTime attribute(s) into seperate Date, Time and TimeZone attributes.
 gem 'date_time_attribute'
-
-# MySQL in production
-group :production do
-  gem 'mysql2'
-end
