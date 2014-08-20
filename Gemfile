@@ -46,3 +46,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Splits access of DateTime attribute(s) into seperate Date, Time and TimeZone attributes.
 gem 'date_time_attribute'
+
+# Serves static assets
+gem 'rails_12factor', group: :production
