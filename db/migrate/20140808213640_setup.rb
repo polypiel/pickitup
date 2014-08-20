@@ -1,12 +1,12 @@
 class Setup < ActiveRecord::Migration
   def change
-    drop_table :currencies
+    drop_table :currencies if ActiveRecord::Base.connection.table_exists? 'currencies'
     create_table :currencies do |t|
       t.string :name
       t.timestamps
     end
 
-    drop_table :coins
+    drop_table :coins if ActiveRecord::Base.connection.table_exists? 'coins'
     create_table :coins do |t|
       t.integer :value
       t.string :name
@@ -15,13 +15,13 @@ class Setup < ActiveRecord::Migration
       t.timestamps
     end
 
-    drop_table :wallets
+    drop_table :wallets if ActiveRecord::Base.connection.table_exists? 'wallets'
     create_table :wallets do |t|
       t.string :name
       t.timestamps
     end
 
-    drop_table :pickups
+    drop_table :pickups if ActiveRecord::Base.connection.table_exists? 'pickups'
     create_table :pickups do |t|
       t.datetime :picked_at
       t.string :comments
@@ -34,7 +34,7 @@ class Setup < ActiveRecord::Migration
       t.timestamps
     end
 
-    drop_table :users
+    drop_table :users if ActiveRecord::Base.connection.table_exists? 'users'
     create_table :users do |t|
       t.string :username
       t.string :email
