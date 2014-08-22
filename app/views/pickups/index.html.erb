@@ -12,7 +12,7 @@
       <th>Date</th>
       <th>Coin</th>
       <th>Picker</th>
-      <th>Location</th>
+      <th class="hidden-xs">Location</th>
       <th></th>
     </tr>
   </thead>
@@ -23,7 +23,7 @@
         <td><%= pickup.picked_at.strftime("%m/%d/%Y %H:%M") %></td>
         <td><%= pickup.coin %></td>
         <td><%= pickup.picker.username %></td>
-        <td><%= pickup.location %></td>
+        <td class="hidden-xs"><%= pickup.location %></td>
         <td style="text-align: right;">
           <div class="btn-group">
             <% if can_edit pickup.picker_id %>

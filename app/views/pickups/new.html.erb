@@ -2,9 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', pickups_path %>
-
-<!--script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIs7REsewixFwKzkjgytbajoZ6eZDjENA"></script-->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIs7REsewixFwKzkjgytbajoZ6eZDjENA"></script>
 <script>
 $(document).ready(function() {
 
@@ -21,7 +19,6 @@ $(document).ready(function() {
     $("#pickup_longitude").val(position.coords.longitude);
 
     // Searching textual location
-    /*
     var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({'latLng': latlng}, function(results, status) {
@@ -33,7 +30,6 @@ $(document).ready(function() {
       $('#search_location_msg').hide();
       $('#location_part').show();
     });
-    */
   }
 
   function handle_error(err) {

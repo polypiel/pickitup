@@ -10,17 +10,17 @@
   <% end %>
 
   <div class="row">
-    <div class="col-md-4 field form-group">
+    <div class="col-md-4 col-sm-12  field form-group">
       <%= f.label :coin %><br>
       <%= f.collection_select :coin_id, Coin.all, :id, :to_s, {}, {:class => 'form-control'} %>
     </div>
 
-    <div class="col-md-4 field form-group">
+    <div class="col-md-4 col-sm-6 field form-group">
       <%= f.label 'Date' %><br>
       <%= f.date_field :picked_at_date, :value => (@pickup.picked_at_date.strftime("%d/%m/%Y")), :class => 'form-control', title: 'Format: dd/mm/yyyy' %>
     </div>
 
-    <div class="col-md-4 field form-group">
+    <div class="col-md-4 col-sm-6 field form-group">
       <%= f.label 'Time' %><br>
       <%= f.time_field :picked_at_time, :value => (@pickup.picked_at_time.strftime("%H:%M")), :class => 'form-control', title: 'Format: hh:mm' %>
     </div>
