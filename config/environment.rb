@@ -13,8 +13,8 @@ Pickitup::Application.configure do
     port: 587,
     domain: "pickitup.angelcalvo.com",
     authentication: "plain",
-    user_name: "admin",
-    password: "penY_pencE",
+    user_name: ENV['EMAIL_USER'], 
+    password: ENV['EMAIL_PSSWD'],
     enable_starttls_auto: true
   }
 end

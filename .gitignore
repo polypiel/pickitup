@@ -18,6 +18,3 @@
 # Other files
 /doc/*.bak
 *.sublime-*
-
-# file with passwords
-config/environment.rb
