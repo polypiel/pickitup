@@ -11,7 +11,6 @@ Pickitup::Application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.1and1.es",
     port: 587,
-    domain: "pickitup.angelcalvo.com",
     authentication: "plain",
     user_name: ENV['EMAIL_USER'], 
     password: ENV['EMAIL_PSSWD'],
