@@ -25,7 +25,11 @@ $header-height: 58px;
 
 #main {
   margin-top: $header-height;
-  padding-top: 2rem;
+  padding-top: 1rem;
+}
+
+h1 {
+  font-size: 3rem;
 }
 
 .navbar-brand {
