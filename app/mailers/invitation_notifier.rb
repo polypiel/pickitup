@@ -8,7 +8,7 @@ class InvitationNotifier < ActionMailer::Base
   #
   def invite(owner, contributor)
     @owner = owner
-    @link = "http://pickitup.angelcalvo.com/signup?u=#{URI.encode(contributor.email)}&p=#{URI.encode(contributor.password_digest)}"
+    @link = "http://#{Pickitup::Application.config.app_url}/signup?u=#{URI.encode(contributor.email)}&p=#{URI.encode(contributor.password_digest)}"
 
     mail to: contributor.email, subject: "You've been invited to join Pickitup!"
   end
