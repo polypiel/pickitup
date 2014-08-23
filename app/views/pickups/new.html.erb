@@ -6,8 +6,10 @@
 <script>
 $(document).ready(function() {
 
-  // Date
-  $('#pickup_picked_at_date').datepicker({format: 'dd/mm/yyyy', weekStart: 1});
+  // Adds datepicker if there isn't native control
+  if(!date_supported()) {
+    $('#pickup_picked_at_date').datepicker({format: 'dd/mm/yyyy', weekStart: 1});
+  }
 
   // Location 
   $('#search_location_msg').show();
@@ -35,6 +37,13 @@ $(document).ready(function() {
   function handle_error(err) {
     $('#search_location_msg').hide();
     $('#location_part').show();
+  }
+
+  function date_supported() {
+    var tester = document.createElement('input');
+    tester.type = 'date';
+    tester.value = ':(';
+    return tester.date === 'date' && tester.value === '';
   }
 });
 </script>
