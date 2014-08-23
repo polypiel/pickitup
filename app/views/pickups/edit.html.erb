@@ -4,8 +4,17 @@
 
 
 <script>
+function date_supported() {
+  var tester = document.createElement('input');
+  tester.type = 'date';
+  tester.value = ':(';
+  return tester.type === 'date' && tester.value === '';
+}
+
 $(document).ready(function() {
   // Date
-  $('#pickup_picked_at_date').datepicker({format: 'dd/mm/yyyy', weekStart: 1});
+  if(!date_supported()) {
+    $('#pickup_picked_at_date').datepicker({format: 'dd/mm/yyyy', weekStart: 1});
+  }
 });
 </script>
