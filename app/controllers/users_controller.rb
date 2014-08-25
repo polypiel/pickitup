@@ -87,7 +87,9 @@ class UsersController < ApplicationController
     error = true
 
     if session[:user_id]
-      # TODO
+      respond_to do |format|
+        format.html { redirect_to login_path, notice: 'You should first log out.' }
+      end
     end
 
     if params[:u] and params[:p]
@@ -102,7 +104,6 @@ class UsersController < ApplicationController
     if error
       respond_to do |format|
         format.html { redirect_to login_path, notice: 'Something wrong happened.' }
-        format.json { head :no_content }
       end
     end
   end
@@ -115,10 +116,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(params.permit(:username, :password, :password_confirmation))
         format.html { redirect_to login_path, notice: 'Your user has been confirmed. Please sign in.' }
-        format.json { render :show, status: :ok, location: location_path }
       else
-        format.html { render :signup }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :signup_new }
       end
     end
   end
