@@ -101,7 +101,7 @@ class UsersController < ApplicationController
 
     if @error
       respond_to do |format|
-        format.html { redirect_to :signup_new, notice: 'Something wrong happened.' }
+        format.html { render :signup_new, notice: 'Something wrong happened.' }
       end
     end
   end
