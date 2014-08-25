@@ -93,7 +93,6 @@ class UsersController < ApplicationController
     end
 
     if params[:u] and params[:p]
-      puts "#{params[:u]} #{params[:p]}"
       @user = User.find_by(email: params[:u])
       if not @user or @user.active or not @user.authenticate(params[:p])
         @error = false
