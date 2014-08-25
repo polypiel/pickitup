@@ -2,24 +2,36 @@
 
 <%= render 'form' %>
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIs7REsewixFwKzkjgytbajoZ6eZDjENA"></script>
 <script>
 function show_map(position) {
-  $("#pickup_latitude").val(position.coords.latitude);
-  $("#pickup_longitude").val(position.coords.longitude);
+  search_location(position.coords.latitude, position.coords.longitude, 0);
+}
 
-  // Searching textual location
-  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-  var geocoder = new google.maps.Geocoder();
-  geocoder.geocode({'latLng': latlng}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      if (results[1]) {
-        $("#pickup_location").val(results[1].formatted_address);
+function search_location(lat, lng, retries) {
+  if(gmaps_loaded) {
+    $("#pickup_latitude").val(lat);
+    $("#pickup_longitude").val(lng);
+    var latlng = new google.maps.LatLng(lat, lng);
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          $("#pickup_location").val(results[1].formatted_address);
+        }
       }
+      $('#search_location_msg').hide();
+      $('#location_part').show();
+    });
+  } else {
+    if(retries < 2) {
+      console.log("retry");
+      setTimeout(function() {search_location(lat, lng, retries + 1);}, 1000);
+    } else {
+      // fail
+      $('#search_location_msg').hide();
+      $('#location_part').show();
     }
-    $('#search_location_msg').hide();
-    $('#location_part').show();
-  });
+  }
 }
 
 function handle_error(err) {
@@ -32,6 +44,10 @@ function date_supported() {
   tester.type = 'date';
   tester.value = ':(';
   return tester.type === 'date' && tester.value === '';
+}
+
+function gmaps_loaded() {
+  return typeof google === 'object' && typeof google.maps === 'object';
 }
 
 // Init
