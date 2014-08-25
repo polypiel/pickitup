@@ -84,26 +84,25 @@ class UsersController < ApplicationController
   # GET /signup
   def signup_new
     # TODO only owner
-    error = true
+    @error = true
 
     if session[:user_id]
       respond_to do |format|
-        format.html { redirect_to login_path, notice: 'You should first log out.' }
+        format.html { redirect_to pickups_url , notice: 'You should first log out.' }
       end
     end
 
     if params[:u] and params[:p]
       puts "#{params[:u]} #{params[:p]}"
       @user = User.find_by(email: params[:u])
-      puts @user.inspect
       if not @user or @user.active or not @user.authenticate(params[:p])
-        error = false
+        @error = false
       end
     end
 
-    if error
+    if @error
       respond_to do |format|
-        format.html { redirect_to login_path, notice: 'Something wrong happened.' }
+        format.html { redirect_to :signup_new, notice: 'Something wrong happened.' }
       end
     end
   end
@@ -117,6 +116,7 @@ class UsersController < ApplicationController
       if @user.update(params.permit(:username, :password, :password_confirmation))
         format.html { redirect_to login_path, notice: 'Your user has been confirmed. Please sign in.' }
       else
+        @error = true
         format.html { render :signup_new }
       end
     end
