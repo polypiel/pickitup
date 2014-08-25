@@ -35,6 +35,7 @@ function search_location(lat, lng, retries) {
 }
 
 function handle_error(err) {
+  console.log("Location not found")
   $('#search_location_msg').hide();
   $('#location_part').show();
 }
@@ -60,6 +61,6 @@ $(document).ready(function() {
   // Location 
   $('#search_location_msg').show();
   $('#location_part').hide();
-  navigator.geolocation.getCurrentPosition(show_map, handle_error);
+  navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: 5000, enableHighAccuracy: true});
 });
 </script>
