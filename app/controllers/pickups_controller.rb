@@ -5,7 +5,7 @@ class PickupsController < ApplicationController
   # GET /pickups
   # GET /pickups.json
   def index
-    @pickups = Pickup.where(wallet_id: session[:wallet_id])
+    @pickups = Pickup.where(wallet_id: session[:wallet_id]).order(picked_at: :desc)
   end
 
   # GET /pickups/1
@@ -16,6 +16,7 @@ class PickupsController < ApplicationController
   # GET /pickups/new
   def new
     @pickup = Pickup.new
+    @pickup.picked_at = Time.zone.now
   end
 
   # GET /pickups/1/edit
