@@ -24,7 +24,7 @@ function search_location(lat, lng, retries) {
     });
   } else {
     if(retries < 2) {
-      console.log("retry");
+      console.log("retrying...");
       setTimeout(function() {search_location(lat, lng, retries + 1);}, 1000);
     } else {
       // fail
