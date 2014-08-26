@@ -3,27 +3,18 @@ Pickitup! is application that let you register the pickups of coins.
 
 ## Installation
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Pickitup! is based on:
+ * Ruby 1.9
+ * Ruby on Rails 4.1
 
-Things you may want to cover:
+## Change-log
 
-* Ruby version
+### Version 0.1.0
+Released on 26/08/2014
+Features:
+ * Pickups registering
+ * Pickups management
+ * Contributors management
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-[ ![Codeship Status for polypiel/pickitup](https://codeship.io/projects/cee686f0-088b-0132-e340-227fea69da68/status)](https://codeship.io/projects/31374)
+## Documentation
+[Index](doc/readme.md)
