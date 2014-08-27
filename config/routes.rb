@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'dashboard' => 'dashboard#index'
+
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'pickups#index'
+  root 'dashboard#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -9,7 +9,7 @@ class SessionsControllerTest < ActionController::TestCase
   test "should login" do
     marielo = users(:marielo)
     post :create, username: 'Marielo', password: 'marielo'
-    assert_redirected_to pickups_url
+    assert_redirected_to dashboard_url
     assert_equal marielo.id, session[:user_id]
   end
 

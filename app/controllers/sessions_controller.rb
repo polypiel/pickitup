@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user and user.active and user.authenticate(params[:password])
       session[:user_id] = user.id
       session[:wallet_id] = user.wallet_id
-      redirect_to pickups_url
+      redirect_to dashboard_url
     else
       redirect_to login_url, alert: "Invalid user/password"
     end
