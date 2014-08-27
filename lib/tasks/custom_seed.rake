@@ -1,3 +1,4 @@
+# lib/tasks/custom_seed.rake
 namespace :db do
   namespace :seed do
     Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].each do |filename|
