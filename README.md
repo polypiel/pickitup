@@ -9,7 +9,15 @@ Pickitup! is based on:
 
 ## Change-log
 
-### Version 0.1.0
+### 0.2.0
+WIP
+Features:
+ * User's picture
+ * Get coordinates from user entered location
+ * Dashboard
+ * Pickups: pagination, filter
+
+### 0.1.0
 Released on 26/08/2014
 Features:
  * Pickups registering
