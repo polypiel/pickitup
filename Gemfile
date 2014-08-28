@@ -49,3 +49,6 @@ gem 'date_time_attribute'
 
 # Serves static assets
 gem 'rails_12factor', group: :production
+
+# Pagination
+gem 'kaminari'
