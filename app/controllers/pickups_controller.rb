@@ -5,7 +5,7 @@ class PickupsController < ApplicationController
   # GET /pickups
   # GET /pickups.json
   def index
-    @pickups = Pickup.where(wallet_id: session[:wallet_id]).order(picked_at: :desc)
+    @pickups = Pickup.where(wallet_id: session[:wallet_id]).order(picked_at: :desc).page(params[:page]).per(20)
   end
 
   # GET /pickups/1
