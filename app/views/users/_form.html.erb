@@ -1,31 +1,76 @@
-<%= form_for(@user, :html => {:role => 'form'}) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<!-- Nav tabs -->
+<ul id="settings-tab" class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+  <li><a href="#password" role="tab" data-toggle="tab">Password</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="profile">
+  <%= form_for(@user, :html => {:role => 'form'}) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field form-group">
+      <%= f.label :username %><br/>
+      <%= f.text_field :username, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :picture %><br/>
+      <%= f.file_field :uploaded_picture, class: 'form-control' %>
+    </div>
+    <hr/>
+
+    <div class="actions form-group">
+      <%= f.submit class: 'btn btn-primary'%>
     </div>
   <% end %>
-
-  <div class="field form-group">
-    <%= f.label :username %><br/>
-    <%= f.text_field :username, class: 'form-control' %>
   </div>
 
-  <div class="field form-group">
-    <%= f.label :password %><br>
-    <%= f.password_field :password, class: 'form-control' %>
-  </div>
+  <div class="tab-pane" id="password">
+  <%= form_for(@user, :html => {:role => 'form'}) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <div class="field form-group">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation, class: 'form-control' %>
-  </div>
-  <hr/>
+    <div class="field form-group">
+      <%= f.label :password %><br>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
 
-  <div class="actions form-group">
-    <%= f.submit class: 'btn btn-primary'%>
+    <div class="field form-group">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+    <hr/>
+
+    <div class="actions form-group">
+      <%= f.submit 'Change password', class: 'btn btn-primary'%>
+    </div>
+  <% end %>
   </div>
-<% end %>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#settings-tab a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+  });
+</script>
