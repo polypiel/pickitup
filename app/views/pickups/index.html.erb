@@ -20,7 +20,7 @@
   <tbody>
     <% @pickups.each do |pickup| %>
       <tr>
-        <td><%= pickup.picked_at.strftime("%d/%m/%Y %H:%M") %></td>
+        <td title="<%= pickup.picked_at.strftime("%d/%m/%Y %H:%M") %>"><%= time_ago_in_words(pickup.picked_at) %> ago</td>
         <td><%= pickup.coin %></td>
         <td><%= pickup.picker.username %></td>
         <td class="hidden-xs"><%= pickup.location %></td>
