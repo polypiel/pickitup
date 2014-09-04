@@ -51,3 +51,27 @@ h1 {
     width: 3rem;
   }
 }
+
+.vertical-align {
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+
+html.login {
+  background: image-url("coins.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.white-bg {
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.85);
+}

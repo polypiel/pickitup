@@ -2,6 +2,8 @@ class SessionsController < ApplicationController
   skip_before_action :authorise
 
   def new
+    @login_page = true
+    render :new, layout: 'public'
   end
 
   def create
