@@ -1,3 +1,57 @@
-<h1>Edit user</h1>
 
-<%= render 'form' %>
+<h1>Profile</h1>
+<%= form_for(@user, :html => {:role => 'form'}) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :username %><br/>
+    <%= f.text_field :username, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :picture %><br/>
+    <%= f.file_field :uploaded_picture %>
+  </div>
+  <hr/>
+
+  <div class="actions form-group">
+    <%= f.submit class: 'btn btn-primary'%>
+  </div>
+<% end %>
+
+<h1>Password</h1>
+<%= form_for(@user, :html => {:role => 'form'}) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :password %><br>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+  <hr/>
+
+  <div class="actions form-group">
+    <%= f.submit 'Change password', class: 'btn btn-primary'%>
+  </div>
+<% end %>
+</div>
