@@ -70,6 +70,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_picture
+  end
+  
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
@@ -129,6 +132,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :password, :password_confirmation)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :avatar)
     end
 end

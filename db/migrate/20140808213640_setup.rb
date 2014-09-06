@@ -42,6 +42,7 @@ class Setup < ActiveRecord::Migration
       t.boolean :active
       t.string :password_digest
       t.belongs_to :wallet
+      t.binary :picture, :limit => 1.megabyte
       t.timestamps
     end
   end

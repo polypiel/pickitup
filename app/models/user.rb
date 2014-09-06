@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
 
   belongs_to :wallet, inverse_of: :contributors
 
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/assets/missing.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
   def active_user
     if active and username.nil?
       errors.add(:username, "Active users must have an username")

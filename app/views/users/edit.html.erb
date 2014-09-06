@@ -1,5 +1,5 @@
+<h1>Edit user</h1>
 
-<h1>Profile</h1>
 <%= form_for(@user, :html => {:role => 'form'}) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
@@ -16,18 +16,26 @@
     <%= f.text_field :username, class: 'form-control' %>
   </div>
 
-  <div class="field form-group">
-    <%= f.label :picture %><br/>
-    <%= f.file_field :uploaded_picture %>
-  </div>
-  <hr/>
-
   <div class="actions form-group">
-    <%= f.submit class: 'btn btn-primary'%>
+    <%= f.submit 'Save username', class: 'btn btn-primary'%>
   </div>
 <% end %>
+<hr/>
 
-<h1>Password</h1>
+
+<%= form_for @user, :html => { :multipart => true } do |f| %>
+  <div class="field form-group">
+    <%= f.label :avatar %><br/>
+    <%= image_tag @user.avatar.url(:thumb), class: 'img-circle' %>
+    <%= f.file_field :avatar %>
+  </div>
+  <div class="actions form-group">
+    <%= f.submit 'Upload avatar', class: 'btn btn-primary'%>
+  </div>
+<% end %>
+<hr/>
+
+
 <%= form_for(@user, :html => {:role => 'form'}) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
@@ -41,14 +49,13 @@
 
   <div class="field form-group">
     <%= f.label :password %><br>
-    <%= f.password_field :password, class: 'form-control' %>
+    <%= f.password_field :password, class: 'form-control', autocomplete: 'off' %>
   </div>
 
   <div class="field form-group">
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
   </div>
-  <hr/>
 
   <div class="actions form-group">
     <%= f.submit 'Change password', class: 'btn btn-primary'%>
