@@ -12,14 +12,15 @@ Pickitup! is based on:
 ### Future versions
  * Remember auth details to avoid logins
  * Notifications
+ * Filter pickups
 
 ### 0.2.0
 WIP
 Features:
  * User's picture (wip)
- * Get coordinates from user entered location
+ * Get coordinates from user entered location (?)
  * Dashboard (wip)
- * Pickups: pagination (done), filter (?), dates as time ago (done)
+ * Pickups: pagination (done), dates as time ago (done)
 
 ### 0.1.0
 CURRENT
