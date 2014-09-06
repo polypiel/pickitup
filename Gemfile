@@ -52,3 +52,6 @@ gem 'rails_12factor', group: :production
 
 # Pagination
 gem 'kaminari'
+
+# File uploads
+gem "paperclip", "~> 4.2"
