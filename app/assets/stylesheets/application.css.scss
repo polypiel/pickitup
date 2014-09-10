@@ -19,6 +19,9 @@
 $max-width: 640px;
 $header-height: 58px;
 
+$desktop_threshold: 960px;
+$tablet_threshold: 480px;
+
 .container-fluid {
   max-width: $max-width;  
 }
@@ -67,7 +70,15 @@ h2 {
 }
 
 html.login {
-  background: image-url("coins.jpg") no-repeat center center fixed; 
+  @media all and (max-width: $tablet_threshold) {
+    background: image-url("coins-small.jpg") no-repeat center center fixed; 
+  }
+  @media all and (min-width: $tablet_threshold+1) and (max-width: $desktop_threshold) {
+    background: image-url("coins-medium.jpg") no-repeat center center fixed; 
+  }
+  @media all and (min-width: $desktop_threshold+1) {
+    background: image-url("coins.jpg") no-repeat center center fixed; 
+  }
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
