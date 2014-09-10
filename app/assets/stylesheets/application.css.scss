@@ -70,6 +70,9 @@ h2 {
 }
 
 html.login {
+  @media all and (orientation : portrait) {
+    background-attachment: scroll;
+  }
   @media all and (max-width: $tablet_threshold) {
     background: image-url("coins-small.jpg") no-repeat center center fixed; 
   }
