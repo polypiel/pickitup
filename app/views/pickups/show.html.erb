@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+<p id="notice" class="text-info"><i class="fa fa-info-circle"></i> <%= notice %></p>
+<% end %>
 
 <h1><%= @pickup.coin %></h1>
 <p>Picked by <%= @pickup.picker.username %> at <%= @pickup.picked_at %></p>
