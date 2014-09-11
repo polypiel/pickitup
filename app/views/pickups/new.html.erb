@@ -3,14 +3,18 @@
 <%= render 'form' %>
 
 <script>
+var loc_retries = 0;
+
 function show_map(position) {
   search_location(position.coords.latitude, position.coords.longitude, 0);
 }
 
 function search_location(lat, lng, retries) {
+  //console.debug("Coordinates found: " + lat + ", " + lng);
+  $("#pickup_latitude").val(lat);
+  $("#pickup_longitude").val(lng);
+
   if(gmaps_loaded) {
-    $("#pickup_latitude").val(lat);
-    $("#pickup_longitude").val(lng);
     var latlng = new google.maps.LatLng(lat, lng);
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({'latLng': latlng}, function(results, status) {
@@ -23,20 +27,18 @@ function search_location(lat, lng, retries) {
       $('#location_part').show();
     });
   } else {
-    if(retries < 2) {
-      console.log("retrying...");
-      setTimeout(function() {search_location(lat, lng, retries + 1);}, 1000);
-    } else {
-      // fail
-      handle_error("Max retries");
-    }
+    console.error("gmaps not loaded")
   }
 }
 
 function handle_error(err) {
   console.error("Location not found: " + err);
-  $('#search_location_msg').hide();
-  $('#location_part').show();
+  if(err.code == PositionError.TIMEOUT && loc_retries == 0) {
+    navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: 5000, enableHighAccuracy: false});
+  } else {
+    $('#search_location_msg').hide();
+    $('#location_part').show();
+  }
 }
 
 function date_supported() {
@@ -60,6 +62,6 @@ $(document).ready(function() {
   // Location 
   $('#search_location_msg').show();
   $('#location_part').hide();
-  navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: 7500});
+  navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: 5000, enableHighAccuracy: true});
 });
 </script>
