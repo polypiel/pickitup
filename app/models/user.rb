@@ -12,7 +12,20 @@ class User < ActiveRecord::Base
 
   belongs_to :wallet, inverse_of: :contributors
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/assets/missing.png"
+  has_attached_file :avatar, 
+    :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
+    :default_url => "/assets/missing.png",
+    :storage => Rails.env.production? ? :ftp : :filesystem,
+    :path => "/:attachment/:id/:style/:filename",
+    :url => "http://pickitup.angelcalvo.com/:attachment/:id/:style/:filename",
+    :ftp_servers => [
+      {
+        :host     => ENV['FTP_HOST'],
+        :user     => ENV['FTP_USER'],
+        :password => ENV['FTP_PSSWD']
+      }
+    ],
+    :ftp_connect_timeout => 5 # optional, nil by default (OS default timeout)
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def active_user

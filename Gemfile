@@ -55,3 +55,4 @@ gem 'kaminari'
 
 # File uploads
 gem "paperclip", "~> 4.2"
+gem "paperclip-storage-ftp"
