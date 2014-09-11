@@ -36,6 +36,13 @@
   <table>
 </div>
 
-<!--div>
+<div>
   <h2>Last pickups</h2>
-</div-->
+  <table class="table">
+  <% @last_pickups.each do |pickup| %>
+    <tr class="lead">
+      <td><%= pickup.coin %> by <strong><%= pickup.picker.username %></strong>, <%= time_ago_in_words(pickup.picked_at) %> ago.</td>
+    </tr>
+  <% end %>
+  <table>
+</div>

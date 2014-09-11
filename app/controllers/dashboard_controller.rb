@@ -12,5 +12,7 @@ class DashboardController < ApplicationController
       ORDER BY coins DESC
       LIMIT 3
     ')
+
+    @last_pickups = Pickup.where(wallet_id: session[:wallet_id], picked_at: (15.days.ago.to_date)..(Time.zone.now)).order(picked_at: :desc).limit(3)
   end
 end
