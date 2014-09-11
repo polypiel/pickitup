@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
       {
         :host     => ENV['FTP_HOST'],
         :user     => ENV['FTP_USER'],
-        :password => ENV['FTP_PSSWD']
+        :password => ENV['FTP_PSSWD'],
+        :passive  => true
       }
     ],
     :ftp_connect_timeout => 5 # optional, nil by default (OS default timeout)
