@@ -13,17 +13,19 @@ Pickitup! is based on:
  * Remember auth details to avoid logins
  * Notifications
  * Filter pickups
-
+ * Bug: Login bg in mobiles
+ * Location as City+Country
+ 
 ### 0.2.0
-WIP
 Features:
- * User's picture (wip)
- * Get coordinates from user entered location (?)
- * Dashboard (wip)
- * Pickups: pagination (done), dates as time ago (done)
+CURRENT
+ * User's avatar
+ * Dashboard
+ * Pickups: pagination, pickup dates as time ago
+ * Bugfixes
+ * Visual improvements
 
 ### 0.1.0
-CURRENT
 Released on 26/08/2014
 Features:
  * Pickups registering
