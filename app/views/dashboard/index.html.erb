@@ -1,18 +1,18 @@
 <h2>Total</h2>
-<row>
-  <div class="col-md-6">
+<div class="row">
+  <div class="col-md-offset-2 col-md-4 col-sm-6">
     <div class="well">
       <h2><strong><%= @coins %></strong></h2>
       <p class="lead">Coins</p>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4 col-sm-6">
     <div class="well">
       <h2><strong><%= @money %></h2></strong>
       <p class="lead">Cents</p>
     </div>
   </div>
-</row>
+</div>
 
 <div>
   <h2>Top pickers</h2>
@@ -21,17 +21,21 @@
       <tr>
         <th></th>
         <th></th>
-        <th>Coins</th>
-        <th>Value</th>
+        <th style="text-align: right;">Coins</th>
+        <th style="text-align: right;">Value</th>
       </tr>
     </thead>
   <% @top_users.each_with_index do |top_user, index| %>
     <tr class="lead">
       <td><%= index + 1 %></td>
-      <td><%= top_user['username'] %></td>
-      <td><%= top_user['coins'] %></td>
-      <td><%= top_user['value'] %></td>
+      <td><strong><%= top_user['username'] %></strong></td>
+      <td style="text-align: right;"><%= top_user['coins'] %></td>
+      <td style="text-align: right;"><%= top_user['value'] %></td>
     </tr>
   <% end %>
   <table>
 </div>
+
+<!--div>
+  <h2>Last pickups</h2>
+</div-->
