@@ -10,25 +10,43 @@ function show_map(position) {
 }
 
 function search_location(lat, lng, retries) {
-  //console.debug("Coordinates found: " + lat + ", " + lng);
+  console.debug("Coordinates found: " + lat + ", " + lng);
   $("#pickup_latitude").val(lat);
   $("#pickup_longitude").val(lng);
 
   if(gmaps_loaded) {
     var latlng = new google.maps.LatLng(lat, lng);
     var geocoder = new google.maps.Geocoder();
+    var timed_out = false;
+    var timer_id;
+
     geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          $("#pickup_location").val(results[1].formatted_address);
+      if(!timed_out) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (results[1]) {
+            $("#pickup_location").val(results[1].formatted_address);
+            show_location_controls();
+          }
+        } else {
+          console.error("Gmaps error: " + status);
         }
+        clearTimeout(timer_id);
       }
-      $('#search_location_msg').hide();
-      $('#location_part').show();
     });
+    timer_id = setTimeout(function() {
+      console.debug("Gmaps time out");
+      timed_out = true;
+      show_location_controls();
+    }, 5000);
+
   } else {
-    console.error("gmaps not loaded")
+    console.error("gmaps not loaded");
   }
+}
+
+function show_location_controls() {
+  $('#search_location_msg').hide();
+  $('#location_part').show();
 }
 
 function handle_error(err) {
