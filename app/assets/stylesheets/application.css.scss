@@ -70,12 +70,15 @@ h2 {
 }
 
 html.login {  
-  @media all and (max-width: $desktop_threshold) {
-    background: image-url("coins-medium.jpg") no-repeat center center fixed; 
+  @media all and (max-width: $desktop_threshold - 1) {
+    background-image: image-url("coins-medium.jpg"); 
   }
-  @media all and (min-width: $desktop_threshold+1) {
-    background: image-url("coins.jpg") no-repeat center center fixed; 
+  @media all and (min-width: $desktop_threshold) {
+    background-image: image-url("coins.jpg"); 
   }
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
