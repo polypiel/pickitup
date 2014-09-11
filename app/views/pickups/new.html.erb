@@ -51,7 +51,7 @@ function show_location_controls() {
 
 function handle_error(err) {
   console.error("Location not found: " + err);
-  if(err.code == PositionError.TIMEOUT && loc_retries == 0) {
+  if(err.code == 3 && loc_retries == 0) {
     navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: 5000, enableHighAccuracy: false});
   } else {
     $('#search_location_msg').hide();
