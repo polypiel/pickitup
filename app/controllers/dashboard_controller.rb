@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
     @money = Pickup.joins(:coin).sum(:value)
 
     @top_users = ActiveRecord::Base.connection.execute('
-      SELECT u.username, count(u.id) AS coins , sum(c.value) AS value
+      SELECT u.id, u.username, count(u.id) AS coins , sum(c.value) AS value
       FROM users u
       JOIN pickups p ON p.picker_id = u.id
       JOIN coins c ON p.coin_id = c.id

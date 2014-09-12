@@ -11,6 +11,10 @@ class PickupsController < ApplicationController
   # GET /pickups/1
   # GET /pickups/1.json
   def show
+    user = get_logged_user
+    puts user.owner?
+    puts  @pickup.picker == user
+    @can_edit = (user.owner? or @pickup.picker == user)
   end
 
   # GET /pickups/new
@@ -27,7 +31,7 @@ class PickupsController < ApplicationController
   # POST /pickups.json
   def create
     @pickup = Pickup.new(pickup_params)
-    @pickup.picker = User.find_by(id: session[:user_id])
+    @pickup.picker = get_logged_user
     @pickup.wallet = @pickup.picker.wallet
 
     respond_to do |format|

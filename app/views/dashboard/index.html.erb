@@ -28,7 +28,7 @@
   <% @top_users.each_with_index do |top_user, index| %>
     <tr class="lead">
       <td><%= index + 1 %></td>
-      <td><strong><%= top_user['username'] %></strong></td>
+      <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
       <td style="text-align: right;"><%= top_user['coins'] %></td>
       <td style="text-align: right;"><%= top_user['value'] %></td>
     </tr>
@@ -41,7 +41,7 @@
   <table class="table">
   <% @last_pickups.each do |pickup| %>
     <tr class="lead">
-      <td><%= pickup.coin %> by <strong><%= pickup.picker.username %></strong>, <%= time_ago_in_words(pickup.picked_at) %> ago.</td>
+      <td><%= link_to pickup.coin, pickup_path(pickup) %> by <strong><%= pickup.picker.username %></strong>, <%= time_ago_in_words(pickup.picked_at) %> ago.</td>
     </tr>
   <% end %>
   <table>
