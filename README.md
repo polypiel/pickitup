@@ -15,10 +15,14 @@ Pickitup! is based on:
  * Filter pickups
  * Bug: Login bg in mobiles
  * Location as City+Country
+ * Enforce auth
+
+### 0.3.0
  
 ### 0.2.0
-Features:
 CURRENT
+Released on 11/09/2014
+Features:
  * User's avatar
  * Dashboard
  * Pickups: pagination, pickup dates as time ago
