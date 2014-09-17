@@ -17,7 +17,10 @@
       <%= label_tag :password, 'Password', class: 'sr-only' %>
       <%= password_field_tag :password, params[:password], class: 'form-control', placeholder: "Password" %>
     </div>
-
+    <div class="form-group">
+      <%= check_box_tag :rememberme %>
+      <%= label_tag :rememberme, 'Remember me' %>
+    </div>
     <hr>
 
     <div class="form-group">
