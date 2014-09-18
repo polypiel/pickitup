@@ -91,20 +91,26 @@ class UsersController < ApplicationController
 
     if session[:user_id]
       respond_to do |format|
-        format.html { redirect_to pickups_url , notice: 'You should first log out.' }
+        format.html { redirect_to dashboard_path , notice: 'You should first log out.' }
       end
     end
 
     if params[:u] and params[:p]
-      @user = User.find_by(email: params[:u])
-      if not @user or @user.active or not @user.authenticate(params[:p])
+      @user = User.find_by(email: params[:u], active: false, password_digest: URI.decode(params[:p]))
+      puts @user
+      if @user
         @error = false
       end
     end
 
     if @error
       respond_to do |format|
-        format.html { render :signup_new, notice: 'Something wrong happened.' }
+        format.html { redirect_to :login, alert: 'Something wrong happened.' }
+      end
+    else
+      @login_page = true
+      respond_to do |format|
+        format.html { render :signup_new, layout: 'public' }
       end
     end
   end
@@ -118,8 +124,8 @@ class UsersController < ApplicationController
       if @user.update(params.permit(:username, :password, :password_confirmation))
         format.html { redirect_to login_path, notice: 'Your user has been confirmed. Please sign in.' }
       else
-        @error = true
-        format.html { render :signup_new }
+        @login_page = true
+        format.html { render :signup_new, layout: 'public', email: params[:email]  }
       end
     end
   end

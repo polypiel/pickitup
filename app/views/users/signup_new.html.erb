@@ -1,13 +1,13 @@
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-6 col-md-offset-3 white-bg">
   <h1 class="login-title">Pick it up! <span class="title-version">Beta</span></h1>
-
-  <p class="alert alert-info">Please, to sign up fill in an username and password.</p>
 
   <% if flash[:alert] %>
   <p id="notice" class="alert alert-danger"><%= flash[:alert] %></p>
   <% end %>
   
   <% unless @error %>
+  <p class="text-info"><i class="fa fa-info"></i> Please, to <strong>sign up</strong> fill in an username and a password.</p>
+
   <%= form_tag '/signup', role: 'form' do %>
   <% if @user.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
@@ -20,20 +20,20 @@
   <% end %>
     <div class="form-group">
       <%= label_tag :username, 'Username', class: 'sr-only' %>
-      <%= text_field_tag :username, params[:username], class: 'form-control', placeholder: "Username" %>
+      <%= text_field_tag :username, params[:username], class: 'form-control', placeholder: "Username", autocomplete: "off" %>
     </div>
     <div class="form-group">
       <%= label_tag :password, 'Password', class: 'sr-only' %>
-      <%= password_field_tag :password, params[:password], class: 'form-control', placeholder: "Password" %>
+      <%= password_field_tag :password, params[:password], class: 'form-control', placeholder: "Password", autocomplete: "off" %>
     </div>
     <div class="form-group">
       <%= label_tag :password_confirmation, 'Password', class: 'sr-only' %>
-      <%= password_field_tag :password_confirmation, params[:password_confirmation], class: 'form-control', placeholder: "Password confirmation" %>
+      <%= password_field_tag :password_confirmation, params[:password_confirmation], class: 'form-control', placeholder: "Password confirmation", autocomplete: "off" %>
     </div>
-    <%= hidden_field_tag :email, params[:u] %>
+    <%= hidden_field_tag :email, @user.email %>
     <hr>
     <div class="form-group">
-      <%= submit_tag "Sign up", class: 'btn btn-primary login-success' %>
+      <%= submit_tag "Sign up", class: 'btn btn-primary login-submit' %>
     </div>
   <% end %>
   <% end %>
