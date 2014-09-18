@@ -27,9 +27,4 @@ class SessionsControllerTest < ActionController::TestCase
     delete :destroy
     assert_redirected_to login_url
   end
-
-  test "should invite" do
-    post :new, email: 'not@inthedb.com'
-    assert_redirected_to :users
-  end
 end

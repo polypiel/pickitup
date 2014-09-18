@@ -23,10 +23,18 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: @update
+      post :create, user: {email: 'not@inthedb.com'}
     end
 
     assert_redirected_to users_path
+  end
+
+  test "should not create user" do
+    assert_no_difference('User.count') do
+      post :create, user: {email: 'polypiel@pickitup.com'}
+    end
+
+    assert_response :success
   end
 
   test "should show user" do
@@ -50,5 +58,25 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to users_path
+  end
+
+  test "should not get signup" do
+    logout
+    get :signup_new
+    assert_redirected_to :login
+  end
+
+  test "should get signup" do
+    logout
+    invited = users(:invited)
+    get :signup_new, u: invited.email, p: URI.encode(invited.password_digest)
+    assert_response :success
+  end
+
+  test "should signup" do
+    logout
+    invited = users(:invited)
+    patch :signup, username: 'john', email: 'invited@gmail.com', password: '123456' 
+    assert_redirected_to :login
   end
 end

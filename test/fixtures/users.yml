@@ -16,6 +16,7 @@ marielo:
   active: true
   password_digest: <%= BCrypt::Password.create('marielo') %>
 
+# Inactive user should not login
 brett:
   username: Brett
   email: brettdomino@pickitup.com
@@ -23,3 +24,10 @@ brett:
   wallet: marielos
   active: false
   password_digest: <%= BCrypt::Password.create('brett') %>
+
+invited:
+  email: invited@gmail.com
+  role: 2
+  active: false
+  wallet: marielos
+  password_digest: <%= BCrypt::Password.create('invited') %>

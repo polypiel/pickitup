@@ -97,7 +97,6 @@ class UsersController < ApplicationController
 
     if params[:u] and params[:p]
       @user = User.find_by(email: params[:u], active: false, password_digest: URI.decode(params[:p]))
-      puts @user
       if @user
         @error = false
       end
