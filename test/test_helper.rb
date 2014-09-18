@@ -9,10 +9,12 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   def login_as(user)
     session[:user_id] = users(user).id
+    session[:wallet_id] = users(user).wallet.id
   end
 
   def logout
     session.delete :user_id
+    session.delete :wallet_id
   end
 
   def setup

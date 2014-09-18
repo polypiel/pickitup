@@ -12,8 +12,6 @@ class PickupsController < ApplicationController
   # GET /pickups/1.json
   def show
     user = get_logged_user
-    puts user.owner?
-    puts  @pickup.picker == user
     @can_edit = (user.owner? or @pickup.picker == user)
   end
 

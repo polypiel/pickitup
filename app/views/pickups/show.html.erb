@@ -2,7 +2,7 @@
 <p class="lead">Picked by <strong><%= @pickup.picker.username %></strong> on <%= @pickup.picked_at.strftime("%d %B %Y") %> at <%= @pickup.picked_at.strftime("%H:%M") %>.</p>
 <p>
 
-<% unless @pickup.comments.empty? %>
+<% unless @pickup.comments.blank? %>
 <blockquote>
   <p><%= @pickup.comments %></p>
 </blockquote>
