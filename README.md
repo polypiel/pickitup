@@ -10,7 +10,6 @@ Pickitup! is based on:
 ## Change-log
 
 ### Future versions
- * Remember auth details to avoid logins
  * Notifications
  * Filter pickups
  * Bug: Login bg in mobiles
@@ -20,6 +19,11 @@ Pickitup! is based on:
  * Bug: big pictures in user profile
 
 ### 0.3.0
+Features:
+ * Received option for pickups
+ * Remember me on login
+ * Graphs on the dashboard
+ * Visual improvements
  
 ### 0.2.0
 CURRENT
