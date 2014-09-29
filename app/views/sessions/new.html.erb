@@ -2,10 +2,10 @@
   <h1 class="login-title">Pick it up! <span class="title-version">Beta</span></h1>
 
   <% if flash[:alert] %>
-  <p id="notice" class="alert alert-danger"><%= flash[:alert] %></p>
+  <p id="notice" class="text-danger"><i class="fa fa-exclamation-triangle"></i> <%= flash[:alert] %></p>
   <% end %>
   <% if notice %>
-  <p id="notice" class="alert alert-info"><%= notice %></p>
+  <p id="notice" class="text-info"><i class="fa fa-info"></i> <%= notice %></p>
   <% end %>
 
   <%= form_tag role: 'form' do %>
