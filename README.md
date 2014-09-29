@@ -16,6 +16,8 @@ Pickitup! is based on:
  * Bug: Login bg in mobiles
  * Location as City+Country
  * Enforce auth
+ * Received option in pickups
+ * Bug: big pictures in user profile
 
 ### 0.3.0
  
