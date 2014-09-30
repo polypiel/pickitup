@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require bootstrap.min
 //= require bootstrap-datepicker
+//= require jquery.flot
+//= require jquery.flot.pie
 //= require_tree .

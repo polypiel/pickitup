@@ -9,21 +9,9 @@
     </div>
   <% end %>
 
-  <div class="row">
-    <div class="col-md-4 col-sm-12  field form-group">
-      <%= f.label :coin %><br>
-      <%= f.collection_select :coin_id, Coin.all, :id, :to_s, {}, {:class => 'form-control'} %>
-    </div>
-
-    <div class="col-md-4 col-sm-6 field form-group">
-      <%= f.label 'Date' %><br>
-      <%= f.date_field :picked_at_date, :class => 'form-control' %>
-    </div>
-
-    <div class="col-md-4 col-sm-6 field form-group">
-      <%= f.label 'Time' %><br>
-      <%= f.time_field :picked_at_time, :value => (@pickup.picked_at_time.strftime("%H:%M")), :class => 'form-control', title: 'Format: hh:mm' %>
-    </div>
+  <div class="field form-group">
+    <%= f.label :coin %><br>
+    <%= f.collection_select :coin_id, Coin.all, :id, :to_s, {}, {:class => 'form-control'} %>
   </div>
 
   <div class="field form-group">
@@ -31,16 +19,42 @@
     <%= f.text_area :comments, rows: 3, class: 'form-control' %>
   </div>
 
-
   <%= f.hidden_field :longitude, :class => 'form-control' %>
   <%= f.hidden_field :latitude, :class => 'form-control' %>
 
 
-  <span id="search_location_msg" class="text-info"><i class="fa fa-circle-o-notch fa-spin"></i> Searching for location...</span>
-  <div id="location_part" class="field form-group">
+  <div class="field form-group">
     <%= f.label :location %><br>
-    <%= f.text_field :location, :class => 'form-control' %>
+    <span id="search_location_msg" class="text-info"><i class="fa fa-circle-o-notch fa-spin"></i> Searching for location...</span>
+    <div id="location_part" >
+      <%= f.text_field :location, :class => 'form-control' %>
+    </div>
   </div>
+
+
+    <div class="pull-right form-group">
+      <a id="show-advanced" data-toggle="collapse" href="#collapseOne"><i class="fa fa-angle-double-right"></i> Show advanced options</a>
+      <a id="hide-advanced" data-toggle="collapse" href="#collapseOne" style="display: none;"><i class="fa fa-angle-double-down"></i> Hide advanced options</a>
+    </div>
+    <div class="clearfix"></div>
+    <div id="collapseOne" class="collapse">
+      <div class="row">
+        <div class="col-md-4 col-sm-12 field form-group">
+          <%= f.label :picker %><br>
+          <%= f.collection_select :picker_id, @pickers, :id, :username, {}, {:class => 'form-control'} %>
+        </div>
+
+        <div class="col-md-4 col-sm-6 field form-group">
+          <%= f.label 'Date' %><br>
+          <%= f.date_field :picked_at_date, :class => 'form-control' %>
+        </div>
+
+        <div class="col-md-4 col-sm-6 field form-group">
+          <%= f.label 'Time' %><br>
+          <%= f.time_field :picked_at_time, :value => (@pickup.picked_at_time.strftime("%H:%M")), :class => 'form-control', title: 'Format: hh:mm' %>
+        </div>
+      </div>
+    </div>
 
   <hr>
 
@@ -48,3 +62,16 @@
     <%= f.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var show_advanced = $('#show-advanced');
+    var hide_advanced = $('#hide-advanced');
+    var toggle_advanced = function() {
+      show_advanced.toggle();
+      hide_advanced.toggle();
+    }
+    show_advanced.click(toggle_advanced);
+    hide_advanced.click(toggle_advanced);
+  });
+</script>

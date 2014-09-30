@@ -19,6 +19,7 @@ class PickupsController < ApplicationController
   def new
     @pickup = Pickup.new
     @pickup.picked_at = Time.zone.now
+    @pickers = User.where(active: true, wallet_id: session[:wallet_id])
   end
 
   # GET /pickups/1/edit
