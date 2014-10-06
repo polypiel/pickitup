@@ -12,18 +12,20 @@ Pickitup! is based on:
 ### Future versions
  * Notifications
  * Filter pickups
- * Bug: Login bg in mobiles
+ * Bug: Login background in mobiles
  * Location as City+Country
  * Enforce auth
  * Received option in pickups
  * Bug: big pictures in user profile
+ * Pluralize the word'cent'
 
 ### 0.3.0
+WIP
 Features:
- * Received option for pickups
- * Remember me on login
- * Graphs on the dashboard
- * Visual improvements
+ * Received option for pickups (todo)
+ * Remember me on login (todo)
+ * Graphs on the dashboard (wip)
+ * Visual improvements (wip)
  
 ### 0.2.0
 CURRENT
