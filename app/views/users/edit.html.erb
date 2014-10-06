@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field form-group">
+  <div class="form-group">
     <%= f.label :username %><br/>
     <%= f.text_field :username, class: 'form-control' %>
   </div>
@@ -24,7 +24,7 @@
 
 
 <%= form_for @user, :html => { :multipart => true } do |f| %>
-  <div class="field form-group">
+  <div class="form-group">
     <%= f.label :avatar %><br/>
     <%= image_tag @user.avatar.url(:thumb), class: 'img-circle' %>
     <%= f.file_field :avatar %>
@@ -47,12 +47,12 @@
     </div>
   <% end %>
 
-  <div class="field form-group">
+  <div class="form-group">
     <%= f.label :password %><br>
     <%= f.password_field :password, class: 'form-control', autocomplete: 'off' %>
   </div>
 
-  <div class="field form-group">
+  <div class="form-group">
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
   </div>
