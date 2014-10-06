@@ -19,11 +19,12 @@ class PickupsController < ApplicationController
   def new
     @pickup = Pickup.new
     @pickup.picked_at = Time.zone.now
-    @pickers = User.where(active: true, wallet_id: session[:wallet_id])
+    @pickers = wallet_pickers
   end
 
   # GET /pickups/1/edit
   def edit
+    @pickers = wallet_pickers
   end
 
   # POST /pickups
@@ -75,6 +76,10 @@ class PickupsController < ApplicationController
   end
 
   private
+    def wallet_pickers
+      User.where(active: true, wallet_id: session[:wallet_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_pickup
       @pickup = Pickup.find(params[:id])
