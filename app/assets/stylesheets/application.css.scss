@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  *= require bootstrap.min
- *= require-datepicker
+ *= require bootstrap-datepicker
  */
 
 $max-width: 640px;
@@ -36,6 +36,9 @@ h1 {
 }
 h2 {
   font-size: 2.5rem !important;
+}
+h3 {
+  font-size: 1.75rem !important;
 }
 
 .navbar-brand {
