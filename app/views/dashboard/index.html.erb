@@ -1,4 +1,4 @@
-<h2>Stats</h2>
+<h1>Stats</h1>
 
 <div class="row">
   <div class="col-sm-3 col-xs-3">
@@ -31,6 +31,7 @@
 </div>
 
 <div id="chart-container" class="well">
+  <h2>Accumulated coins by month</h2>
   <svg class="chart"></svg>
 </div>
 
@@ -107,7 +108,7 @@ $(document).ready(function() {
 
   var dataset_2 = [
   <% @pickups_monthly.each do |m, p| %>
-    {'month': '<%= Date::MONTHNAMES[m.month] %>', 'coins': <%= p.size %>},
+    {'month': '<%= Date::MONTHNAMES[m.month][0, 3] %>', 'coins': <%= p.size %>},
   <% end %>
   ];
 

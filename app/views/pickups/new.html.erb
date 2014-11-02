@@ -3,10 +3,12 @@
 <%= render 'form' %>
 
 <script>
-var loc_retries = 0;
+var RETRIES = 3;
+var LOCATION_TIMEOUT = 5000;
+var GMAPS_TIMEOUT = 10000;
 
 function show_map(position) {
-  search_location(position.coords.latitude, position.coords.longitude, 0);
+  search_location(position.coords.latitude, position.coords.longitude, RETRIES);
 }
 
 function search_location(lat, lng, retries) {
@@ -36,8 +38,12 @@ function search_location(lat, lng, retries) {
     timer_id = setTimeout(function() {
       console.debug("Gmaps time out");
       timed_out = true;
-      show_location_controls();
-    }, 7500);
+      if (retries > 0) {
+        search_location(lat, lng, retries - 1);
+      } else {
+        show_location_controls();
+      }
+    }, GMAPS_TIMEOUT);
 
   } else {
     console.error("gmaps not loaded");
@@ -52,7 +58,7 @@ function show_location_controls() {
 function handle_error(err) {
   console.error("Location not found: " + err);
   if(err.code == 3 && loc_retries == 0) {
-    navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: 5000, enableHighAccuracy: false});
+    navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: LOCATION_TIMEOUT, enableHighAccuracy: false});
   } else {
     $('#search_location_msg').hide();
     $('#location_part').show();
