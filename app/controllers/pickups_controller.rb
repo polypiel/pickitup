@@ -25,6 +25,7 @@ class PickupsController < ApplicationController
   # GET /pickups/1/edit
   def edit
     @pickers = wallet_pickers
+    @edit_mode = true
   end
 
   # POST /pickups

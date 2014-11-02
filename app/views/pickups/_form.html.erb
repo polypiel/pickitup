@@ -32,12 +32,15 @@
   </div>
 
 
+    <% unless @edit_mode %>
     <div class="pull-right form-group">
       <a id="show-advanced" data-toggle="collapse" href="#collapseOne"><i class="fa fa-angle-double-right"></i> Show advanced options</a>
       <a id="hide-advanced" data-toggle="collapse" href="#collapseOne" style="display: none;"><i class="fa fa-angle-double-down"></i> Hide advanced options</a>
     </div>
     <div class="clearfix"></div>
-    <div id="collapseOne" class="collapse">
+    <% end %>
+
+    <div id="collapseOne" <% unless @edit_mode %>class="collapse"<% end %>>
       <div class="row">
         <div class="col-md-4 col-sm-12 field form-group">
           <%= f.label :picker %><br>
@@ -60,6 +63,7 @@
 
   <div class="form-group actions">
     <%= f.submit :class => 'btn btn-primary' %>
+    <% if @edit_mode %><%= link_to 'Cancel', pickups_path %><% end %>
   </div>
 <% end %>
 
