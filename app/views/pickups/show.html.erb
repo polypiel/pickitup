@@ -1,13 +1,36 @@
 <h1><%= @pickup.coin %></h1>
-<p class="lead">Picked by <strong><%= @pickup.picker.username %></strong> on <%= @pickup.picked_at.strftime("%d %B %Y") %> at <%= @pickup.picked_at.strftime("%H:%M") %>.</p>
-<p>
 
-<% unless @pickup.comments.blank? %>
-<blockquote>
-  <p><%= @pickup.comments %></p>
-</blockquote>
-<% end %>
+<div class="row">
+  <div class="col-md-6">
+    <p class="lead">Picked by <strong><%= @pickup.picker.username %></strong> on <%= @pickup.picked_at.strftime("%d %B %Y") %> at <%= @pickup.picked_at.strftime("%H:%M") %>.</p>
+    <p>
 
-<% if @can_edit %>
-<%= link_to edit_pickup_path(@pickup) do %><i class="fa fa-edit"></i> Edit<% end %>
-<% end %>
+    <% unless @pickup.comments.blank? %>
+    <blockquote>
+      <p><%= @pickup.comments %></p>
+    </blockquote>
+    <% end %>
+
+    <% if @can_edit %>
+    <%= link_to edit_pickup_path(@pickup) do %><i class="fa fa-edit"></i> Edit<% end %>
+    <% end %>
+  </div>
+
+  <div class="col-md-6">
+    <div id="map-canvas" style="height: 200px;"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      var coinLatlng = new google.maps.LatLng(<%= @pickup.latitude%>, <%= @pickup.longitude %>);
+      var mapOptions = { center: coinLatlng, zoom: 13 };
+      var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      var marker = new google.maps.Marker({
+          position: coinLatlng,
+          map: map,
+          title: '<%= @pickup.location %>'
+    });
+  });
+</script>
