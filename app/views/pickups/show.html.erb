@@ -21,16 +21,18 @@
   </div>
 </div>
 
+<% if @pickup.has_location %>
 <script type="text/javascript">
   $(document).ready(function() {
-      var coinLatlng = new google.maps.LatLng(<%= @pickup.latitude%>, <%= @pickup.longitude %>);
-      var mapOptions = { center: coinLatlng, zoom: 13 };
-      var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var coinLatlng = new google.maps.LatLng(<%= @pickup.latitude%>, <%= @pickup.longitude %>);
+    var mapOptions = { center: coinLatlng, zoom: 13 };
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-      var marker = new google.maps.Marker({
-          position: coinLatlng,
-          map: map,
-          title: '<%= @pickup.location %>'
+    var marker = new google.maps.Marker({
+        position: coinLatlng,
+        map: map,
+        title: '<%= @pickup.location %>'
     });
   });
 </script>
+<% end %>

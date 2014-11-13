@@ -10,6 +10,10 @@ class Pickup < ActiveRecord::Base
 
   date_time_attribute :picked_at
 
+  def has_location
+    not latitude.nil? or not longitude.nil?
+  end
+
   def location_complete
     if latitude.nil? ^ longitude.nil?
       errors.add(:latitude, "Location is incomplete")
