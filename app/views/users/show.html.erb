@@ -1,6 +1,12 @@
+<div>
+<% if notice %>
+  <p id="notice" class="text-info"><i class="fa fa-info"></i> <%= notice %></p>
+<% end %>
+<div>
+
 <div class="row">
   <div class="col-md-4 col-sm-4 text-center">
-    <%= image_tag @user.avatar.url, class: 'img-circle' %>
+    <%= image_tag @user.avatar.url, class: 'avatar-profile img-circle' %>
   </div>
   <div class="col-md-8 col-sm-4">
     <h2><%= @user.username %></h2>

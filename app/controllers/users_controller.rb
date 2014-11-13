@@ -6,8 +6,9 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     # Finds only current wallet contributors
-    @users = User.where(wallet_id: session[:wallet_id], role: User::ROLE_CONTRIBUTOR, active: true)
-    @invitations = User.where(wallet_id: session[:wallet_id], role: User::ROLE_CONTRIBUTOR, active: false)
+    wallet_id = get_logged_user.wallet.id
+    @users = User.where(wallet_id: wallet_id, role: User::ROLE_CONTRIBUTOR, active: true)
+    @invitations = User.where(wallet_id: wallet_id, role: User::ROLE_CONTRIBUTOR, active: false)
   end
 
   # GET /users/1
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.active = false
     @user.role = User::ROLE_CONTRIBUTOR
-    @user.wallet_id = session[:wallet_id]
+    @user.wallet_id = get_logged_user.wallet.id
     @user.password = SecureRandom.hex(16)
 
     respond_to do |format|
@@ -58,19 +59,35 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    # Only the current user can update theirself
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    # TODO: Only the current user can update theirself
+    update_type = params[:user][:update_type]
+    params[:user].delete(:update_type)
+
+    puts update_type
+    puts params[:user][:username]
+    puts params[:user][:avatar]
+    puts params[:user][:password]
+
+    if update_type == "username" and params[:user][:username].blank?
+      @user.errors[:username] << "can't be empty"
+      render :edit
+    elsif update_type == "avatar" and params[:user][:avatar].nil?
+      @user.errors[:avatar] << "can't be empty"
+      render :edit
+    elsif update_type == "password" and params[:user][:password].empty?
+      @user.errors[:password] << "can't be empty"
+      render :edit
+    else
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
-  end
-
-  def update_picture
   end
   
   # DELETE /users/1

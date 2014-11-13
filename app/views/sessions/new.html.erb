@@ -1,4 +1,4 @@
-<div class="col-md-6 col-md-offset-3 white-bg">
+<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 white-bg">
   <h1 class="login-title">Pick it up! <span class="title-version">Beta</span></h1>
 
   <% if flash[:alert] %>
@@ -17,10 +17,6 @@
       <%= label_tag :password, 'Password', class: 'sr-only' %>
       <%= password_field_tag :password, params[:password], class: 'form-control', placeholder: "Password" %>
     </div>
-    <!--div class="form-group">
-      <%= check_box_tag :rememberme %>
-      <%= label_tag :rememberme, 'Remember me' %>
-    </div-->
     <hr>
 
     <div class="form-group">

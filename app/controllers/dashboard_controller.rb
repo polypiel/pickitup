@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    wallet_id = session[:wallet_id]
+    wallet_id = get_logged_user.wallet.id
 
     @coins = Pickup.where(wallet_id: wallet_id).count
     @money = Pickup.where(wallet_id: wallet_id).joins(:coin).sum(:value)
@@ -46,9 +46,9 @@ class DashboardController < ApplicationController
       ORDER BY u.username ASC, p.picked_at ASC
     ")
 
-    @last_pickups = Pickup.where(wallet_id: session[:wallet_id], picked_at: (15.days.ago.to_date)..(Time.zone.now)).order(picked_at: :desc).limit(3)
+    @last_pickups = Pickup.where(wallet_id: wallet_id, picked_at: (15.days.ago.to_date)..(Time.zone.now)).order(picked_at: :desc).limit(3)
 
-    pickups = Pickup.select(:picked_at).where(wallet_id: session[:wallet_id]).order(:picked_at)
+    pickups = Pickup.select(:picked_at).where(wallet_id: wallet_id).order(:picked_at)
     @pickups_monthly = pickups.group_by { |p| p.picked_at.beginning_of_month }
     # puts @pickups_monthly
   end

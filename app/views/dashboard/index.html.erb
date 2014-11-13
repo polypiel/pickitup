@@ -14,19 +14,17 @@
     </div>
   </div>
   <div class="col-sm-6 col-xs-6">
-    <div class="well">
-      <h2>Last pickups</h2>
-      <table class="table">
-      <% @last_pickups.each do |pickup| %>
-        <tr>
-          <td><%= link_to pickup.coin, pickup_path(pickup) %> by <strong><%= pickup.picker.username %></strong>, <%= time_ago_in_words(pickup.picked_at) %> ago.</td>
-        </tr>
-      <% end %>
-      <% if @last_pickups.empty? %>
-        <tr><td>There isn't recent pickups. Go out and pick up some coins!</td><tr>
-      <% end %>
-      </table>
-    </div>
+    <h2>Last pickups</h2>
+    <table class="table">
+    <% @last_pickups.each do |pickup| %>
+      <tr>
+        <td><%= link_to pickup.coin, pickup_path(pickup) %> by <strong><%= pickup.picker.username %></strong>, <%= time_ago_in_words(pickup.picked_at) %> ago.</td>
+      </tr>
+    <% end %>
+    <% if @last_pickups.empty? %>
+      <tr><td>There isn't recent pickups. Go out and pick up some coins!</td><tr>
+    <% end %>
+    </table>
   </div>
 </div>
 

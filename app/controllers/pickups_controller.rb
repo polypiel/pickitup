@@ -5,7 +5,8 @@ class PickupsController < ApplicationController
   # GET /pickups
   # GET /pickups.json
   def index
-    @pickups = Pickup.where(wallet_id: session[:wallet_id]).order(picked_at: :desc).page(params[:page]).per(20)
+    wallet_id = get_logged_user.wallet.id
+    @pickups = Pickup.where(wallet_id: wallet_id).order(picked_at: :desc).page(params[:page]).per(20)
   end
 
   # GET /pickups/1
@@ -78,7 +79,8 @@ class PickupsController < ApplicationController
 
   private
     def wallet_pickers
-      User.where(active: true, wallet_id: session[:wallet_id])
+      wallet_id = get_logged_user.wallet.id
+      User.where(active: true, wallet_id: wallet_id)
     end
 
     # Use callbacks to share common setup or constraints between actions.

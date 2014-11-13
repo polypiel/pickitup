@@ -1,16 +1,16 @@
 <h1>Edit user</h1>
 
-<%= form_for(@user, :html => {:role => 'form'}) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @user.errors.any? %>
+  <div id="password_error_explanation" class="alert alert-danger">
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
+<%= form_for(@user, :html => {:role => 'form'}) do |f| %>
   <div class="form-group">
     <%= f.label :username %><br/>
     <%= f.text_field :username, class: 'form-control' %>
@@ -19,6 +19,7 @@
   <div class="actions form-group">
     <%= f.submit 'Save username', class: 'btn btn-primary'%>
   </div>
+  <%= f.hidden_field :update_type, value: "username" %>
 <% end %>
 <hr/>
 
@@ -32,21 +33,12 @@
   <div class="actions form-group">
     <%= f.submit 'Upload avatar', class: 'btn btn-primary'%>
   </div>
+  <%= f.hidden_field :update_type, value: "avatar" %>
 <% end %>
 <hr/>
 
 
 <%= form_for(@user, :html => {:role => 'form'}) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="form-group">
     <%= f.label :password %><br>
     <%= f.password_field :password, class: 'form-control', autocomplete: 'off' %>
@@ -60,5 +52,6 @@
   <div class="actions form-group">
     <%= f.submit 'Change password', class: 'btn btn-primary'%>
   </div>
+  <%= f.hidden_field :update_type, value: "password" %>
 <% end %>
 </div>

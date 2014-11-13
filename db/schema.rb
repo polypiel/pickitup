@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906120923) do
+ActiveRecord::Schema.define(version: 20141103222552) do
 
   create_table "coins", force: true do |t|
     t.integer  "value"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140906120923) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "remember_digest"
   end
 
   create_table "wallets", force: true do |t|

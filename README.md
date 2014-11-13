@@ -12,21 +12,31 @@ Pickitup! is based on:
 ### Future versions
  * Notifications
  * Filter pickups
- * Bug: Login background in mobiles
  * Location as City+Country
  * Enforce auth
+
+### Known bugs
+ * Bug: Login background in mobiles
+ * Bug: pluralize the word 'cent'
+ * Bug: location info
+
+### 0.4.0
+PLANNED
  * Received option in pickups
- * Bug: big pictures in user profile
- * Pluralize the word'cent'
+ * Download data as CSV
 
 ### 0.3.0
 WIP
 Features:
- * Received option for pickups (todo)
- * Remember me on login (todo)
- * Graphs on the dashboard (wip)
- * Visual improvements (wip)
- 
+ * Remember me on login (done?)
+ * Graphs on the dashboard (done)
+ * Visual improvements (done)
+ * Map in coin info view (done)
+ * Bug: big pictures in user profile (done)
+ * Bug: don't upload a empty picture (done)
+ * Bug: save avatar [only in development]
+ * Bug: max-width for login box (done)
+
 ### 0.2.0
 CURRENT
 Released on 11/09/2014

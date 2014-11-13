@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :pickups
   resources :users
+  
   get 'profile', to: 'users#profile'
   get 'signup', to: 'users#signup_new'
   post 'signup', to: 'users#signup'
