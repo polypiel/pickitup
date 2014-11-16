@@ -21,12 +21,13 @@ Pickitup! is based on:
  * Bug: location info
 
 ### 0.4.0
-PLANNED
+NEXT
  * Received option in pickups
  * Download data as CSV
 
 ### 0.3.0
-WIP
+CURRENT
+Released on 16/11/2014
 Features:
  * Remember me on login (done?)
  * Graphs on the dashboard (done)
@@ -38,7 +39,6 @@ Features:
  * Bug: max-width for login box (done)
 
 ### 0.2.0
-CURRENT
 Released on 11/09/2014
 Features:
  * User's avatar
