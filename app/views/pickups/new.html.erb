@@ -3,9 +3,9 @@
 <%= render 'form' %>
 
 <script>
-var RETRIES = 3;
+var RETRIES = 2;
 var LOCATION_TIMEOUT = 5000;
-var GMAPS_TIMEOUT = 10000;
+var GMAPS_TIMEOUT = 5000;
 
 function show_map(position) {
   search_location(position.coords.latitude, position.coords.longitude, RETRIES);
