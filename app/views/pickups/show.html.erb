@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<% if @pickup.has_location %>
+<% if @pickup.has_coordinates? %>
 <script type="text/javascript">
   $(document).ready(function() {
     var coinLatlng = new google.maps.LatLng(<%= @pickup.latitude%>, <%= @pickup.longitude %>);
