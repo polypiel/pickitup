@@ -14,6 +14,7 @@ Pickitup! is based on:
  * Filter pickups
  * Location as City+Country
  * Enforce auth
+ * Yearly stats
 
 ### Known bugs
  * Bug: Login background in mobiles
@@ -21,9 +22,9 @@ Pickitup! is based on:
  * Bug: location info
 
 ### 0.4.0
-NEXT
+IN PROGRESS
  * Received option in pickups
- * Download data as CSV
+ * Download pickups data as CSV (done)
 
 ### 0.3.0
 CURRENT

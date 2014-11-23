@@ -4,7 +4,11 @@
 <p id="notice" class="text-info"><i class="fa fa-info"></i> <%= notice %></p>
 <% end %>
 
-<p><%= link_to new_pickup_path do %> <i class="fa fa-plus"></i> New pickup <% end %></p>
+<p>
+  <%= link_to new_pickup_path do %><i class="fa fa-plus"></i> New pickup<% end %>
+  <span style="padding-right: 1rem;"></span>
+  <%= link_to pickups_path(format: "csv"), title: "Download list as a CSV file" do %><i class="fa fa-download"></i> Download<% end %>
+</p>
 
 <table class="table table-striped">
   <thead>
