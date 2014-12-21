@@ -6,17 +6,6 @@ class DashboardController < ApplicationController
     @money = Pickup.where(wallet_id: wallet_id).joins(:coin).sum(:value)
     @pickers = User.where(wallet_id: wallet_id, active: true).count
 
-    @top_users = ActiveRecord::Base.connection.execute("
-      SELECT u.id, u.username, count(u.id) AS coins , sum(c.value) AS value
-      FROM users u
-      JOIN pickups p ON p.picker_id = u.id
-      JOIN coins c ON p.coin_id = c.id
-      WHERE u.wallet_id = #{wallet_id}
-      GROUP BY u.id
-      ORDER BY coins DESC
-      LIMIT 3
-    ")
-
     date_limit = 30.days.ago.to_formatted_s(:db)
     @top_users_monthly = ActiveRecord::Base.connection.execute("
       SELECT u.id, u.username, count(u.id) AS coins , sum(c.value) AS value

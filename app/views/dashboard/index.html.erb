@@ -1,19 +1,29 @@
-<h1>Stats</h1>
+<h1>Dashboard</h1>
 
 <div class="row">
   <div class="col-sm-3 col-xs-6">
     <div id="first-well" class="well">
       <h2><strong><%= @coins %></strong></h2>
       <p class="lead">Coins</p>
-    </div>
+    <!--/div>
   </div>
   <div class="col-sm-3 col-xs-6">
-    <div class="well">
+    <div class="well"-->
       <h2><strong><%= @money %></strong></h2>
       <p class="lead">Cents</p>
     </div>
   </div>
-  <div class="col-sm-6 col-xs-12">
+
+  <div class="col-sm-9 col-xs-12">
+  <div id="chart-container" class="well">
+    <h2>Accumulated coins</h2>
+    <svg class="chart"></svg>
+  </div>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-xs-12">
     <h2>Last pickups</h2>
     <table class="table">
     <% @last_pickups.each do |pickup| %>
@@ -26,54 +36,15 @@
     <% end %>
     </table>
   </div>
-</div>
 
-<div id="chart-container" class="well">
-  <h2>Accumulated coins by month</h2>
-  <svg class="chart"></svg>
-</div>
-
-<div class="row">
-  <h2>Top pickers</h2>
-  <div class="col-sm-6">
-    <h3>Yearly</h3>
+  <div class="col-sm-6 col-xs-12">
+    <h2>Last 30 days top pickers</h2>
     <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <th style="text-align: right;">Coins</th>
-          <th style="text-align: right;">Value</th>
-        </tr>
-      </thead>
-    <% @top_users.each_with_index do |top_user, index| %>
-      <tr>
-        <td><%= index + 1 %></td>
-        <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
-        <td style="text-align: right;"><%= top_user['coins'] %></td>
-        <td style="text-align: right;"><%= top_user['value'] %></td>
-      </tr>
-    <% end %>
-    </table>
-  </div>
-
-  <div class="col-sm-6">
-    <h3>Monthly</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <th style="text-align: right;">Coins</th>
-          <th style="text-align: right;">Value</th>
-        </tr>
-      </thead>
     <% @top_users_monthly.each_with_index do |top_user, index| %>
       <tr>
         <td><%= index + 1 %></td>
         <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
-        <td style="text-align: right;"><%= top_user['coins'] %></td>
-        <td style="text-align: right;"><%= top_user['value'] %></td>
+        <td style="text-align: right;" title="<%= pluralize(top_user['coins'], 'coin') %>"><%= top_user['coins'] %></td>
       </tr>
     <% end %>
     </table>
@@ -81,12 +52,14 @@
 </div>
 
 <style>
+/*
 .bar {
-  fill: 'steelblue';
+  fill: '#a4725a';
 }
 .bar:hover {
   fill: 'brown';
 }
+*/
 .axis {
   font: 10px sans-serif;
 }
@@ -136,7 +109,7 @@ $(document).ready(function() {
       .data(dataset_2)
       .enter()
       .append("rect")
-      .attr("fill", "teal")
+      .attr("fill", "#a4725a")
       .attr("x", function(d, i) {
           return i * (w / dataset_2.length);
       })
