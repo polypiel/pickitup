@@ -24,7 +24,7 @@
   <tbody>
     <% @pickups.each do |pickup| %>
       <tr>
-        <td title="<%= pickup.picked_at.strftime("%d/%m/%Y %H:%M") %>"><%= time_ago_in_words(pickup.picked_at) %> ago</td>
+        <td><%= pickup.picked_at.strftime("%d/%m/%Y %H:%M") %></td>
         <td><%= link_to pickup.coin, pickup_path(pickup) %></td>
         <td><%= pickup.picker.username %></td>
         <td class="hidden-xs"><%= pickup.location %></td>
