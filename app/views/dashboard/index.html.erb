@@ -2,24 +2,26 @@
 
 <div class="row">
   <div class="col-sm-3 col-xs-6">
-    <div id="first-well" class="well">
+    <div id="first-well" class="well" >
       <h2><strong><%= @coins %></strong></h2>
       <p class="lead">Coins</p>
-    <!--/div>
+    </div>
   </div>
   <div class="col-sm-3 col-xs-6">
-    <div class="well"-->
+    <div class="well">
       <h2><strong><%= @money %></strong></h2>
       <p class="lead">Cents</p>
     </div>
   </div>
-
-  <div class="col-sm-9 col-xs-12">
-  <div id="chart-container" class="well">
-    <h2>Accumulated coins</h2>
-    <svg class="chart"></svg>
-  </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-12 col-xs-12">
+    <div id="chart-container" class="well">
+      <h2>Accumulated coins</h2>
+      <svg class="chart"></svg>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -46,6 +48,9 @@
         <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
         <td style="text-align: right;" title="<%= pluralize(top_user['coins'], 'coin') %>"><%= top_user['coins'] %></td>
       </tr>
+    <% end %>
+    <% if @top_users_monthly.empty? %>
+    <tr><td>Nobody found a single coin during past 30 days. This is unbearable!</td>
     <% end %>
     </table>
   </div>
