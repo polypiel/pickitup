@@ -26,6 +26,7 @@ IN PROGRESS
  * Download pickups data as CSV (done)
  * Dashboard revamped (done)
  * Yearly stats
+ * Profile info enhance with pickups stats.
 
 ### 0.3.0
 CURRENT
