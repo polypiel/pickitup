@@ -16,3 +16,24 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-6">
+    <h2>Stats</h2>
+    Coins: <%= @coins %><br/>
+    Value: <%= @money %> cents
+  </div>
+  <div class="col-md-6">
+    <h2>Last pickups</h2>
+    <table class="table">
+    <% @last_pickups.each do |pickup| %>
+      <tr>
+        <td><%= link_to pickup.coin, pickup_path(pickup) %>, <%= time_ago_in_words(pickup.picked_at) %> ago.</td>
+      </tr>
+    <% end %>
+    <% if @last_pickups.empty? %>
+      <tr><td>No pickups yet. Try harder!</td><tr>
+    <% end %>
+    </table>
+  </div>
+</div>
+
