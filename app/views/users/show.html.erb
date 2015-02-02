@@ -17,10 +17,22 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-6">
     <h2>Stats</h2>
-    Coins: <%= @coins %><br/>
-    Value: <%= @money %> cents
+    <row>
+      <div class="col-sm-6">
+        <div id="first-well" class="well" >
+          <h2><strong><%= @coins %></strong></h2>
+          <p class="lead">Coins</p>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="well">
+          <h2><strong><%= @money %></strong></h2>
+          <p class="lead">Cents</p>
+        </div>
+      </div>
+    </row>
   </div>
   <div class="col-md-6">
     <h2>Last pickups</h2>
