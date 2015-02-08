@@ -68,12 +68,19 @@
 
   <div class="form-group">
     <%= f.submit :class => 'btn btn-primary col-xs-12' %>
-    <% if @edit_mode %><%= link_to 'Cancel', pickups_path %><% end %>
+    <% if @edit_mode %><%= link_to 'Cancel', pickups_path, :class => 'btn btn-link' %><% end %>
   </div>
 <% end %>
 
 <script type="text/javascript">
   var GMAPS_TIMEOUT = 5000;
+
+  function isDateControlSupported() {
+    var tester = document.createElement('input');
+    tester.type = 'date';
+    tester.value = ':(';
+    return tester.type === 'date' && tester.value === '';
+  }
 
   function isGmapsLoaded() {
     return typeof google === 'object' && typeof google.maps === 'object';
