@@ -9,6 +9,7 @@ class DashboardController < ApplicationController
 
     # Last month top users
     @top_users_monthly = top_users_monthly wallet_id
+    puts @top_users_monthly
 
     # Three last pickups
     @last_pickups = Pickup.where(wallet_id: wallet_id, picked_at: (15.days.ago.to_date)..(Time.zone.now)).order(picked_at: :desc).limit(3)
