@@ -1,0 +1,22 @@
+  <h2>Top pickers</h2>
+  <div class="col-sm-6">
+    <h3>Yearly</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th style="text-align: right;">Coins</th>
+          <th style="text-align: right;">Value</th>
+        </tr>
+      </thead>
+    <% @top_users.each_with_index do |top_user, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
+        <td style="text-align: right;"><%= top_user['coins'] %></td>
+        <td style="text-align: right;"><%= top_user['value'] %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>

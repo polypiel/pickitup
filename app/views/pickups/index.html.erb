@@ -4,7 +4,11 @@
 <p id="notice" class="text-info"><i class="fa fa-info"></i> <%= notice %></p>
 <% end %>
 
-<p><%= link_to new_pickup_path do %> <i class="fa fa-plus"></i> New pickup <% end %></p>
+<p>
+  <%= link_to new_pickup_path do %><i class="fa fa-plus"></i> New pickup<% end %>
+  <span style="padding-right: 1rem;"></span>
+  <%= link_to pickups_path(format: "csv"), title: "Download list as a CSV file" do %><i class="fa fa-download"></i> Download<% end %>
+</p>
 
 <table class="table table-striped">
   <thead>
@@ -20,7 +24,7 @@
   <tbody>
     <% @pickups.each do |pickup| %>
       <tr>
-        <td title="<%= pickup.picked_at.strftime("%d/%m/%Y %H:%M") %>"><%= time_ago_in_words(pickup.picked_at) %> ago</td>
+        <td><%= pickup.picked_at.strftime("%d/%m/%Y %H:%M") %></td>
         <td><%= link_to pickup.coin, pickup_path(pickup) %></td>
         <td><%= pickup.picker.username %></td>
         <td class="hidden-xs"><%= pickup.location %></td>
@@ -28,8 +32,8 @@
           <div class="btn-group">
             <% if can_edit pickup.picker_id %>
             <%#= link_to pickup, :title => "Show", :class => 'btn btn-default' do %><!--i class="fa fa-eye"></i--><%# end %>
-            <%= link_to edit_pickup_path(pickup), :title => "Edit", :class => 'btn btn-default' do %><i class="fa fa-edit"></i><% end %>
-            <%= link_to pickup, method: :delete, data: { confirm: "Do you really want to delete the pickup?" }, :title => "Delete", :class => 'btn btn-default' do %><i class="fa fa-trash-o"></i><% end %>
+            <%= link_to edit_pickup_path(pickup), :title => "Edit", :class => 'btn btn-default btn-sm' do %><i class="fa fa-edit"></i><% end %>
+            <%= link_to pickup, method: :delete, data: { confirm: "Do you really want to delete the pickup?" }, :title => "Delete", :class => 'btn btn-default btn-sm' do %><i class="fa fa-trash-o"></i><% end %>
             <% end %>
           </div>
         </td>

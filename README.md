@@ -2,41 +2,46 @@
 Pickitup! is application that let you register the pickups of coins.
 
 ## Installation
-
 Pickitup! is based on:
  * Ruby 1.9
  * Ruby on Rails 4.1
 
 ## Change-log
 
-### Future versions
+### Proposed features
  * Notifications
  * Filter pickups
  * Location as City+Country
  * Enforce auth
+ * Received option in pickups
+ * Edit location from coordinates
+ * Yearly stats
 
 ### Known bugs
- * Bug: Login background in mobiles
- * Bug: pluralize the word 'cent'
- * Bug: location info
+ * Bug: Login background in mobiles (3)
+ * Bug: pluralize the word 'cent' (1)
+ * Bug: location info (4)
 
 ### 0.4.0
-NEXT
- * Received option in pickups
- * Download data as CSV
+CURRENT
+Released on 08/02/2015
+ * Download pickups data as CSV
+ * Dashboard revamped
+ * Profile info enhance with pickups stats
+ * Better location control
+ * Visual enhancements (large buttons on mobile, buttons on tables...)
 
 ### 0.3.0
-CURRENT
 Released on 16/11/2014
 Features:
- * Remember me on login (done?)
- * Graphs on the dashboard (done)
- * Visual improvements (done)
- * Map in coin info view (done)
- * Bug: big pictures in user profile (done)
- * Bug: don't upload a empty picture (done)
+ * Remember me on login
+ * Graphs on the dashboard
+ * Visual improvements
+ * Map in coin info view
+ * Bug: big pictures in user profile
+ * Bug: don't upload a empty picture
  * Bug: save avatar [only in development]
- * Bug: max-width for login box (done)
+ * Bug: max-width for login box
 
 ### 0.2.0
 Released on 11/09/2014

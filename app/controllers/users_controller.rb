@@ -15,11 +15,14 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @current_user = @user.id == session[:user_id]
+    profile_queries
   end
 
   def profile
     @user = User.find(session[:user_id])
     @current_user = true
+    profile_queries
+    
     render "show"
   end
 
@@ -147,6 +150,12 @@ class UsersController < ApplicationController
   end
 
   private
+    def profile_queries
+      @coins = Pickup.where(picker_id: @user.id).count
+      @money = Pickup.where(picker_id: @user.id).joins(:coin).sum(:value)
+      @last_pickups = Pickup.where(picker_id: @user.id).order(picked_at: :desc).limit(3)
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
