@@ -14,7 +14,7 @@ function show_map(position) {
 
 function handle_error(err) {
   console.error("Location not found: " + err);
-  if (err.code == 3 && loc_retries == 0) {
+  if (err.code == 3) {
     navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: POSITION_TIMEOUT, enableHighAccuracy: false});
   } else {
     $('#pickup_location').attr('placeholder', '');
