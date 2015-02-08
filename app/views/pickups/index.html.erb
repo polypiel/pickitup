@@ -32,8 +32,8 @@
           <div class="btn-group">
             <% if can_edit pickup.picker_id %>
             <%#= link_to pickup, :title => "Show", :class => 'btn btn-default' do %><!--i class="fa fa-eye"></i--><%# end %>
-            <%= link_to edit_pickup_path(pickup), :title => "Edit", :class => 'btn btn-default' do %><i class="fa fa-edit"></i><% end %>
-            <%= link_to pickup, method: :delete, data: { confirm: "Do you really want to delete the pickup?" }, :title => "Delete", :class => 'btn btn-default' do %><i class="fa fa-trash-o"></i><% end %>
+            <%= link_to edit_pickup_path(pickup), :title => "Edit", :class => 'btn btn-default btn-sm' do %><i class="fa fa-edit"></i><% end %>
+            <%= link_to pickup, method: :delete, data: { confirm: "Do you really want to delete the pickup?" }, :title => "Delete", :class => 'btn btn-default btn-sm' do %><i class="fa fa-trash-o"></i><% end %>
             <% end %>
           </div>
         </td>
