@@ -55,9 +55,7 @@
         <td style="text-align: right;" title="<%= pluralize(top_user['coins'], 'coin') %>"><%= top_user['coins'] %></td>
       </tr>
     <% end %>
-    <% if @top_users_monthly.empty? %>
-    <tr><td>Nobody found a single coin during past 30 days. This is unbearable!</td>
-    <% end %>
+
     </table>
   </div>
 </div>
