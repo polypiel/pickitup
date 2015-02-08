@@ -9,12 +9,12 @@
     </div>
   <% end %>
 
-  <div class="field form-group">
+  <div class="form-group">
     <%= f.label :coin %><br>
     <%= f.collection_select :coin_id, Coin.all, :id, :to_s, {}, {:class => 'form-control'} %>
   </div>
 
-  <div class="field form-group">
+  <div class="form-group">
     <%= f.label :comments %><br>
     <%= f.text_area :comments, rows: 3, class: 'form-control' %>
   </div>
@@ -23,17 +23,22 @@
   <%= f.hidden_field :latitude, :class => 'form-control' %>
 
 
-  <div class="field form-group">
+  <div class="form-group">
     <%= f.label :location %><br>
-    <span id="search_location_msg" class="text-info"><i class="fa fa-circle-o-notch fa-spin"></i> Searching for location...</span>
-    <div id="location_part" >
+    <div class="input-group">
       <%= f.text_field :location, :class => 'form-control' %>
+      <span class="input-group-btn">
+        <button id="find-location-button" class="btn btn-default" type="button" title="Gets the location form the coordinates">
+          <i class="fa fa-search"></i> 
+          <span class="hidden-xs hidden-sm">Search</span>
+        </button>
+      </div>
     </div>
   </div>
 
 
     <% unless @edit_mode %>
-    <div class="pull-right form-group">
+    <div class="pull-right form-group form-inline">
       <a id="show-advanced" data-toggle="collapse" href="#collapseOne"><i class="fa fa-angle-double-right"></i> Show advanced options</a>
       <a id="hide-advanced" data-toggle="collapse" href="#collapseOne" style="display: none;"><i class="fa fa-angle-double-down"></i> Hide advanced options</a>
     </div>
@@ -42,17 +47,17 @@
 
     <div id="collapseOne" <% unless @edit_mode %>class="collapse"<% end %>>
       <div class="row">
-        <div class="col-md-4 col-sm-12 field form-group">
+        <div class="col-md-4 col-sm-12 form-group">
           <%= f.label :picker %><br>
           <%= f.collection_select :picker_id, @pickers, :id, :username, {}, {:class => 'form-control'} %>
         </div>
 
-        <div class="col-md-4 col-sm-6 field form-group">
+        <div class="col-md-4 col-sm-6 form-group">
           <%= f.label 'Date' %><br>
           <%= f.date_field :picked_at_date, :class => 'form-control' %>
         </div>
 
-        <div class="col-md-4 col-sm-6 field form-group">
+        <div class="col-md-4 col-sm-6 form-group">
           <%= f.label 'Time' %><br>
           <%= f.time_field :picked_at_time, :value => (@pickup.picked_at_time.strftime("%H:%M")), :class => 'form-control', title: 'Format: hh:mm' %>
         </div>
@@ -61,13 +66,45 @@
 
   <hr>
 
-  <div class="form-group actions">
-    <%= f.submit :class => 'btn btn-primary' %>
+  <div class="form-group">
+    <%= f.submit :class => 'btn btn-primary col-xs-12' %>
     <% if @edit_mode %><%= link_to 'Cancel', pickups_path %><% end %>
   </div>
 <% end %>
 
 <script type="text/javascript">
+  var GMAPS_TIMEOUT = 5000;
+
+  function isGmapsLoaded() {
+    return typeof google === 'object' && typeof google.maps === 'object';
+  }
+
+  function hasCoordinates() {
+    var lat = parseFloat($("#pickup_latitude").val());
+    var lng = parseFloat($("#pickup_longitude").val());
+    return lat && lng;
+  }
+
+  function searchLocation(lat, lng) {
+    if (!isGmapsLoaded()) {
+      console.error("Google maps could not be found");
+      return;
+    }
+
+    var latlng = new google.maps.LatLng(lat, lng);
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          $("#pickup_location").val(results[1].formatted_address);
+        }
+      } else {
+        console.error("Google maps error: " + status);
+      }
+    });
+  }
+
   $(document).ready(function() {
     var show_advanced = $('#show-advanced');
     var hide_advanced = $('#hide-advanced');
@@ -78,4 +115,23 @@
     show_advanced.click(toggle_advanced);
     hide_advanced.click(toggle_advanced);
   });
+
+  $(document).ready(function() {
+    $('#find-location-button').click(function(e) {
+      var lat = parseFloat($("#pickup_latitude").val());
+      var lng = parseFloat($("#pickup_longitude").val());
+
+      if (!lat || !lng) {
+        console.log('The coordinates are unknown');
+        return;
+      }
+
+      var input = $('#pickup_location');
+      input.val('');
+      input.attr('placeholder', 'Searching location...');
+      searchLocation(lat, lng);
+
+      e.preventDefault();
+    });
+  })
 </script>

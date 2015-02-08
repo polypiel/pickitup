@@ -4,17 +4,17 @@
 
 
 <script>
-function date_supported() {
-  var tester = document.createElement('input');
-  tester.type = 'date';
-  tester.value = ':(';
-  return tester.type === 'date' && tester.value === '';
-}
 
 $(document).ready(function() {
   // Date
-  if(!date_supported()) {
+  if (!isDateControlSupported()) {
     $('#pickup_picked_at_date').datepicker({format: 'dd/mm/yyyy', weekStart: 1});
+  }
+
+  if (!hasCoordinates()) {
+    var findLocationButton = $('#find-location-button');
+    findLocationButton.attr('disabled', 'disabled');
+    findLocationButton.attr('title', 'There are no coordinates registered');
   }
 });
 </script>

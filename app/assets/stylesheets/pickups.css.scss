@@ -2,7 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#search_coordinates_msg, 
-#search_location_msg {
-  display: none;
+$tablet_threshold: 480px;
+
+form .btn-primary {
+  width: auto;
+  @media all and (max-width: $tablet_threshold) {
+    width: 100%;
+  }
 }
