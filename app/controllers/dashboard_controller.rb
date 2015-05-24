@@ -18,6 +18,7 @@ class DashboardController < ApplicationController
     year_ago = 12.months.ago.to_date
     pickups = Pickup.select(:picked_at).where(wallet_id: wallet_id, picked_at: year_ago..now).order(:picked_at)
     @pickups_monthly = pickups.group_by { |p| p.picked_at.beginning_of_month }
+    @pickups_monthly = @pickups_monthly.drop(@pickups_monthly.length - 12) if @pickups_monthly.length > 12
   end
 
   def top_users_monthly wallet_id

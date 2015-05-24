@@ -142,8 +142,7 @@ $(document).ready(function() {
     // Axes
     var xAxis = d3.svg.axis()
         .scale(xScale)
-        .orient("bottom")
-        .ticks(dataset_2.length);
+        .orient("bottom");
     svg.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(0, " + h + ")")
