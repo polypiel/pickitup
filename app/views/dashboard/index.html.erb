@@ -78,7 +78,7 @@
 $(document).ready(function() {
 
   var dataset_2 = [
-  <% @pickups_monthly.each do |m, p| %>
+  <% @pickups_monthly.sort.map do |m, p| %>
     {'month': '<%= Date::MONTHNAMES[m.month][0, 3] %>', 'coins': <%= p.size %>},
   <% end %>
   ];
@@ -143,8 +143,7 @@ $(document).ready(function() {
     var xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom");
-    svg
-        .append("g")
+    svg.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(0, " + h + ")")
         .call(xAxis);
