@@ -10,12 +10,12 @@ class DashboardController < ApplicationController
     # Last month top users
     @top_users_monthly = top_users_monthly wallet_id
 
-
     # Three last pickups
     @last_pickups = Pickup.where(wallet_id: wallet_id, picked_at: (15.days.ago.to_date)..(Time.zone.now)).order(picked_at: :desc).limit(3)
 
     # Last year pickups
-    pickups = Pickup.select(:picked_at).where(wallet_id: wallet_id).order(:picked_at)
+    year_ago = Time.now - 12.months
+    pickups = Pickup.select(:picked_at).where(wallet_id: wallet_id, picked_at: year_ago..Time.now).order(:picked_at)
     @pickups_monthly = pickups.group_by { |p| p.picked_at.beginning_of_month }
   end
 

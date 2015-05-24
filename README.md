@@ -22,6 +22,9 @@ Pickitup! is based on:
  * Bug: pluralize the word 'cent' (1)
  * Bug: location info (4)
 
+### 0.5.0
+ * Bug: histogram on dashboard (done)
+
 ### 0.4.0
 CURRENT
 Released on 08/02/2015
