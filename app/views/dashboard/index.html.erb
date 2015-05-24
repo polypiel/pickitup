@@ -78,7 +78,7 @@
 $(document).ready(function() {
 
   var dataset_2 = [
-  <% @pickups_monthly.sort.reverse.map do |m, p| %>
+  <% @pickups_monthly.sort.map do |m, p| %>
     {'month': '<%= Date::MONTHNAMES[m.month][0, 3] %>', 'coins': <%= p.size %>},
   <% end %>
   ];
