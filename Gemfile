@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby "2.1.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.4'
+gem 'rails', '4.1.10'
 # Databases for Active Record
 group :production do
   gem 'pg'
