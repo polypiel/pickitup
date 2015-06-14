@@ -3,12 +3,13 @@ require 'test_helper'
 class PickupsControllerTest < ActionController::TestCase
   
   setup do
-    @pickup = pickups(:one)
-    @update = {
+    @pickup_one = pickups(:one)
+    @pickup_one_updated = {
       picked_at_time: Time.now,
       picked_at_date: Time.now,
       comments: "It was on the pavement",
-      coin_id: coins(:one_cent).id
+      coin_id: coins(:one_cent).id,
+      handed_over: false
     }
   end
 
@@ -25,30 +26,31 @@ class PickupsControllerTest < ActionController::TestCase
 
   test "should create pickup" do
     assert_difference('Pickup.count') do
-      post :create, pickup: @update
+      post :create, pickup: @pickup_one_updated
     end
 
     assert_redirected_to pickups_path, notice: 'Pickup was created.'
   end
 
   test "should show pickup" do
-    get :show, id: @pickup
+    get :show, id: @pickup_one
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @pickup
+    get :edit, id: @pickup_one
     assert_response :success
   end
 
   test "should update pickup" do
-    patch :update, id: @pickup, pickup: @update
+    patch :update, id: @pickup_one, pickup: @pickup_one_updated
     assert_redirected_to pickups_path, notice: 'Pickup was updated.'
   end
 
   test "should destroy pickup" do
     assert_difference('Pickup.count', -1) do
-      delete :destroy, id: @pickup
+      delete :destroy, id: @pickup_one
+
     end
 
     assert_redirected_to pickups_path

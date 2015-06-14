@@ -1,4 +1,4 @@
-<h1><%= @pickup.coin %></h1>
+<h1><%= @pickup.coin %><% if @pickup.handed_over %> <i class="fa fa-check handed_over_check" title="Handed over"></i><% end %></h1>
 
 <div class="row">
   <div class="col-md-6">

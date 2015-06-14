@@ -39,6 +39,7 @@ class PickupsController < ApplicationController
     @pickup = Pickup.new(pickup_params)
     @pickup.picker = get_logged_user
     @pickup.wallet = @pickup.picker.wallet
+    @pickup.handed_over = @pickup.picker.owner?
 
     respond_to do |format|
       if @pickup.save
