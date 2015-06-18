@@ -25,12 +25,16 @@ class PickupsController < ApplicationController
     @pickup = Pickup.new
     @pickup.picked_at = Time.zone.now
     @pickers = wallet_pickers
+    @can_view_hand_over = false
   end
 
   # GET /pickups/1/edit
   def edit
     @pickers = wallet_pickers
     @edit_mode = true
+    user = get_logged_user
+    @can_view_hand_over = user.owner?
+    @cannot_edit_hand_over = @pickup.picker.id == user.id
   end
 
   # POST /pickups
@@ -95,6 +99,6 @@ class PickupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pickup_params
-      params.require(:pickup).permit(:coin_id, :picked_at_date, :picked_at_time, :comments, :longitude, :latitude,  :location)
+      params.require(:pickup).permit(:coin_id, :picked_at_date, :picked_at_time, :comments, :longitude, :latitude,  :location, :handed_over)
     end
 end
