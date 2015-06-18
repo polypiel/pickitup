@@ -41,10 +41,16 @@ h3 {
   font-size: 1.75rem !important;
 }
 
-.navbar-brand {
+.navbar-header {
   height: $header-height;
-  font-size: 2rem;
+}
+.navbar-brand {
+  height: $header-height !important;
+  line-height: $header-height !important;
+  font-size: 2.5rem !important;
   font-weight: bold;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .title-version {
@@ -104,4 +110,13 @@ html.login {
 
 .avatar-profile {
   width: 100%;
+}
+
+footer {
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  text-align: right;
+}
+.credits {
+  font-size: 12px;
 }
