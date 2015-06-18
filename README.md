@@ -11,12 +11,11 @@ Pickitup! is based on:
 ### Proposed features
 Priority from 1 (low) to 5 (high)
  * Notifications (1)
- * Filter pickups (4)
  * Location as City+Country (2)
  * Enforce auth (2)
  * Edit location from coordinates (4)
- * Yearly stats (2)
- * Tasks (coins to be handed over, location that need fixing...) (3)
+ * Yearly stats/dashboard (3)
+ * Tasks (coins to be handed over, locations that need fixing...) (3)
 
 ### Known bugs
 Priority from 1 (low) to 5 (high)
@@ -26,7 +25,9 @@ Priority from 1 (low) to 5 (high)
 
 ### 0.5.0
  * Bug: histogram on dashboard (done)
- * Received option in pickups (wip)
+ * Coin given option in pickups (done)
+ * Filter pickups (4)
+ * No more beta! Footer (done)
 
 ### 0.4.0
 CURRENT
