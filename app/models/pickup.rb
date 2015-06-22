@@ -1,6 +1,8 @@
 require 'csv'
 
 class Pickup < ActiveRecord::Base
+  include Filterable
+
 	validates :picked_at, :picker, :coin, presence: true
   validates :longitude, numericality: { greater_than: -180, less_than: 180 }, allow_nil: true
   validates :latitude, numericality: { greater_than: -90, less_than: 90 }, allow_nil: true
@@ -11,6 +13,10 @@ class Pickup < ActiveRecord::Base
   belongs_to :picker, class_name: "User"
 
   date_time_attribute :picked_at
+
+  scope :coin, -> (coin_id) { where coin: coin_id }
+  scope :picker_id, -> (id) { where picker_id: id }
+
 
   def has_coordinates?
     not latitude.nil? and not longitude.nil?

@@ -26,7 +26,7 @@ Priority from 1 (low) to 5 (high)
 ### 0.5.0
  * Bug: histogram on dashboard (done)
  * Coin given option in pickups (done)
- * Filter pickups (4)
+ * Filter pickups (wip)
  * No more beta! Footer (done)
 
 ### 0.4.0

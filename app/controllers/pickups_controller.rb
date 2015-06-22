@@ -6,7 +6,11 @@ class PickupsController < ApplicationController
   # GET /pickups.json
   def index
     wallet_id = get_logged_user.wallet.id
-    @pickups = Pickup.where(wallet_id: wallet_id).order(picked_at: :desc).page(params[:page]).per(20)
+    @pickers = wallet_pickers
+    @pickups = Pickup.where(wallet_id: wallet_id).order(picked_at: :desc)
+      .filter(params.slice(:coin, :picker_id))
+      .page(params[:page]).per(20)
+
     respond_to do |format|
       format.html
       format.csv { render text: @pickups.to_csv }
