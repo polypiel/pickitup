@@ -57,7 +57,7 @@
         <td><% if pickup.handed_over %><i class="fa fa-check handed_over_check" title="Handed over"></i><% end %></td>
         <td><%= link_to pickup.coin, pickup_path(pickup) %></td>
         <td><%= pickup.picker.username %></td>
-        <td class="hidden-xs"><%= pickup.location %></td>
+        <td class="hidden-xs"><%= truncate(pickup.location, length: 24) %></td>
         <td style="text-align: right;">
           <div class="btn-group">
             <% if can_edit pickup.picker_id %>
