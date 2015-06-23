@@ -16,6 +16,7 @@ class Pickup < ActiveRecord::Base
 
   scope :coin, -> (coin_id) { where coin: coin_id }
   scope :picker_id, -> (id) { where picker_id: id }
+  scope :handed_over, -> (handed_over) { where handed_over: ActiveRecord::ConnectionAdapters::Column.value_to_boolean(handed_over) }
 
 
   def has_coordinates?

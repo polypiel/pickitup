@@ -14,17 +14,21 @@
   <a id="show-filtering" data-toggle="collapse" href="#collapseOne"><i class="fa fa-angle-double-right"></i> Show filtering options</a>
   <a id="hide-filtering" data-toggle="collapse" href="#collapseOne" style="display: none;"><i class="fa fa-angle-double-down"></i> Hide filtering options</a>
 </div>
-<div id="collapseOne" class="panel panel-default">
+<div id="collapseOne" class="panel panel-default collapse <% if @show_filter_form %>in<% end %>">
   <div class="panel-body">
     <%= form_tag pickups_path, :method => 'get', :role => 'form' do %>
       <div class="row">
-        <div class="form-group col-sm-6">
+        <div class="form-group col-sm-4 col-xs-12">
           <%= label_tag :coin %>
-          <%= select_tag :coin, options_from_collection_for_select(Coin.all, :id, :to_s), {include_blank: true, class: 'form-control'} %>
+          <%= select_tag :coin, options_from_collection_for_select(Coin.all, :id, :to_s, params[:coin]), {include_blank: 'Any coin', class: 'form-control'} %>
         </div>
-        <div class="form-group col-sm-6">
+        <div class="form-group col-sm-4 col-xs-12">
           <%= label_tag :picker_id %>
-          <%= select_tag :picker_id, options_from_collection_for_select(@pickers, :id, :username), {include_blank: true, class: 'form-control'} %>
+          <%= select_tag :picker_id, options_from_collection_for_select(@pickers, :id, :username, params[:picker_id]), {include_blank: 'Any picker', class: 'form-control'} %>
+        </div>
+        <div class="form-group col-sm-4 col-xs-12">
+          <%= label_tag :handed_over %>
+          <%= select_tag :handed_over, options_for_select({'Yes' => true, 'No' => false}, params[:handed_over]), {include_blank: 'Whatever', class: 'form-control'} %>
         </div>
       </div>
       <div class="form-group">
@@ -71,6 +75,7 @@
 <p><%= paginate @pickups %></p>
 
 <script type="text/javascript">
+  // decide based on params presence
   $(document).ready(function() {
     var show_filtering = $('#show-filtering');
     var hide_filtering = $('#hide-filtering');
@@ -80,5 +85,13 @@
     }
     show_filtering.click(toggle_filtering);
     hide_filtering.click(toggle_filtering);
+
+    <% if @show_filter_form %>
+    show_filtering.hide();
+    hide_filtering.show();
+    <% else %>
+    show_filtering.show();
+    hide_filtering.hide();
+    <% end %>
   });
 </script>
