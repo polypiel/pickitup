@@ -24,10 +24,10 @@ Priority from 1 (low) to 5 (high)
  * Bug: location info (4)
 
 ### 0.5.0
- * Bug: histogram on dashboard (done)
- * Coin given option in pickups (done)
- * Filter pickups (wip)
- * No more beta! Footer (done)
+ * Bug: histogram on dashboard
+ * Coin given option in pickups
+ * Filter pickups
+ * No more beta! Footer
 
 ### 0.4.0
 CURRENT
