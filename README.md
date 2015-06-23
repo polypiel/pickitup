@@ -24,13 +24,14 @@ Priority from 1 (low) to 5 (high)
  * Bug: location info (4)
 
 ### 0.5.0
+CURRENT
+Released on 23/06/2015
  * Bug: histogram on dashboard
  * Coin given option in pickups
  * Filter pickups
  * No more beta! Footer
 
 ### 0.4.0
-CURRENT
 Released on 08/02/2015
  * Download pickups data as CSV
  * Dashboard revamped
