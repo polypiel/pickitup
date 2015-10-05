@@ -1,22 +1,40 @@
+<h1>Stats</h1>
+<div class="col-sm-6">
   <h2>Top pickers</h2>
-  <div class="col-sm-6">
-    <h3>Yearly</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <th style="text-align: right;">Coins</th>
-          <th style="text-align: right;">Value</th>
-        </tr>
-      </thead>
-    <% @top_users.each_with_index do |top_user, index| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= index + 1 %></td>
-        <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
-        <td style="text-align: right;"><%= top_user['coins'] %></td>
-        <td style="text-align: right;"><%= top_user['value'] %></td>
+        <th></th>
+        <th></th>
+        <th style="text-align: right;">Coins</th>
+        <th style="text-align: right;">Value</th>
       </tr>
+    </thead>
+  <% @top_users.each_with_index do |top_user, index| %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
+      <td style="text-align: right;"><%= top_user['coins'] %></td>
+      <td style="text-align: right;"><%= top_user['value'] %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+
+<div class="col-sm-6">
+  <h2>Coins</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th style="text-align: right;">Times Picked</th>
+      </tr>
+    </thead>
+    <% @coins_by_type.each_with_index do |coin, index| %>
+    <tr>
+      <td><%= coin['coin'] %> cents</td>
+      <td style="text-align: right;"><%= coin['amount'] %></td>
+    </tr>
     <% end %>
-    </table>
-  </div>
+  </table>
+</div>

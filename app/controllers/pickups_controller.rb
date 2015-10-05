@@ -7,8 +7,9 @@ class PickupsController < ApplicationController
   def index
     wallet_id = get_logged_user.wallet.id
     @pickers = wallet_pickers
-    @pickups = Pickup.where(wallet_id: wallet_id).order(picked_at: :desc)
+    @pickups = Pickup.where(wallet_id: wallet_id)
       .filter(params.slice(:coin, :picker_id, :handed_over))
+      .order(picked_at: :desc)
       .page(params[:page]).per(20)
     @show_filter_form = (!(params[:coin].blank?)) | (!(params[:picker_id].blank?)) | (!(params[:handed_over].blank?))
 

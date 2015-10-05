@@ -5,7 +5,7 @@
   <title>Pick it up!</title>
   <meta name="viewport" content="width=device-width">
 
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -25,6 +25,7 @@
               <li><%= link_to controller: 'pickups' do %><i class="fa fa-money"></i> Pickups<% end %></li>
               <li><%= link_to  profile_path do %><i class="fa fa-user"></i> Profile<% end %></li>
               <% if owner? %><li><%= link_to controller: 'users' do %><i class=" fa fa-users"></i> Contributors<% end %></li><% end %>
+              <li><%= link_to controller: 'stats' do %><i class="fa fa-bar-chart"></i> Stats<% end %></li>
               <li><%= link_to logout_path, method: :delete do %><i class="fa fa-sign-out"></i> Log out<% end %></li>
             </ul>
           </li> 

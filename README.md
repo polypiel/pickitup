@@ -16,12 +16,18 @@ Priority from 1 (low) to 5 (high)
  * Edit location from coordinates (4)
  * Yearly stats/dashboard (3)
  * Tasks (coins to be handed over, locations that need fixing...) (3)
+ * Badges (2)
 
 ### Known bugs
 Priority from 1 (low) to 5 (high)
  * Bug: Login background in mobiles (3)
  * Bug: pluralize the word 'cent' (1)
  * Bug: location info (4)
+ * Filtering is done after paging
+ 
+### 0.6.0
+IN DEV
+ * Stats page
 
 ### 0.5.0
 CURRENT
