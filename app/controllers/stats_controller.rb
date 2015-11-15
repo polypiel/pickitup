@@ -23,5 +23,7 @@ class StatsController < ApplicationController
       GROUP BY u.id
       ORDER BY coins DESC
     ")
+
+    @all_coins = Pickup.where(wallet_id: wallet_id).select {|p| p.has_coordinates?}
   end
 end

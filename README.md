@@ -1,4 +1,4 @@
-# README
+# READ ME
 Pickitup! is application that let you register the pickups of coins.
 
 ## Installation
@@ -24,7 +24,7 @@ Priority from 1 (low) to 5 (high)
  * Bug: pluralize the word 'cent' (1)
  * Bug: location info (4)
  * Filtering is done after paging
- 
+
 ### 0.6.0
 IN DEV
  * Stats page
@@ -63,7 +63,7 @@ Features:
  * User's avatar
  * Dashboard
  * Pickups: pagination, pickup dates as time ago
- * Bugfixes
+ * Bug fixes
  * Visual improvements
 
 ### 0.1.0
