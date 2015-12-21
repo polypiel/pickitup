@@ -1,4 +1,20 @@
-<h1>Stats</h1>
+<div>
+  <h1 style="float: left;"><%= @year %> Stats</h1>
+
+  <nav style="float: right;">
+    <ul class="pagination">
+      <% @years.each do |y| %>
+      <% if y == @year %>
+      <li class="active"><a href="#"><%= y %></a></li>
+      <% else %>
+      <li><a href="#" ><%= y %></a></li>
+      <% end end %>
+    </ul>
+  </nav>
+</div>
+
+<div style="clear: both;"/>
+
 <div class="row">
   <div class="col-sm-6">
     <h2>Top pickers</h2>

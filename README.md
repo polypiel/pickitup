@@ -3,8 +3,8 @@ Pickitup! is application that let you register the pickups of coins.
 
 ## Installation
 Pickitup! is based on:
- * Ruby 2.1.2
- * Ruby on Rails 4.1.10
+ * Ruby 2.1
+ * Ruby on Rails 4.1
 
 ## Change-log
 
