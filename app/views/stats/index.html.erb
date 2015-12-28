@@ -70,10 +70,10 @@
           <th style="text-align: right;">Pickups</th>
         </tr>
       </thead>
-      <% @coins_by_month.each |month, coins| %>
+      <% @pickups_by_month.each do |month, coins| %>
       <tr>
-        <td><%= month %></td>
-        <td><%= coins %></td>
+        <td><%= Date::MONTHNAMES[month.month] %></td>
+        <td style="text-align: right;"><%= coins.size %></td>
       </tr>
       <% end %>
       </table>
