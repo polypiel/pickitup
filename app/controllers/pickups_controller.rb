@@ -50,6 +50,7 @@ class PickupsController < ApplicationController
     @pickup.picker = get_logged_user
     @pickup.wallet = @pickup.picker.wallet
     @pickup.handed_over = @pickup.picker.owner?
+    @pickup.year = @pickup.picked_at.year
 
     respond_to do |format|
       if @pickup.save
@@ -65,6 +66,7 @@ class PickupsController < ApplicationController
   # PATCH/PUT /pickups/1
   # PATCH/PUT /pickups/1.json
   def update
+    @pickup.year = pickup.picked_at.year
     respond_to do |format|
       if @pickup.update(pickup_params)
         format.html { redirect_to pickups_url, notice: 'Pickup was updated.' }
