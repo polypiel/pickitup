@@ -5,10 +5,13 @@
     <ul class="pagination">
       <% @years.each do |y| %>
       <% if y == @year %>
-      <li class="active"><a href="#"><%= y %></a></li>
+      <li class="active">
       <% else %>
-      <li><a href="#" ><%= y %></a></li>
-      <% end end %>
+      <li>
+      <% end %>
+        <%= link_to y, :year => y %>
+      </li>
+      <% end %>
     </ul>
   </nav>
 </div>
@@ -17,7 +20,7 @@
 
 <div class="row">
   <div class="col-sm-6">
-    <h2>Top pickers</h2>
+    <h2>Pickers</h2>
     <table class="table">
       <thead>
         <tr>
@@ -58,7 +61,28 @@
 </div>
 
 <div class="row">
+  <div class="col-sm-6">
+    <h2>By Month</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th style="text-align: right;">Pickups</th>
+        </tr>
+      </thead>
+      <% @coins_by_month.each |month, coins| %>
+      <tr>
+        <td><%= month %></td>
+        <td><%= coins %></td>
+      </tr>
+      <% end %>
+      </table>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-sm-12">
+    <h2>Map</h2>
     <div id="map-canvas" style="height: 200px;"></div>
   </div>
 </div>
