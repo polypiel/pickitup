@@ -28,6 +28,5 @@ class StatsController < ApplicationController
     @pickups_with_location = all.where(year: @year).select { |p| p.has_coordinates? }
     @pickups_by_month = all.where(year: @year).group_by { |p| p.picked_at.beginning_of_month }
     @pickups_by_year = all.group(:year).count
-    puts "year: #{@pickups_by_month}"
   end
 end
