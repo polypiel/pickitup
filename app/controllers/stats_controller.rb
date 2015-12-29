@@ -24,9 +24,10 @@ class StatsController < ApplicationController
       ORDER BY coins DESC
     ")
 
-    @all_coins = Pickup.where(wallet_id: wallet_id).select {|p| p.has_coordinates? and p.year == @year}
-    @pickups_by_month = @all_coins.group_by { |p| p.picked_at.beginning_of_month }
-    @pickups_by_time = @all_coins.group_by { |p| (p.picked_at.hour / 8) }
-    puts "#{@pickups_by_time}"
+    all = Pickup.where(wallet_id: wallet_id)
+    @pickups_with_location = all.where(year: @year).select { |p| p.has_coordinates? }
+    @pickups_by_month = all.where(year: @year).group_by { |p| p.picked_at.beginning_of_month }
+    @pickups_by_year = all.group(:year).count
+    puts "year: #{@pickups_by_month}"
   end
 end

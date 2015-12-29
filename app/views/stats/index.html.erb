@@ -61,6 +61,13 @@
 </div>
 
 <div class="row">
+  <div class="col-sm-12">
+    <h2>By Location</h2>
+    <div id="map-canvas" style="height: 300px;"></div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-sm-6">
     <h2>By Month</h2>
     <table class="table">
@@ -70,44 +77,37 @@
           <th style="text-align: right;">Pickups</th>
         </tr>
       </thead>
-      <% @pickups_by_month.each do |month, coins| %>
+      <% @pickups_by_month.keys.sort.each do |month| %>
       <tr>
         <td><%= Date::MONTHNAMES[month.month] %></td>
-        <td style="text-align: right;"><%= coins.size %></td>
+        <td style="text-align: right;"><%= @pickups_by_month[month].size %></td>
       </tr>
       <% end %>
     </table>
   </div>
     <div class="col-sm-6">
-      <h2>By Time</h2>
+      <h2>By Year</h2>
       <table class="table">
         <thead>
           <tr>
-            <th>Time</th>
+            <th>Year</th>
             <th style="text-align: right;">Pickups</th>
           </tr>
         </thead>
-        <% @pickups_by_time.each do |time, coins| %>
+        <% @pickups_by_year.keys.sort.reverse.each do |year| %>
         <tr>
-          <td><%= "#{time*8}-#{time*8+8}" %></td>
-          <td style="text-align: right;"><%= coins.size %></td>
+          <td><%= year %></td>
+          <td style="text-align: right;"><%= @pickups_by_year[year] %></td>
         </tr>
         <% end %>
       </table>
     </div>
 </div>
 
-<div class="row">
-  <div class="col-sm-12">
-    <h2>By Location</h2>
-    <div id="map-canvas" style="height: 300px;"></div>
-  </div>
-</div>
-
 <script type="text/javascript">
   $(document).ready(function() {
     var coins = [
-      <% @all_coins.each { |c| %>
+      <% @pickups_with_location.each { |c| %>
         {lat:<%= c.latitude %>, lon:<%= c.longitude %>},
       <% } %>
     ];
