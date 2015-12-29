@@ -14,9 +14,8 @@ Priority from 1 (low) to 5 (high)
  * Location as City+Country (2)
  * Enforce auth (2)
  * Edit location from coordinates (4)
- * Yearly stats/dashboard (3)
  * Tasks (coins to be handed over, locations that need fixing...) (3)
- * Badges (2)
+ * Badges (1)
 
 ### Known bugs
 Priority from 1 (low) to 5 (high)
@@ -26,11 +25,12 @@ Priority from 1 (low) to 5 (high)
  * Filtering is done after paging
 
 ### 0.6.0
-IN DEV
+CURRENT
+Released on 29/12/2015
  * Stats page
+ * New domain pickitup.es
 
 ### 0.5.0
-CURRENT
 Released on 23/06/2015
  * Bug: histogram on dashboard
  * Coin given option in pickups
