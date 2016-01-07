@@ -68,23 +68,13 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
-    <h2>By Month</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Month</th>
-          <th style="text-align: right;">Pickups</th>
-        </tr>
-      </thead>
-      <% @pickups_by_month.keys.sort.each do |month| %>
-      <tr>
-        <td><%= Date::MONTHNAMES[month.month] %></td>
-        <td style="text-align: right;"><%= @pickups_by_month[month].size %></td>
-      </tr>
-      <% end %>
-    </table>
+  <div class="col-sm-12">
+    <h2>By Time</h2>
+    <div id="monthly-chart" style="height: 300px;"></div>
   </div>
+</div>
+
+<div class="row">
     <div class="col-sm-6">
       <h2>By Year</h2>
       <table class="table">
@@ -106,6 +96,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+    // Map
     var coins = [
       <% @pickups_with_location.each { |c| %>
         {lat:<%= c.latitude %>, lon:<%= c.longitude %>},
@@ -123,5 +114,30 @@
       bounds.extend(marker.position);
     }
     map.fitBounds(bounds);
+
+    // Monthly chart
+    var chart = c3.generate({
+      bindto: '#monthly-chart',
+      data: {
+        columns: [
+          <% @users.each do |u| %>
+            ['<%= u %>',
+            <% (1..12).each do |m| %>
+              <%= @pickups_by_month[u][m.to_s] || 0 %>,
+            <% end %>
+            ],
+          <% end %>
+        ],
+        type: 'bar',
+        groups: [
+            [<%= raw @users.map {|u| "\"#{u}\""}.join "," %>]
+        ]
+      },
+      grid: {
+          y: {
+              lines: [{value:0}]
+          }
+        }
+      });
   });
 </script>

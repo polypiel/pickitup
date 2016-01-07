@@ -26,7 +26,16 @@ class StatsController < ApplicationController
 
     all = Pickup.where(wallet_id: wallet_id)
     @pickups_with_location = all.where(year: @year).select { |p| p.has_coordinates? }
-    @pickups_by_month = all.where(year: @year).group_by { |p| p.picked_at.beginning_of_month }
+    @users = @top_users.map { |u| u['username']}
+    pickups_by_month_raw = all.where(year: @year).group_by { |p| "#{p.picker.username}-#{p.picked_at.month}" }
+    @pickups_by_month = {}
+    pickups_by_month_raw.each do |k, v|
+      user, month = k.split "-"
+      # puts "#{user}-#{month}=#{v.size}"
+      @pickups_by_month[user] = {} unless @pickups_by_month[user]
+      @pickups_by_month[user][month] = v.size
+    end
+    puts "#{@pickups_by_month}"
     @pickups_by_year = all.group(:year).count
   end
 end

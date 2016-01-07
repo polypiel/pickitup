@@ -22,7 +22,11 @@ Priority from 1 (low) to 5 (high)
  * Bug: Login background in mobiles (3)
  * Bug: pluralize the word 'cent' (1)
  * Bug: location info (4)
- * Filtering is done after paging
+ * Bug: Filtering is done after paging (5)
+
+### 0.7
+IN DEV
+ * Better stats page
 
 ### 0.6.0
 CURRENT

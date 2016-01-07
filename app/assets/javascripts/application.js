@@ -16,4 +16,5 @@
 //= require bootstrap.min
 //= require bootstrap-datepicker
 //= require d3.min
+//= require c3.min
 //= require_tree .
