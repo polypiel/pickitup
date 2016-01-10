@@ -69,29 +69,16 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <h2>By Time</h2>
+    <h2>By Month</h2>
     <div id="monthly-chart" style="height: 300px;"></div>
   </div>
 </div>
 
 <div class="row">
-    <div class="col-sm-6">
-      <h2>By Year</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th style="text-align: right;">Pickups</th>
-          </tr>
-        </thead>
-        <% @pickups_by_year.keys.sort.reverse.each do |year| %>
-        <tr>
-          <td><%= year %></td>
-          <td style="text-align: right;"><%= @pickups_by_year[year] %></td>
-        </tr>
-        <% end %>
-      </table>
-    </div>
+  <div class="col-sm-12">
+    <h2>By Year</h2>
+    <div id="year-chart" style="height: 300px;"></div>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -116,29 +103,49 @@
     map.fitBounds(bounds);
 
     // Monthly chart
-    var chart = c3.generate({
+    c3.generate({
       bindto: '#monthly-chart',
       data: {
         x: 'x',
         columns: [
-            ['x', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'a'],
+          ['x', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'a'],
           <% @users.each do |u| %>
-            ['<%= u %>', <% (1..12).each do |m| %><%= @pickups_by_month[u][m.to_s] || 0 %>, <% end %>],
+          ['<%= u %>', <% (1..12).each do |m| %><%= @pickups_by_month[u][m.to_s] || 0 %>, <% end %>],
           <% end %>
         ],
         type: 'bar',
         groups: [
-            [<%= raw @users.map {|u| "\"#{u}\""}.join "," %>]
+          [<%= raw @users.map {|u| "\"#{u}\""}.join "," %>]
         ]
-      },
-      grid: {
-        y: {
-            lines: [{value:0}]
-        }
       },
       axis: {
         x: {
-            type: 'category' // this needed to load string x value
+          type: 'category' // this needed to load string x value
+        }
+      }
+    });
+
+    // Year chart
+    c3.generate({
+      bindto: '#year-chart',
+      data: {
+        x: 'x',
+        columns: [
+          ['x', <%= raw @pickups_by_year.keys.sort.reverse.map { |y| "'#{y}'"}.join(",") %> ],
+          ['coins',
+          <% @pickups_by_year.keys.sort.reverse.each do |year| %>
+            <%= raw @pickups_by_year[year] %>,
+          <% end %>
+          ]
+        ],
+      },
+      axis: {
+        x: {
+          type: 'category' // this needed to load string x value
+        },
+        y: {
+          min: 0,
+          padding: {top:0, bottom:0}
         }
       }
     });
