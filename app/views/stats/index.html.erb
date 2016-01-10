@@ -119,13 +119,11 @@
     var chart = c3.generate({
       bindto: '#monthly-chart',
       data: {
+        x: 'x',
         columns: [
+            ['x', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'a'],
           <% @users.each do |u| %>
-            ['<%= u %>',
-            <% (1..12).each do |m| %>
-              <%= @pickups_by_month[u][m.to_s] || 0 %>,
-            <% end %>
-            ],
+            ['<%= u %>', <% (1..12).each do |m| %><%= @pickups_by_month[u][m.to_s] || 0 %>, <% end %>],
           <% end %>
         ],
         type: 'bar',
@@ -134,10 +132,15 @@
         ]
       },
       grid: {
-          y: {
-              lines: [{value:0}]
-          }
+        y: {
+            lines: [{value:0}]
         }
-      });
+      },
+      axis: {
+        x: {
+            type: 'category' // this needed to load string x value
+        }
+      }
+    });
   });
 </script>
