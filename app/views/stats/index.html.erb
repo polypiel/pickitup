@@ -131,9 +131,9 @@
       data: {
         x: 'x',
         columns: [
-          ['x', <%= raw @pickups_by_year.keys.sort.reverse.map { |y| "'#{y}'"}.join(",") %> ],
+          ['x', <%= raw @pickups_by_year.keys.sort.map { |y| "'#{y}'"}.join(",") %> ],
           ['coins',
-          <% @pickups_by_year.keys.sort.reverse.each do |year| %>
+          <% @pickups_by_year.keys.sort.each do |year| %>
             <%= raw @pickups_by_year[year] %>,
           <% end %>
           ]
