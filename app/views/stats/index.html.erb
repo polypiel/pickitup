@@ -131,21 +131,25 @@
       data: {
         x: 'x',
         columns: [
-          ['x', <%= raw @pickups_by_year.keys.sort.map { |y| "'#{y}'"}.join(",") %> ],
-          ['coins',
-          <% @pickups_by_year.keys.sort.each do |year| %>
-            <%= raw @pickups_by_year[year] %>,
+          ['x', <%= raw @years.reverse.map { |y| "'#{y}'"}.join(",") %> ],
+          <% @users.each do |u| %>
+            ['<%= u %>', <% @years.reverse.each do |y| %><%= @pickups_by_year[u][y.to_s] || 0 %>, <% end %>],
           <% end %>
-          ]
         ],
+        types: {
+          <%= raw @users.map {|u| "#{u}: 'area'"}.join "," %>
+        },
       },
+      groups: [
+        [<%= raw @users.map {|u| "\"#{u}\""}.join "," %>]
+      ],
       axis: {
         x: {
           type: 'category' // this needed to load string x value
         },
         y: {
           min: 0,
-          padding: {top:0, bottom:0}
+          padding: { bottom:0 }
         }
       }
     });
