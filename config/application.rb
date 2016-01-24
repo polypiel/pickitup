@@ -21,7 +21,6 @@ module Pickitup
     # config.i18n.default_locale = :de
 
     # URL
-    config.app_url = "pickitup-ror.herokuapp.com"
-
+    config.app_url = "pickitup.es"
   end
 end
