@@ -10,7 +10,6 @@ Pickitup! is based on:
 
 ### Proposed features
 Priority from 1 (low) to 5 (high)
- * Notifications (1)
  * Location as City+Country (2)
  * Enforce auth (2)
  * Edit location from coordinates (4)
@@ -27,6 +26,7 @@ Priority from 1 (low) to 5 (high)
 ### 0.7
 IN DEV
  * Better stats page
+ * Improved localtion input
 
 ### 0.6.0
 CURRENT
