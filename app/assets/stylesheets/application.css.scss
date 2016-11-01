@@ -44,6 +44,10 @@ h3 {
 
 .navbar-header {
   height: $header-height;
+  float: left;
+}
+.nav > li {
+  float: left;
 }
 .navbar-brand {
   height: $header-height !important;
