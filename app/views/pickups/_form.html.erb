@@ -21,11 +21,6 @@
     <%= f.collection_select :coin_id, Coin.all.order(currency_id: :asc, value: :asc), :id, :to_s, {}, {:class => 'form-control'} %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :comments %><br>
-    <%= f.text_area :comments, rows: 3, class: 'form-control' %>
-  </div>
-
   <%= f.hidden_field :longitude, :class => 'form-control' %>
   <%= f.hidden_field :latitude, :class => 'form-control' %>
 
@@ -53,6 +48,10 @@
     <% end %>
 
     <div id="collapseOne" <% unless @edit_mode %>class="collapse"<% end %>>
+        <div class="form-group">
+          <%= f.label :comments %><br>
+          <%= f.text_area :comments, rows: 3, class: 'form-control' %>
+        </div>
       <div class="row">
         <div class="col-md-4 col-sm-12 form-group">
           <%= f.label :picker %><br>
@@ -74,8 +73,12 @@
   <hr>
 
   <div class="form-group">
+    <% if @edit_mode %>
     <%= f.submit :class => 'btn btn-primary col-xs-12' %>
-    <% if @edit_mode %><%= link_to 'Cancel', pickups_path, :class => 'btn btn-link' %><% end %>
+    <%= link_to 'Cancel', pickups_path, :class => 'btn btn-link' %>
+    <% else %>
+    <%= f.submit :class => 'btn btn-primary btn-lg col-xs-12' %>
+    <% end %>
   </div>
 <% end %>
 
