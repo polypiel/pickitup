@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20151228120321) do
 
-  create_table "coins", force: true do |t|
+  create_table "coins", force: :cascade do |t|
     t.integer  "value"
     t.string   "name"
     t.string   "short_name"
@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(version: 20151228120321) do
     t.datetime "updated_at"
   end
 
-  create_table "currencies", force: true do |t|
+  create_table "currencies", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "pickups", force: true do |t|
+  create_table "pickups", force: :cascade do |t|
     t.datetime "picked_at"
     t.string   "comments"
     t.decimal  "longitude"
@@ -43,13 +43,14 @@ ActiveRecord::Schema.define(version: 20151228120321) do
     t.integer  "year"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
     t.integer  "role"
     t.boolean  "active"
     t.string   "password_digest"
     t.integer  "wallet_id"
+    t.binary   "picture"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar_file_name"
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(version: 20151228120321) do
     t.string   "remember_digest"
   end
 
-  create_table "wallets", force: true do |t|
+  create_table "wallets", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
