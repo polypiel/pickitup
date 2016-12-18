@@ -27,15 +27,9 @@
 
   <div class="form-group">
     <%= f.label :location %><br>
-    <div class="input-group">
-      <%= f.text_field :location, :class => 'form-control' %>
-      <span class="input-group-btn">
-        <button id="find-location-button" class="btn btn-default" type="button" title="Gets the location form the coordinates">
-          <i class="fa fa-crosshairs"></i> 
-          <span class="hidden-xs hidden-sm">Search</span>
-        </button>
-      </div>
-    </div>
+    <div id="location-searching"><i class="fa fa-spinner fa-spin"></i> Searching localtion...</div>
+    <div id="localtion-err" class="hidden"><i class="fa fa-times-circle-o"></i> Coordinates not found, please fill in the location text box.</div>
+    <%= f.text_field :location, :class => 'form-control' %>
   </div>
 
 
