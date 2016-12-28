@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228120321) do
+ActiveRecord::Schema.define(version: 20161220220024) do
 
   create_table "coins", force: :cascade do |t|
     t.integer  "value"
@@ -64,6 +64,9 @@ ActiveRecord::Schema.define(version: 20151228120321) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "defaultCurrency_id"
   end
+
+  add_index "wallets", ["defaultCurrency_id"], name: "index_wallets_on_defaultCurrency_id"
 
 end

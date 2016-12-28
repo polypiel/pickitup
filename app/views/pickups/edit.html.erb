@@ -11,10 +11,13 @@ $(document).ready(function() {
     $('#pickup_picked_at_date').datepicker({format: 'dd/mm/yyyy', weekStart: 1});
   }
 
+  $("#location-searching").hide();
+  $("#location-err").hide();
+  /*
   if (!hasCoordinates()) {
     var findLocationButton = $('#find-location-button');
     findLocationButton.attr('disabled', 'disabled');
     findLocationButton.attr('title', 'There are no coordinates registered');
-  }
+  }*/
 });
 </script>
