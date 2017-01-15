@@ -19,8 +19,12 @@
   <div class="col-md-12">
     <h3>Location</h3>
     <div id="map-canvas" style="height: 300px;"></div>
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    </div>
+    <input id="pac-input" class="controls" type="text" placeholder="Enter location" style="width: 100%;">
+    <form>
+      <input type="hidden" name="lat" id="pickitup_lat">
+      <input type="hidden" name="lon" id="pickitup_lng">
+      <button id="saveCoordinatesBtn" type="submit" class="btn btn-default hidden"><i class="fa fa-save"></i> Save</button>
+    </form>
   </div>
 </div>
 
@@ -29,7 +33,13 @@ $(document).ready(function() {
   var coinLatlng = new google.maps.LatLng(
     <%= @pickup.has_coordinates? ? @pickup.latitude : 40.416775 %>, 
     <%= @pickup.has_coordinates? ? @pickup.longitude : -3.703790 %>);
-  var mapOptions = { center: coinLatlng, zoom: 13 };
+  var mapOptions = { 
+    center: coinLatlng, 
+    zoom: 13, 
+    mapTypeId: 'roadmap', 
+    disableDefaultUI: true,
+    zoomControl: true,
+  };
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
 
@@ -73,20 +83,17 @@ $(document).ready(function() {
         console.log("Returned place contains no geometry");
         return;
       }
-      var icon = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25)
-      };
+
+      $("#pickup_lat").val(place.geometry.location.lat);
+      $("#pickup_lng").val(place.geometry.location.lng);
+      $("#saveCoordinatesBtn").removeClass('hidden');
 
       // Create a marker for each place.
       markers.push(new google.maps.Marker({
         map: map,
-        icon: icon,
         title: place.name,
-        position: place.geometry.location
+        position: place.geometry.location,
+        draggable:true,
       }));
 
       if (place.geometry.viewport) {

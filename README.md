@@ -23,10 +23,11 @@ Priority from 1 (low) to 5 (high)
  * Bug: location info (4)
  * Bug: Filtering is done after paging (5)
 
-### 0.7
+### 1.0.0
 IN DEV
- * Better stats page
- * Improved localtion input
+ * Add location in show pickitup
+ * New colours
+ * Coin given removed
 
 ### 0.6.0
 CURRENT

@@ -91,7 +91,11 @@
     ];
 
     var bounds = new google.maps.LatLngBounds();
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {});
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+      mapTypeId: 'roadmap', 
+      disableDefaultUI: true,
+      zoomControl: true
+    });
 
     for (var i = 0; i < coins.length; i++) {
       var marker = new google.maps.Marker({
