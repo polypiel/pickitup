@@ -26,9 +26,10 @@
           <%= label_tag :picker_id %>
           <%= select_tag :picker_id, options_from_collection_for_select(@pickers, :id, :username, params[:picker_id]), {include_blank: 'Any picker', class: 'form-control'} %>
         </div>
+        <!-- TODO -->
         <div class="form-group col-sm-4 col-xs-12">
-          <%= label_tag :handed_over %>
-          <%= select_tag :handed_over, options_for_select({'Yes' => true, 'No' => false}, params[:handed_over]), {include_blank: 'Whatever', class: 'form-control'} %>
+          <%= label_tag :has_coordinates %>
+          <%= select_tag :has_coordinates, options_for_select({'Yes' => true, 'No' => false}, params[:has_coordinates]), {include_blank: 'Whatever', class: 'form-control'} %>
         </div>
       </div>
       <div class="form-group">

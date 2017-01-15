@@ -1,9 +1,9 @@
 <h1><%= @pickup.coin %><% if @pickup.handed_over %> <i class="fa fa-check handed_over_check" title="Handed over"></i><% end %></h1>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <p class="lead">Picked by <strong><%= @pickup.picker.username %></strong> on <%= @pickup.picked_at.strftime("%d %B %Y") %> at <%= @pickup.picked_at.strftime("%H:%M") %>.</p>
-    <p>
+    </p>
 
     <% unless @pickup.comments.blank? %>
     <blockquote>
@@ -16,23 +16,88 @@
     <% end %>
   </div>
 
-  <div class="col-md-6">
-    <div id="map-canvas" style="height: 200px;"></div>
+  <div class="col-md-12">
+    <h3>Location</h3>
+    <div id="map-canvas" style="height: 300px;"></div>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    </div>
   </div>
 </div>
 
-<% if @pickup.has_coordinates? %>
 <script type="text/javascript">
-  $(document).ready(function() {
-    var coinLatlng = new google.maps.LatLng(<%= @pickup.latitude%>, <%= @pickup.longitude %>);
-    var mapOptions = { center: coinLatlng, zoom: 13 };
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+$(document).ready(function() {
+  var coinLatlng = new google.maps.LatLng(
+    <%= @pickup.has_coordinates? ? @pickup.latitude : 40.416775 %>, 
+    <%= @pickup.has_coordinates? ? @pickup.longitude : -3.703790 %>);
+  var mapOptions = { center: coinLatlng, zoom: 13 };
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-    new google.maps.Marker({
-        position: coinLatlng,
-        map: map,
-        title: '<%= @pickup.location %>'
-    });
+
+  <% if @pickup.has_coordinates? %>
+  new google.maps.Marker({
+      position: coinLatlng,
+      map: map,
+      title: '<%= @pickup.location %>'
   });
+  <% else %>
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('pac-input');
+  var searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener('bounds_changed', function() {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  var markers = [];
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    // Clear out the old markers.
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    markers = [];
+
+    // For each place, get the icon, name and location.
+    var bounds = new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+      if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+      var icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      // Create a marker for each place.
+      markers.push(new google.maps.Marker({
+        map: map,
+        icon: icon,
+        title: place.name,
+        position: place.geometry.location
+      }));
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
+  });
+  <% end %>
+});
 </script>
-<% end %>
