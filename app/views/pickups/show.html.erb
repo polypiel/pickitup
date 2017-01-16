@@ -1,5 +1,9 @@
 <h1><%= @pickup.coin %><% if @pickup.handed_over %> <i class="fa fa-check handed_over_check" title="Handed over"></i><% end %></h1>
 
+<% if notice %>
+<p id="notice" class="text-info"><i class="fa fa-info"></i> <%= notice %></p>
+<% end %>
+
 <div class="row">
   <div class="col-md-12">
     <p class="lead">Picked by <strong><%= @pickup.picker.username %></strong> on <%= @pickup.picked_at.strftime("%d %B %Y") %> at <%= @pickup.picked_at.strftime("%H:%M") %>.</p>
@@ -19,12 +23,15 @@
   <div class="col-md-12">
     <h3>Location</h3>
     <div id="map-canvas" style="height: 300px;"></div>
-    <input id="pac-input" class="controls" type="text" placeholder="Enter location" style="width: 100%;">
-    <form>
-      <input type="hidden" name="lat" id="pickitup_lat">
-      <input type="hidden" name="lon" id="pickitup_lng">
-      <button id="saveCoordinatesBtn" type="submit" class="btn btn-default hidden"><i class="fa fa-save"></i> Save</button>
-    </form>
+    <input id="pac-input" type="text" placeholder="Enter location" style="width: 100%;">
+    <%= form_for(@pickup, :url =>  {:action => 'update_coordinates'}, :html => {:role => 'form'}) do |f| %>
+      <%= f.hidden_field :longitude %>
+      <%= f.hidden_field :latitude %>
+      <%= f.hidden_field :location %>
+      <%= f.button :type => 'submit', :class => 'btn btn-default hidden', :id => "saveCoordinatesBtn" do %>
+        <i class="fa fa-save"> Save coordinates</i>
+      <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -84,8 +91,9 @@ $(document).ready(function() {
         return;
       }
 
-      $("#pickup_lat").val(place.geometry.location.lat);
-      $("#pickup_lng").val(place.geometry.location.lng);
+      $("#pickup_latitude").val(place.geometry.location.lat);
+      $("#pickup_longitude").val(place.geometry.location.lng);
+      $("#pickup_location").val(input.value);
       $("#saveCoordinatesBtn").removeClass('hidden');
 
       // Create a marker for each place.

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end
 
   resources :pickups
+  put 'pickups/coordinates/:id' => 'pickups#update_coordinates'
+  patch 'pickups/coordinates/:id' => 'pickups#update_coordinates'
   resources :users
   
   get 'profile', to: 'users#profile'

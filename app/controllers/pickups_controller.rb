@@ -1,5 +1,5 @@
 class PickupsController < ApplicationController
-  before_action :set_pickup, only: [:show, :edit, :update, :destroy]
+  before_action :set_pickup, only: [:show, :edit, :update, :update_coordinates, :destroy]
   helper_method :can_edit
 
   # GET /pickups
@@ -78,6 +78,20 @@ class PickupsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /pickups/coordinates/1
+  # PATCH/PUT /pickups/coordinates/1.json
+  def update_coordinates
+    respond_to do |format|
+      if @pickup.update(pickup_params)
+        format.html { redirect_to pickup_url(@pickup), notice: 'Pickup coordinates were updated.' }
+        format.json { render :index, status: :ok, location: @pickups }
+      else
+        format.html { render :edit }
+        format.json { render json: @pickup.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /pickups/1
   # DELETE /pickups/1.json
   def destroy
@@ -108,5 +122,9 @@ class PickupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pickup_params
       params.require(:pickup).permit(:coin_id, :picked_at_date, :picked_at_time, :comments, :longitude, :latitude,  :location, :handed_over)
+    end
+
+    def pickup_coordinates_params
+      params.require(:pickup).permit(:longitude, :latitude, :location)
     end
 end
