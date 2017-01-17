@@ -9,13 +9,6 @@
     </div>
   <% end %>
 
-  <% if @can_view_hand_over %>
-  <div class="form-group">
-    <%= f.check_box :handed_over, :disabled => @cannot_edit_hand_over, :title => 'Sets if the coin has been given to you' %>
-    <%= f.label :handed_over %>
-  </div>
-  <% end %>
-
   <div class="form-group">
     <%= f.label :coin %><br>
     <%= f.collection_select :coin_id, Coin.all.order(currency_id: :asc, value: :asc), :id, :to_s, {}, {:class => 'form-control'} %>

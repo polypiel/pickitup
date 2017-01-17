@@ -121,7 +121,7 @@ class PickupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pickup_params
-      params.require(:pickup).permit(:coin_id, :picked_at_date, :picked_at_time, :comments, :longitude, :latitude,  :location, :handed_over)
+      params.require(:pickup).permit(:coin_id, :picked_at_date, :picked_at_time, :comments, :longitude, :latitude,  :location)
     end
 
     def pickup_coordinates_params
