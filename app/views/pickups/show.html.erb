@@ -1,4 +1,4 @@
-<h1><%= @pickup.coin %><% if @pickup.handed_over %> <i class="fa fa-check handed_over_check" title="Handed over"></i><% end %></h1>
+<h1><%= @pickup.coin %></h1>
 
 <% if notice %>
 <p id="notice" class="text-info"><i class="fa fa-info"></i> <%= notice %></p>
@@ -7,7 +7,6 @@
 <div class="row">
   <div class="col-md-12">
     <p class="lead">Picked by <strong><%= @pickup.picker.username %></strong> on <%= @pickup.picked_at.strftime("%d %B %Y") %> at <%= @pickup.picked_at.strftime("%H:%M") %>.</p>
-    </p>
 
     <% unless @pickup.comments.blank? %>
     <blockquote>
@@ -23,7 +22,7 @@
   <div class="col-md-12">
     <h3><% if @pickup.has_coordinates? %><i class="fa fa-location-arrow"></i> <% end %>Location</h3>
     <div id="map-canvas" style="height: 300px;"></div>
-    <% if !@pickup.location? %>
+
     <input id="pac-input" type="text" placeholder="Enter location" style="width: 100%;" value="<%= @pickup.location %>">
     <%= form_for(@pickup, :url =>  {:action => 'update_coordinates'}, :html => {:role => 'form'}) do |f| %>
       <%= f.hidden_field :longitude %>
@@ -32,7 +31,6 @@
       <%= f.button :type => 'submit', :class => 'btn btn-default hidden', :id => "saveCoordinatesBtn" do %>
         <i class="fa fa-save"> Save coordinates</i>
       <% end %>
-    <% end %>
     <% end %>
   </div>
 </div>
@@ -73,49 +71,52 @@ $(document).ready(function() {
   var markers = [];
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
-  searchBox.addListener('places_changed', function() {
-    var places = searchBox.getPlaces();
+  searchBox.addListener('places_changed', placesChanged);
+  <% end %>
+});
 
-    if (places.length == 0) {
+
+function placesChanged() {
+      var places = searchBox.getPlaces();
+
+  if (places.length == 0) {
+    return;
+  }
+
+  // Clear out the old markers.
+  markers.forEach(function(marker) {
+    marker.setMap(null);
+  });
+  markers = [];
+
+  // For each place, get the icon, name and location.
+  var bounds = new google.maps.LatLngBounds();
+  places.forEach(function(place) {
+    if (!place.geometry) {
+      console.log("Returned place contains no geometry");
       return;
     }
 
-    // Clear out the old markers.
-    markers.forEach(function(marker) {
-      marker.setMap(null);
-    });
-    markers = [];
+    $("#pickup_latitude").val(place.geometry.location.lat);
+    $("#pickup_longitude").val(place.geometry.location.lng);
+    $("#pickup_location").val(input.value);
+    $("#saveCoordinatesBtn").removeClass('hidden');
 
-    // For each place, get the icon, name and location.
-    var bounds = new google.maps.LatLngBounds();
-    places.forEach(function(place) {
-      if (!place.geometry) {
-        console.log("Returned place contains no geometry");
-        return;
-      }
+    // Create a marker for each place.
+    markers.push(new google.maps.Marker({
+      map: map,
+      title: place.name,
+      position: place.geometry.location,
+      draggable:true,
+    }));
 
-      $("#pickup_latitude").val(place.geometry.location.lat);
-      $("#pickup_longitude").val(place.geometry.location.lng);
-      $("#pickup_location").val(input.value);
-      $("#saveCoordinatesBtn").removeClass('hidden');
-
-      // Create a marker for each place.
-      markers.push(new google.maps.Marker({
-        map: map,
-        title: place.name,
-        position: place.geometry.location,
-        draggable:true,
-      }));
-
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
-    });
-    map.fitBounds(bounds);
+    if (place.geometry.viewport) {
+      // Only geocodes have viewport.
+      bounds.union(place.geometry.viewport);
+    } else {
+      bounds.extend(place.geometry.location);
+    }
   });
-  <% end %>
-});
+  map.fitBounds(bounds);
+}
 </script>
