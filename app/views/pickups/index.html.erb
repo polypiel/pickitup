@@ -28,8 +28,8 @@
         </div>
         <!-- TODO -->
         <div class="form-group col-sm-4 col-xs-12">
-          <%= label_tag :has_coordinates %>
-          <%= select_tag :has_coordinates, options_for_select({'Yes' => true, 'No' => false}, params[:has_coordinates]), {include_blank: 'Whatever', class: 'form-control'} %>
+          <%= label_tag :coordinates %>
+          <%= select_tag :coordinates, options_for_select({'Yes' => true, 'No' => false}), {include_blank: 'Whatever', class: 'form-control'} %>
         </div>
       </div>
       <div class="form-group">
