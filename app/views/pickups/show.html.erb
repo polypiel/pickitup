@@ -69,17 +69,10 @@ $(document).ready(function() {
   });
 
 
+  var markers = [];
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
   searchBox.addListener('places_changed', function() {
-    placesChanged(map, searchBox.getPlaces());
-  });
-  <% end %>
-});
-
-
-var markers = [];
-function placesChanged(map, places) {
   if (places.length == 0) {
     return;
   }
@@ -119,5 +112,7 @@ function placesChanged(map, places) {
     }
   });
   map.fitBounds(bounds);
-}
+  });
+  <% end %>
+});
 </script>
