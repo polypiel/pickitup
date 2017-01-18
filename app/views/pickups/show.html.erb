@@ -71,14 +71,14 @@ $(document).ready(function() {
   var markers = [];
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
-  searchBox.addListener('places_changed', placesChanged);
+  searchBox.addListener('places_changed', function() {
+    placesChanged(searchBox.getPlaces());
+  });
   <% end %>
 });
 
 
-function placesChanged() {
-      var places = searchBox.getPlaces();
-
+function placesChanged(places) {
   if (places.length == 0) {
     return;
   }
