@@ -8,10 +8,12 @@ class PickupsController < ApplicationController
     wallet_id = get_logged_user.wallet.id
     @pickers = wallet_pickers
     @pickups = Pickup.where(wallet_id: wallet_id)
-      .filter(params.slice(:coin, :picker_id, :coordinates))
+      .filter(params.slice(:year, :picker_id, :coordinates))
       .order(picked_at: :desc)
       .page(params[:page]).per(20)
-    @show_filter_form = (!(params[:coin].blank?)) | (!(params[:picker_id].blank?)) | (!(params[:coordinates].blank?))
+    @show_filter_form = (!(params[:year].blank?)) | (!(params[:picker_id].blank?)) | (!(params[:coordinates].blank?))
+    @years = Pickup.pluck('DISTINCT year').sort.reverse
+    @year = (params['year'] || @years.max).to_i
 
     respond_to do |format|
       format.html

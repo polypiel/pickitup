@@ -14,10 +14,11 @@ class Pickup < ActiveRecord::Base
 
   date_time_attribute :picked_at
 
-  scope :coin, -> (coin_id) { where coin: coin_id }
+#  scope :coin, -> (coin_id) { where coin: coin_id }
+  scope :year, -> (year)  {where "cast(strftime('%Y', picked_at) as int) = ?", year }
   scope :picker_id, -> (id) { where picker_id: id }
-  scope :handed_over, -> (handed_over) { where handed_over: ActiveRecord::ConnectionAdapters::Column.value_to_boolean(handed_over) }
-  scope :coordinates , -> (coordinates) { coordinates ? where(latitude: nil) : where.not(latitude: nil) }
+#  scope :handed_over, -> (handed_over) { where handed_over: ActiveRecord::ConnectionAdapters::Column.value_to_boolean(handed_over) }
+  scope :coordinates , -> (coordinates) { where "(#{coordinates ? '0=0' : '1=0'} and latitude is not null) or (#{coordinates ? '1=0' : '0=0'} and latitude is null)"}
 
   def has_coordinates?
     not latitude.nil? and not longitude.nil?

@@ -25,9 +25,11 @@ Priority from 1 (low) to 5 (high)
 
 ### 1.0.0
 IN DEV
- * Add location in show pickitup
- * New colours
- * Coin given removed
+ * Add location in show pickitup (wip)
+ * New colours (done)
+ * Coin given removed (done)
+ * Fix header menu
+ * New filters (wip)
 
 ### 0.6.0
 CURRENT

@@ -19,8 +19,8 @@
     <%= form_tag pickups_path, :method => 'get', :role => 'form' do %>
       <div class="row">
         <div class="form-group col-sm-4 col-xs-12">
-          <%= label_tag :coin %>
-          <%= select_tag :coin, options_from_collection_for_select(Coin.all.order(currency_id: :asc, value: :asc), :id, :to_s, params[:coin]), {include_blank: 'Any coin', class: 'form-control'} %>
+          <%= label_tag :year %>
+          <%= select_tag :year, options_for_select(@years, params[:year]), {include_blank: 'Any year', class: 'form-control'} %>
         </div>
         <div class="form-group col-sm-4 col-xs-12">
           <%= label_tag :picker_id %>
