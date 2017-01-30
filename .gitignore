@@ -22,3 +22,6 @@
 
 # Ignore uploaded resources
 /public/system
+
+# Bootstrap generation file
+config.json
