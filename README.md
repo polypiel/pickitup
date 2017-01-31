@@ -30,6 +30,7 @@ IN DEV
  * Coin given removed (done)
  * Fix header menu
  * New filters (wip)
+ * Remove 'delete' button in pickups view
 
 ### 0.6.0
 CURRENT

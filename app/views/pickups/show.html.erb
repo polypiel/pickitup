@@ -23,7 +23,8 @@
     <h3><% if @pickup.has_coordinates? %><i class="fa fa-location-arrow"></i> <% end %>Location</h3>
     <div id="map-canvas" style="height: 300px;"></div>
 
-    <input id="pac-input" type="text" placeholder="Enter location" style="width: 100%;" value="<%= @pickup.location %>">
+    <input id="pac-input" type="text" placeholder="Enter location" style="width: 100%;" value="<%= @pickup.location %>"
+      <% if @pickup.has_coordinates? %> disabled<% end %>>
     <%= form_for(@pickup, :url =>  {:action => 'update_coordinates'}, :html => {:role => 'form'}) do |f| %>
       <%= f.hidden_field :longitude %>
       <%= f.hidden_field :latitude %>

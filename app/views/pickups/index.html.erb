@@ -46,7 +46,7 @@
       <th>Coin</th>
       <th>Picker</th>
       <th class="hidden-xs">Location</th>
-      <th></th>
+      <th class="hidden-xs"></th>
     </tr>
   </thead>
 
@@ -57,7 +57,7 @@
         <td><%= link_to pickup.coin, pickup_path(pickup) %></td>
         <td><%= pickup.picker.username %></td>
         <td class="hidden-xs"><%= truncate(pickup.location, length: 24) %></td>
-        <td style="text-align: right;">
+        <td class="hidden-xs" style="text-align: right;">
           <div class="btn-group">
             <% if can_edit pickup.picker_id %>
             <%= link_to pickup, method: :delete, data: { confirm: "Do you really want to delete the pickup?" }, :title => "Delete", :class => 'btn btn-default btn-sm' do %><i class="fa fa-trash-o"></i><% end %>
