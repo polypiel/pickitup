@@ -29,7 +29,7 @@
         <!-- TODO -->
         <div class="form-group col-sm-4 col-xs-12">
           <%= label_tag :coordinates %>
-          <%= select_tag :coordinates, options_for_select({'Yes' => true, 'No' => false}), {include_blank: 'Whatever', class: 'form-control'} %>
+          <%= select_tag :coordinates, options_for_select({'Yes' => true, 'No' => false}, params[:coordinates]), {include_blank: 'Whatever', class: 'form-control'} %>
         </div>
       </div>
       <div class="form-group">
@@ -73,6 +73,7 @@
 
 <script type="text/javascript">
   // decide based on params presence
+  // TODO use bootstrap caret
   $(document).ready(function() {
     var show_filtering = $('#show-filtering');
     var hide_filtering = $('#hide-filtering');

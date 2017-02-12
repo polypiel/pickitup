@@ -27,10 +27,11 @@ Priority from 1 (low) to 5 (high)
 IN DEV
  * Add location in show pickitup (wip)
  * New colours (done)
+ * Favicon
  * Coin given removed (done)
  * Fix header menu
- * New filters (wip)
- * Remove 'delete' button in pickups view
+ * New filters (done)
+ * Remove 'delete' button in pickups view (done)
 
 ### 0.6.0
 CURRENT

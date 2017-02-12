@@ -18,7 +18,8 @@ class Pickup < ActiveRecord::Base
   scope :year, -> (year)  {where "cast(strftime('%Y', picked_at) as int) = ?", year }
   scope :picker_id, -> (id) { where picker_id: id }
 #  scope :handed_over, -> (handed_over) { where handed_over: ActiveRecord::ConnectionAdapters::Column.value_to_boolean(handed_over) }
-  scope :coordinates , -> (coordinates) { where "(#{coordinates ? '0=0' : '1=0'} and latitude is not null) or (#{coordinates ? '1=0' : '0=0'} and latitude is null)"}
+  scope :has_coords , -> (w) { where "latitude is not null"}
+  scope :has_not_coords , -> (w) { where "latitude is null"}
 
   def has_coordinates?
     not latitude.nil? and not longitude.nil?
