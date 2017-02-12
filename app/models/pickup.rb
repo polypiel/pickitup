@@ -15,7 +15,7 @@ class Pickup < ActiveRecord::Base
   date_time_attribute :picked_at
 
 #  scope :coin, -> (coin_id) { where coin: coin_id }
-  scope :year, -> (year)  {where "cast(strftime('%Y', picked_at) as int) = ?", year }
+  scope :year, -> (year)  {where "EXTRACT(YEAR FROM picked_at) = ?", year }
   scope :picker_id, -> (id) { where picker_id: id }
 #  scope :handed_over, -> (handed_over) { where handed_over: ActiveRecord::ConnectionAdapters::Column.value_to_boolean(handed_over) }
   scope :has_coords , -> (w) { where "latitude is not null"}
