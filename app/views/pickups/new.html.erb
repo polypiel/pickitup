@@ -26,15 +26,12 @@ function handle_error(err) {
 
 // Init
 $(document).ready(function() {
-  //console.debug("new init");
-  //$('#pickup_location').attr('placeholder', 'Searching for location...');
-
   // Adds datepicker if there isn't native control
   if (!isDateControlSupported()) {
     $('#pickup_picked_at_date').datepicker({format: 'dd/mm/yyyy', weekStart: 1});
   }
 
   // Search location 
-  //navigator.geolocation.getCurrentPosition(onLocationFound, handle_error, {timeout: POSITION_TIMEOUT, enableHighAccuracy: true});
+  navigator.geolocation.getCurrentPosition(onLocationFound, handle_error, {timeout: POSITION_TIMEOUT, enableHighAccuracy: true});
 });
 </script>

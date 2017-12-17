@@ -102,7 +102,6 @@
   }
 
   $(document).ready(function() {
-    console.debug("advanced init");
     var show_advanced = $('#show-advanced');
     var hide_advanced = $('#hide-advanced');
     var toggle_advanced = function() {
@@ -114,7 +113,6 @@
   });
 
   $(document).ready(function() {
-    //console.debug("location init");
     var input = document.getElementById('pickup_location');
     var searchBox = new google.maps.places.SearchBox(input);
     searchBox.addListener('places_changed', function() {
@@ -124,12 +122,11 @@
       }
       places.forEach(function(place) {
         if (!place.geometry) {
-          console.log("Returned place contains no geometry");
+          console.warn("Returned place contains no geometry");
           return;
         }
         $("#pickup_latitude").val(place.geometry.location.lat);
         $("#pickup_longitude").val(place.geometry.location.lng);
-        //$("#pickup_location").val(input.value);
       });
     });
   });

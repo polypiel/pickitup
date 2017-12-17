@@ -25,3 +25,6 @@
 
 # Bootstrap generation file
 config.json
+
+# Personal operations
+OPERATIONS.md
