@@ -3,37 +3,31 @@
 <%= render 'form' %>
 
 <script>
-var POSITION_TIMEOUT = 5000;
+var POSITION_TIMEOUT = 4000;
 
-function show_map(position) {
+function onLocationFound(position) {
   console.debug("Coordinates found: " + position.coords.latitude + ", " + position.coords.longitude);
-  $("#location-searching").hide();
-  $("#location-err").hide();
 
   $("#pickup_latitude").val(position.coords.latitude);
   $("#pickup_longitude").val(position.coords.longitude);
-  searchLocation(position.coords.latitude, position.coords.longitude);
+  searchLocationText(position.coords.latitude, position.coords.longitude);
 }
 
 function handle_error(err) {
-  console.error("Location not found: " + err);
+  console.warn("Location not found: " + err);
   if ($("#pickup_latitude").val() && $("#pickup_longitude").val()) {
     return;
   }
-  $("#location-searching").show();
-  $("#location-err").show();
 
   if (err.code == 3) {
-    navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: POSITION_TIMEOUT, enableHighAccuracy: false});
-  } else {
-    $('#pickup_location').attr('placeholder', '');
+    navigator.geolocation.getCurrentPosition(onLocationFound, handle_error, {timeout: POSITION_TIMEOUT, enableHighAccuracy: false});
   }
 }
 
 // Init
 $(document).ready(function() {
-  console.debug("init")
-  $('#pickup_location').attr('placeholder', 'Searching for location...');
+  //console.debug("new init");
+  //$('#pickup_location').attr('placeholder', 'Searching for location...');
 
   // Adds datepicker if there isn't native control
   if (!isDateControlSupported()) {
@@ -41,6 +35,6 @@ $(document).ready(function() {
   }
 
   // Search location 
-  navigator.geolocation.getCurrentPosition(show_map, handle_error, {timeout: POSITION_TIMEOUT, enableHighAccuracy: true});
+  //navigator.geolocation.getCurrentPosition(onLocationFound, handle_error, {timeout: POSITION_TIMEOUT, enableHighAccuracy: true});
 });
 </script>

@@ -20,8 +20,6 @@
 
   <div class="form-group">
     <%= f.label :location %><br>
-    <div id="location-searching"><i class="fa fa-spinner fa-spin"></i> Searching localtion...</div>
-    <div id="localtion-err" class="hidden"><i class="fa fa-times-circle-o"></i> Coordinates not found, please fill in the location text box.</div>
     <%= f.text_field :location, :class => 'form-control' %>
   </div>
 
@@ -83,13 +81,7 @@
     return typeof google === 'object' && typeof google.maps === 'object';
   }
 
-  function hasCoordinates() {
-    var lat = parseFloat($("#pickup_latitude").val());
-    var lng = parseFloat($("#pickup_longitude").val());
-    return lat && lng;
-  }
-
-  function searchLocation(lat, lng) {
+  function searchLocationText(lat, lng) {
     if (!isGmapsLoaded()) {
       console.error("Google maps could not be found");
       return;
@@ -110,6 +102,7 @@
   }
 
   $(document).ready(function() {
+    console.debug("advanced init");
     var show_advanced = $('#show-advanced');
     var hide_advanced = $('#hide-advanced');
     var toggle_advanced = function() {
@@ -121,21 +114,23 @@
   });
 
   $(document).ready(function() {
-    $('#find-location-button').click(function(e) {
-      var lat = parseFloat($("#pickup_latitude").val());
-      var lng = parseFloat($("#pickup_longitude").val());
-
-      if (!lat || !lng) {
-        console.log('The coordinates are unknown');
+    //console.debug("location init");
+    var input = document.getElementById('pickup_location');
+    var searchBox = new google.maps.places.SearchBox(input);
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+      if (places.length == 0) {
         return;
       }
-
-      var input = $('#pickup_location');
-      input.val('');
-      input.attr('placeholder', 'Searching location...');
-      searchLocation(lat, lng);
-
-      e.preventDefault();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+        $("#pickup_latitude").val(place.geometry.location.lat);
+        $("#pickup_longitude").val(place.geometry.location.lng);
+        //$("#pickup_location").val(input.value);
+      });
     });
-  })
+  });
 </script>
