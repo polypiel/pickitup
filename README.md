@@ -8,6 +8,12 @@ Pickitup! is based on:
 
 ## Change-log
 
+### 1.0.1
+Released on 17/12/2017
+ * Updated Rails
+ * Added icons
+ * Add Pick-up location form has auto-complete
+
 ### 1.0.0
 Released on 15/02/2017
  * Add location in show pickitup
@@ -68,17 +74,14 @@ Features:
 
 ### Proposed features
 Priority from 1 (low) to 5 (high)
- * Location as City+Country (2)
  * Enforce auth (2)
- * Edit location from coordinates (4)
- * Tasks (coins to be handed over, locations that need fixing...) (3)
+ * Tasks (locations that need fixing...) (3)
  * Badges (1)
 
 ### Known bugs
 Priority from 1 (low) to 5 (high)
  * Bug: Login background in mobiles (3)
  * Bug: pluralize the word 'cent' (1)
- * Bug: location info (4)
  * Bug: Filtering is done after paging (5)
 
 ## Documentation
