@@ -103,7 +103,7 @@ GEM
       mimemagic (~> 0.3.0)
     paperclip-storage-ftp (1.2.7)
       paperclip
-    pg (1.0.0)
+    pg (0.20.0)
     rack (1.6.8)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -186,7 +186,7 @@ DEPENDENCIES
   kaminari
   paperclip (~> 5.1.0)
   paperclip-storage-ftp
-  pg
+  pg (= 0.20)
   rails (= 4.2.10)
   rails_12factor
   sass-rails (~> 4.0.5)

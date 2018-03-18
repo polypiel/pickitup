@@ -5,7 +5,7 @@ ruby "2.3.3"
 gem 'rails', '4.2.10'
 # Databases for Active Record
 group :production do
-  gem 'pg'
+  gem 'pg', '0.20'
 end
 group :development, :test do
   gem 'sqlite3'
@@ -54,5 +54,5 @@ gem 'rails_12factor', group: :production
 gem 'kaminari'
 
 # File uploads
-gem "paperclip", "~> 5.1.0"
+gem "paperclip", "~> 5.1.0" # 5.2.0 depends on Rails 5.1
 gem "paperclip-storage-ftp"
