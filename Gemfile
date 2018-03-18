@@ -54,5 +54,5 @@ gem 'rails_12factor', group: :production
 gem 'kaminari'
 
 # File uploads
-gem "paperclip", "~> 4.2"
+gem "paperclip", "~> 5.1.0"
 gem "paperclip-storage-ftp"
