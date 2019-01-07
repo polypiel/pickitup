@@ -1,6 +1,6 @@
 require 'csv'
 
-class Pickup < ActiveRecord::Base
+class Pickup < ApplicationRecord
   include Filterable
 
 	validates :picked_at, :picker, :coin, presence: true

@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   ROLE_OWNER = 1
   ROLE_CONTRIBUTOR = 2
   
