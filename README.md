@@ -8,6 +8,10 @@ Pickitup! is based on:
 
 ## Change-log
 
+### Next
+ * Updated Rails to 4.2.11
+ * Updated Ruby to 2.5
+
 ### 1.0.1
 Released on 17/12/2017
  * Updated Rails
