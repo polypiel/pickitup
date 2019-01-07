@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby "2.5.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.11'
+gem 'rails', '5.0.7'
 # Databases for Active Record
 group :production do
   gem 'pg', '0.20'
@@ -12,16 +12,16 @@ group :development, :test do
 end
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.5'
+gem 'sass-rails', '>= 5.0.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '>= 4.2.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.0.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -54,5 +54,5 @@ gem 'rails_12factor', group: :production
 gem 'kaminari'
 
 # File uploads
-gem "paperclip", "~> 5.1.0" # 5.2.0 depends on Rails 5.1
+gem "paperclip", "~> 5.3.0"
 gem "paperclip-storage-ftp"

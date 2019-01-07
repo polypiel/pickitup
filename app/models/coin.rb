@@ -1,4 +1,4 @@
-class Coin < ActiveRecord::Base
+class Coin < ApplicationRecord
   validates :currency, :value, :name, :short_name, presence: true
   validates :value, numericality: { greater_than_or_equal_to: 1 }
   

@@ -1,4 +1,4 @@
-class Wallet < ActiveRecord::Base
+class Wallet < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
 
