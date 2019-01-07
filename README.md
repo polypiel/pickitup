@@ -76,17 +76,18 @@ Features:
  * Pickups management
  * Contributors management
 
-### Proposed features
+## Proposed features
 Priority from 1 (low) to 5 (high)
  * Enforce auth (2)
  * Tasks (locations that need fixing...) (3)
  * Badges (1)
 
-### Known bugs
+## Known bugs
 Priority from 1 (low) to 5 (high)
- * Bug: Login background in mobiles (3)
- * Bug: pluralize the word 'cent' (1)
- * Bug: Filtering is done after paging (5)
+ * Login background in mobiles (3)
+ * Non pluralized word 'cent' (1)
+ * Filtering is done after paging (5)
+ * Avatar uploading is broken
 
 ## Troubleshoting
 
