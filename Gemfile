@@ -53,6 +53,8 @@ gem 'rails_12factor', group: :production
 # Pagination
 gem 'kaminari'
 
+gem 'rails-controller-testing'
+
 # File uploads
 gem "paperclip", "~> 5.3.0"
 gem "paperclip-storage-ftp"
