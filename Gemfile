@@ -6,6 +6,8 @@ gem 'rails', '5.0.7'
 # Databases for Active Record
 group :production do
   gem 'pg', '0.20'
+  # webserver
+  gem 'puma'
 end
 group :development, :test do
   gem 'sqlite3'
