@@ -24,20 +24,6 @@
 <hr/>
 
 
-<%= form_for @user, :html => { :multipart => true } do |f| %>
-  <div class="form-group">
-    <%= f.label :avatar %><br/>
-    <%= image_tag @user.avatar.url(:thumb), class: 'img-circle' %>
-    <%= f.file_field :avatar %>
-  </div>
-  <div class="actions form-group">
-    <%= f.submit 'Upload avatar', class: 'btn btn-primary'%>
-  </div>
-  <%= f.hidden_field :update_type, value: "avatar" %>
-<% end %>
-<hr/>
-
-
 <%= form_for(@user, :html => {:role => 'form'}) do |f| %>
   <div class="form-group">
     <%= f.label :password %><br>

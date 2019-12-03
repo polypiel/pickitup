@@ -68,14 +68,10 @@ class UsersController < ApplicationController
 
     puts update_type
     puts params[:user][:username]
-    puts params[:user][:avatar]
     puts params[:user][:password]
 
     if update_type == "username" and params[:user][:username].blank?
       @user.errors[:username] << "can't be empty"
-      render :edit
-    elsif update_type == "avatar" and params[:user][:avatar].nil?
-      @user.errors[:avatar] << "can't be empty"
       render :edit
     elsif update_type == "password" and params[:user][:password].empty?
       @user.errors[:password] << "can't be empty"
@@ -163,6 +159,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :password, :password_confirmation, :avatar)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 end

@@ -11,6 +11,7 @@ Pickitup! is based on:
 ### Next
  * Updated Rails to 4.2.11
  * Updated Ruby to 2.5
+ * Delete profile pic (less is more)
 
 ### 1.0.1
 Released on 17/12/2017

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.5.1"
+ruby "2.5.5"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.7'
@@ -54,7 +54,3 @@ gem 'rails_12factor', group: :production
 gem 'kaminari'
 
 gem 'rails-controller-testing'
-
-# File uploads
-gem "paperclip", "~> 5.3.0"
-gem "paperclip-storage-ftp"
