@@ -56,7 +56,7 @@
         <td><%= pickup.picked_at.strftime("%d/%m/%Y %H:%M") %></td>
         <td><%= link_to pickup.coin, pickup_path(pickup) %></td>
         <td><%= pickup.picker.username %></td>
-        <td class="hidden-xs"><%= truncate(pickup.location, length: 24) %></td>
+        <td class="hidden-xs"><span title="<%= pickup.location %>"><%= truncate(pickup.location, length: 24) %></span></td>
         <td class="hidden-xs" style="text-align: right;">
           <div class="btn-group">
             <% if can_edit pickup.picker_id %>
