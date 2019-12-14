@@ -6,16 +6,18 @@
 
 <div class="row">
   <div class="col-md-8 col-sm-4">
-    <h2><%= @user.username %></h2>
+    <h1><%= @user.username %></h1>
     <p><%= @user.email %></p>
 
     <% if @current_user %><%= link_to edit_user_path(@user) do %> <i class="fa fa-edit"></i> Edit<% end %><% end %>
-    <% if @current_user %><%= link_to logout_path, method: :delete  do %> <i class="fa fa-sign-out"></i> Log out<% end %><% end %>
+    <% if @current_user %><%= link_to logout_path, method: :delete  do %> | <i class="fa fa-sign-out"></i> Log out<% end %><% end %>
   </div>
 </div>
 
 <div class="row">
-  <h2>Stats</h2>
+  <div class="col-sm-12">
+    <h2>Stats</h2>
+  </div>
   <div class="col-sm-3 col-xs-6">
     <div id="first-well" class="well" >
       <h2><strong><%= @coins %></strong></h2>
@@ -28,6 +30,7 @@
       <p class="lead">Cents</p>
     </div>
   </div>
+
   <div class="col-sm-6 col-xs-12">
     <h2>Last pickups</h2>
     <table class="table">
