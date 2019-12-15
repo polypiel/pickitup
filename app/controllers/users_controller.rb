@@ -15,6 +15,10 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @current_user = @user.id == session[:user_id]
+
+    all = Pickup.where(wallet_id: wallet_id)
+    @pickups_by_year = year_pickups all #all.group(:year).count
+    
     profile_queries
   end
 
@@ -145,11 +149,23 @@ class UsersController < ApplicationController
     end
   end
 
+
   private
     def profile_queries
       @coins = Pickup.where(picker_id: @user.id).count
       @money = Pickup.where(picker_id: @user.id).joins(:coin).sum(:value)
       @last_pickups = Pickup.where(picker_id: @user.id).order(picked_at: :desc).limit(3)
+    end
+
+    def year_pickups all
+      pickups_by_year = {}
+      pickups_by_year_raw = all.group_by { |p| "#{p.picker.username}-#{p.year}" }
+      pickups_by_year_raw.each do |k, v|
+        user, year = k.split "-"
+        pickups_by_year[user] = {} unless pickups_by_year[user]
+        pickups_by_year[user][year] = v.size
+      end
+      pickups_by_year
     end
 
     # Use callbacks to share common setup or constraints between actions.
