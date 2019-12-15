@@ -24,6 +24,7 @@
       <p class="lead">Coins</p>
     </div>
   </div>
+
   <div class="col-sm-3 col-xs-6">
     <div class="well">
       <h2><strong><%= @money %></strong></h2>
@@ -44,5 +45,41 @@
     <% end %>
     </table>
   </div>
+
+  <div class="col-sm-12">
+    <h2>By Year</h2>
+    <div id="year-chart" style="height: 300px;"></div>
+  </div>
 </div>
 
+<script type="text/javascript">
+    // Year chart
+    c3.generate({
+      bindto: '#year-chart',
+      data: {
+        x: 'x',
+        columns: [
+          ['x', <%= raw @years.reverse.map { |y| "'#{y}'"}.join(",") %> ],
+          <% @users.each do |u| %>
+            ['<%= u %>', <% @years.reverse.each do |y| %><%= @pickups_by_year[u][y.to_s] || 0 %>, <% end %>],
+          <% end %>
+        ],
+        types: {
+          <%= raw @users.map {|u| "#{u}: 'area'"}.join "," %>
+        },
+      },
+      groups: [
+        [<%= raw @users.map {|u| "\"#{u}\""}.join "," %>]
+      ],
+      axis: {
+        x: {
+          type: 'category' // this needed to load string x value
+        },
+        y: {
+          min: 0,
+          padding: { bottom:0 }
+        }
+      }
+    });
+  });
+</script>
