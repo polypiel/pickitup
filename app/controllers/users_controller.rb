@@ -16,9 +16,10 @@ class UsersController < ApplicationController
   def show
     @current_user = @user.id == session[:user_id]
 
+    wallet_id = get_logged_user.wallet.id
     all = Pickup.where(wallet_id: wallet_id)
     @pickups_by_year = year_pickups all #all.group(:year).count
-    
+
     profile_queries
   end
 
