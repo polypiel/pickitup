@@ -16,6 +16,9 @@ class UsersController < ApplicationController
   def show
     @current_user = @user.id == session[:user_id]
 
+    wallet_id = get_logged_user.wallet.id
+    @years = Pickup.pluck('DISTINCT year').sort.reverse
+    @year = (params['year'] || @years.max).to_i
     @top_users = ActiveRecord::Base.connection.execute("
       SELECT u.id, u.username, count(u.id) AS coins , sum(c.value) AS value
       FROM users u
@@ -25,8 +28,6 @@ class UsersController < ApplicationController
       GROUP BY u.id
       ORDER BY coins DESC
     ")
-    @years = Pickup.pluck('DISTINCT year').sort.reverse
-    wallet_id = get_logged_user.wallet.id
     all = Pickup.where(wallet_id: wallet_id)
     @pickups_by_year = year_pickups all #all.group(:year).count
     @users = @top_users.map { |u| u['username']}
