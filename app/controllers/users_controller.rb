@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     wallet_id = get_logged_user.wallet.id
     all = Pickup.where(wallet_id: wallet_id)
     @pickups_by_year = year_pickups all #all.group(:year).count
+    @users = @top_users.map { |u| u['username']}
 
     profile_queries
   end
