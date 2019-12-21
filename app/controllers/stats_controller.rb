@@ -29,6 +29,10 @@ class StatsController < ApplicationController
     @users = @top_users.map { |u| u['username']}
     @pickups_by_month = monthly_pickups all
     # by user too
+
+    # Three last pickups
+    now = Time.zone.now
+    @last_pickups = Pickup.where(wallet_id: wallet_id, picked_at: (15.days.ago.to_date)..(now)).order(picked_at: :desc).limit(3)
   end
 
   private
