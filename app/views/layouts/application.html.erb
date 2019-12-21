@@ -49,7 +49,6 @@
               <li><%= link_to controller: 'pickups' do %><i class="fa fa-money"></i> Pickups<% end %></li>
               <li><%= link_to  profile_path do %><i class="fa fa-user"></i> Profile<% end %></li>
               <% if owner? %><li><%= link_to controller: 'users' do %><i class=" fa fa-users"></i> Contributors<% end %></li><% end %>
-              <li><%= link_to controller: 'stats' do %><i class="fa fa-bar-chart"></i> Stats<% end %></li>
             </ul>
           </li> 
           <li><%= link_to new_pickup_path, :title => "New pickup" do %><i class="fa fa-plus fa-2x"></i><% end %></li>

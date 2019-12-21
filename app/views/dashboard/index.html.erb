@@ -1,31 +1,65 @@
-<h1>Dashboard</h1>
+<div>
+  <h1 style="float: left;"><%= @year %> Stats</h1>
 
-<div class="row">
-  <div class="col-sm-6 col-xs-6">
-    <div id="first-well" class="well" >
-      <h2><strong><%= @coins %></strong></h2>
-      <p class="lead">Coins</p>
-    </div>
-  </div>
-  <div class="col-sm-6 col-xs-6">
-    <div class="well">
-      <h2><strong><%= @money %></strong></h2>
-      <p class="lead">Cents</p>
-    </div>
-  </div>
+  <nav style="float: right;">
+    <ul class="pagination">
+      <% @years.each do |y| %>
+      <% if y == @year %>
+      <li class="active">
+      <% else %>
+      <li>
+      <% end %>
+        <%= link_to y, :year => y %>
+      </li>
+      <% end %>
+    </ul>
+  </nav>
 </div>
 
-<div class="row">
-  <div class="col-sm-12 col-xs-12">
-    <div id="chart-container">
-      <h2>Monthly coins (last year)</h2>
-      <svg class="chart"></svg>
-    </div>
-  </div>
-</div>
+<div style="clear: both;"/>
 
 <div class="row">
-    <div class="col-sm-6 col-xs-12">
+  <div class="col-sm-4 col-xs-12">
+    <h2>By Pickers</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th style="text-align: right;">Coins</th>
+          <th style="text-align: right;">Value</th>
+        </tr>
+      </thead>
+    <% @top_users.each_with_index do |top_user, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
+        <td style="text-align: right;"><%= top_user['coins'] %></td>
+        <td style="text-align: right;"><%= top_user['value'] %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+
+  <div class="col-sm-4 col-xs-12">
+    <h2>By Coins</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th style="text-align: right;">Pickups</th>
+        </tr>
+      </thead>
+      <% @coins_by_type.each_with_index do |coin, index| %>
+      <tr>
+        <td><%= coin['coin'] %> <%= coin['currency'] %></td>
+        <td style="text-align: right;"><%= coin['amount'] %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-sm-4 col-xs-12">
     <h2>Last pickups</h2>
     <table class="table">
     <% @last_pickups.each do |pickup| %>
@@ -37,116 +71,70 @@
       <tr><td>There isn't recent pickups. Go out and pick up some coins!</td><tr>
     <% end %>
     </table>
-  </div>
-
-  <div class="col-sm-6 col-xs-12">
-    <h2>Last 30 days top pickers</h2>
-    <table class="table">
-    <% @top_users_monthly.each_with_index do |top_user, index| %>
-      <tr>
-        <td><%= index + 1 %></td>
-        <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
-        <td style="text-align: right;" title="<%= pluralize(top_user['coins'], 'coin') %>"><%= top_user['coins'] %></td>
-      </tr>
-    <% end %>
-    </table>
+    <%= link_to controller: 'pickups' do %>Ver todos<% end %>
   </div>
 </div>
 
-<style>
-.axis {
-  font: 10px sans-serif;
-}
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-.x.axis path {
-  display: none;
-}
-</style>
+<div class="row">
+  <div class="col-sm-12">
+    <h2>By Location</h2>
+    <div id="map-canvas" style="height: 300px;"></div>
+  </div>
+</div>
 
-<script>
-$(document).ready(function() {
+<div class="row">
+  <div class="col-sm-12">
+    <h2>By Month</h2>
+    <div id="monthly-chart" style="height: 300px;"></div>
+  </div>
+</div>
 
-  var dataset_2 = [
-  <% @pickups_monthly.sort.map do |m, p| %>
-    {'month': '<%= Date::MONTHNAMES[m.month][0, 3] %>', 'coins': <%= p.size %>},
-  <% end %>
-  ];
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Map
+    var coins = [
+      <% @pickups_with_location.each { |c| %>
+        {lat:<%= c.latitude %>, lon:<%= c.longitude %>},
+      <% } %>
+    ];
 
-  var margin = {top: 20, right: 0, bottom: 20, left: 20};
-  var w = $('#chart-container').width() - margin.right - margin.left;
-  var h = 150 - margin.top - margin.bottom;
-  var barPadding = 1;
-  var topPadding = 20;
-  var svg = d3.select("svg")
-      .attr("width", w + margin.right + margin.left)
-      .attr("height", h + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var bounds = new google.maps.LatLngBounds();
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+      mapTypeId: 'roadmap', 
+      disableDefaultUI: true,
+      zoomControl: true
+    });
 
-  // scale
-  var xScale = d3.scale
-      .ordinal()
-      .domain(dataset_2.map(function(d) {return d.month;}))
-      .rangeBands([0, w]);
-  var yScale = d3.scale
-      .linear()
-      .domain([d3.max(dataset_2, function(d) { return d.coins; }), 0])
-      .range([0, h]);
-
-  // data
-  svg.selectAll("rect")
-      .data(dataset_2)
-      .enter()
-      .append("rect")
-      .attr("fill", "#c3886a")
-      .attr("x", function(d, i) {
-          return i * (w / dataset_2.length);
-      })
-      .attr("y", function(d) {
-          return yScale(d.coins);  //Height minus data value
-      })
-      .attr("width", w / dataset_2.length - barPadding)
-      .attr("height", function(d) {
-          return h - yScale(d.coins);
+    for (var i = 0; i < coins.length; i++) {
+      var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(coins[i].lat, coins[i].lon),
+          map: map
       });
-    
-  // texts
-  svg.selectAll("text")
-      .data(dataset_2)
-      .enter()
-      .append("text")
-      .text(function(d) {
-          return d.coins;
-      })
-      .attr("x", function(d, i) {
-          return i * (w / dataset_2.length) + (w / dataset_2.length - barPadding) / 2;
-      })
-      .attr("y", function(d) {
-          return yScale(d.coins) - 2;
-      })
-      .attr("font-size", "1rem")
-      .attr("fill", "black")
-      .attr("text-anchor", "middle");
+      bounds.extend(marker.position);
+    }
+    map.fitBounds(bounds);
 
-    // Axes
-    var xAxis = d3.svg.axis()
-        .scale(xScale)
-        .orient("bottom");
-    svg.append("g")
-        .attr("class", "axis")
-        .attr("transform", "translate(0, " + h + ")")
-        .call(xAxis);
-    var yAxis = d3.svg.axis()
-        .scale(yScale)
-        .orient("left")
-        .ticks(5);
-    svg.append("g")
-        .attr("class", "axis")
-        .call(yAxis);
-});
+    // Monthly chart
+    c3.generate({
+      bindto: '#monthly-chart',
+      data: {
+        x: 'x',
+        columns: [
+          ['x', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'a'],
+          <% @users.each do |u| %>
+          ['<%= u %>', <% (1..12).each do |m| %><%= @pickups_by_month[u][m.to_s] || 0 %>, <% end %>],
+          <% end %>
+        ],
+        type: 'bar',
+        groups: [
+          [<%= raw @users.map {|u| "\"#{u}\""}.join "," %>]
+        ]
+      },
+      axis: {
+        x: {
+          type: 'category' // this needed to load string x value
+        }
+      }
+    });
+  });
 </script>

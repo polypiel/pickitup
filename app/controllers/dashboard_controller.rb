@@ -1,46 +1,49 @@
 class DashboardController < ApplicationController
   def index
     wallet_id = get_logged_user.wallet.id
+    @years = Pickup.pluck('DISTINCT year').sort.reverse
+    @year = (params['year'] || @years.max).to_i
 
-    # Initial stats
-    @coins = Pickup.where(wallet_id: wallet_id).count
-    @money = Pickup.where(wallet_id: wallet_id).joins(:coin).sum(:value)
-    @pickers_count = active_pickers wallet_id
+    @coins_by_type = ActiveRecord::Base.connection.execute("
+      SELECT c.value AS coin, c.short_name AS currency, count(c.id) AS amount
+      FROM pickups p
+      JOIN coins c ON p.coin_id = c.id
+      JOIN users u ON p.picker_id = u.id
+      WHERE u.wallet_id = #{wallet_id} AND p.year = #{@year}
+      GROUP BY c.id
+      ORDER BY c.currency_id, c.value ASC
+    ")
 
-    # Last month top users
-    @top_users_monthly = top_users_monthly wallet_id
+    @top_users = ActiveRecord::Base.connection.execute("
+      SELECT u.id, u.username, count(u.id) AS coins , sum(c.value) AS value
+      FROM users u
+      JOIN pickups p ON p.picker_id = u.id
+      JOIN coins c ON p.coin_id = c.id
+      WHERE u.wallet_id = #{wallet_id} AND p.year = #{@year}
+      GROUP BY u.id
+      ORDER BY coins DESC
+    ")
+
+    all = Pickup.where(wallet_id: wallet_id)
+    @pickups_with_location = all.where(year: @year).select { |p| p.has_coordinates? }
+    @users = @top_users.map { |u| u['username']}
+    @pickups_by_month = monthly_pickups all
+    # by user too
 
     # Three last pickups
     now = Time.zone.now
     @last_pickups = Pickup.where(wallet_id: wallet_id, picked_at: (15.days.ago.to_date)..(now)).order(picked_at: :desc).limit(3)
-
-    # Last year pickups
-    year_ago = 12.months.ago.to_date
-    pickups = Pickup.select(:picked_at).where(wallet_id: wallet_id, picked_at: year_ago..now).order(:picked_at)
-    @pickups_monthly = pickups.group_by { |p| p.picked_at.beginning_of_month }
-    @pickups_monthly = @pickups_monthly.drop(@pickups_monthly.length - 12) if @pickups_monthly.length > 12
   end
 
-  def top_users_monthly wallet_id
-    date_limit = 30.days.ago.to_formatted_s(:db)
-    ActiveRecord::Base.connection.execute("
-      SELECT u.id, u.username, count(u.id) AS coins, sum(c.value) AS value
-      FROM users u
-      JOIN pickups p ON p.picker_id = u.id
-      JOIN coins c ON p.coin_id = c.id
-      WHERE u.wallet_id = #{wallet_id} AND p.picked_at > '#{date_limit}'
-      GROUP BY u.id
-      ORDER BY coins DESC
-      LIMIT 3
-    ")
-  end
-
-  def active_pickers wallet_id
-    ActiveRecord::Base.connection.execute("
-      SELECT count(distinct(u.id)) AS user_count
-      FROM users u
-      JOIN pickups p ON p.picker_id = u.id
-      WHERE p.wallet_id = #{wallet_id} AND " +
-      (Rails.env.production? ? "u.active" : "u.active = 't'"))[0]["user_count"]
-  end
+  private
+    def monthly_pickups all
+      pickups_by_month = {}
+      pickups_by_month_raw = all.where(year: @year).group_by { |p| "#{p.picker.username}-#{p.picked_at.month}" }
+      pickups_by_month_raw.each do |k, v|
+        user, month = k.split "-"
+        pickups_by_month[user] = {} unless pickups_by_month[user]
+        pickups_by_month[user][month] = v.size
+      end
+      pickups_by_month
+    end
 end
