@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   get 'dashboard' => 'dashboard#index'
-  get 'stats' => 'stats#index'
 
   controller :sessions do
     get 'login' => :new

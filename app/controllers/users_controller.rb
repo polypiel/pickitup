@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @current_user = @user.id == session[:user_id]
+
     profile_queries
   end
 
@@ -145,11 +146,39 @@ class UsersController < ApplicationController
     end
   end
 
+
   private
     def profile_queries
       @coins = Pickup.where(picker_id: @user.id).count
       @money = Pickup.where(picker_id: @user.id).joins(:coin).sum(:value)
       @last_pickups = Pickup.where(picker_id: @user.id).order(picked_at: :desc).limit(3)
+
+      wallet_id = get_logged_user.wallet.id
+      @years = Pickup.pluck('DISTINCT year').sort.reverse
+      @year = (params['year'] || @years.max).to_i
+      @top_users = ActiveRecord::Base.connection.execute("
+        SELECT u.id, u.username, count(u.id) AS coins , sum(c.value) AS value
+        FROM users u
+        JOIN pickups p ON p.picker_id = u.id
+        JOIN coins c ON p.coin_id = c.id
+        WHERE u.wallet_id = #{wallet_id} AND p.year = #{@year}
+        GROUP BY u.id
+        ORDER BY coins DESC
+      ")
+      all = Pickup.where(wallet_id: wallet_id)
+      @pickups_by_year = year_pickups all #all.group(:year).count
+      @users = @top_users.map { |u| u['username']}
+    end
+
+    def year_pickups all
+      pickups_by_year = {}
+      pickups_by_year_raw = all.group_by { |p| "#{p.picker.username}-#{p.year}" }
+      pickups_by_year_raw.each do |k, v|
+        user, year = k.split "-"
+        pickups_by_year[user] = {} unless pickups_by_year[user]
+        pickups_by_year[user][year] = v.size
+      end
+      pickups_by_year
     end
 
     # Use callbacks to share common setup or constraints between actions.
