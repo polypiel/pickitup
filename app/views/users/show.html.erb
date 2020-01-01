@@ -16,16 +16,6 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12">
-    <h2>Stats</h2>
-  </div>
-  <div class="col-sm-3 col-xs-6">
-    <div id="first-well" class="well" >
-      <h2><strong><%= @coins %></strong></h2>
-      <p class="lead">Coins</p>
-    </div>
-  </div>
-
   <div class="col-sm-3 col-xs-6">
     <div class="well">
       <h2><strong><%= @money %></strong></h2>
@@ -45,10 +35,20 @@
       <tr><td>No pickups yet. Try harder!</td><tr>
     <% end %>
     </table>
+    <%= link_to controller: 'pickups' do %><i class="fa fa-money"></i> See all<% end %>
+  </div>
+</div>
+
+<h2>Stats</h2>
+<div class="row">
+  <div class="col-sm-12">
+    <div id="first-well" class="well" >
+      <h2><strong><%= @coins %></strong></h2>
+      <p class="lead">Coins</p>
+    </div>
   </div>
 
   <div class="col-sm-12">
-    <h2>By Year</h2>
     <div id="year-chart" style="height: 300px;"></div>
   </div>
 </div>
