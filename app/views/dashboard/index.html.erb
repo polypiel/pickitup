@@ -1,65 +1,7 @@
-<div>
-  <h1 style="float: left;"><%= @year %> Stats</h1>
-
-  <nav style="float: right;">
-    <ul class="pagination">
-      <% @years.each do |y| %>
-      <% if y == @year %>
-      <li class="active">
-      <% else %>
-      <li>
-      <% end %>
-        <%= link_to y, :year => y %>
-      </li>
-      <% end %>
-    </ul>
-  </nav>
-</div>
-
-<div style="clear: both;"/>
+<h1><%= @year %> Stats</h1>
 
 <div class="row">
-  <div class="col-sm-4 col-xs-12">
-    <h2>By Pickers</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <th style="text-align: right;">Coins</th>
-          <th style="text-align: right;">Value</th>
-        </tr>
-      </thead>
-    <% @top_users.each_with_index do |top_user, index| %>
-      <tr>
-        <td><%= index + 1 %></td>
-        <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
-        <td style="text-align: right;"><%= top_user['coins'] %></td>
-        <td style="text-align: right;"><%= top_user['value'] %></td>
-      </tr>
-    <% end %>
-    </table>
-  </div>
-
-  <div class="col-sm-4 col-xs-12">
-    <h2>By Coins</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th style="text-align: right;">Pickups</th>
-        </tr>
-      </thead>
-      <% @coins_by_type.each_with_index do |coin, index| %>
-      <tr>
-        <td><%= coin['coin'] %> <%= coin['currency'] %></td>
-        <td style="text-align: right;"><%= coin['amount'] %></td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-
-  <div class="col-sm-4 col-xs-12">
+  <div class="col-sm-12 col-xs-12">
     <h2>Last pickups</h2>
     <table class="table">
     <% @last_pickups.each do |pickup| %>
@@ -76,18 +18,61 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12">
-    <h2>By Location</h2>
-    <div id="map-canvas" style="height: 300px;"></div>
+  <div class="col-sm-6 col-xs-12">
+    <h2>Top Pickers</h2>
+    <table class="table">
+    <% @top_users.each_with_index do |top_user, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><strong><%= link_to top_user['username'], user_path(top_user['id']) %></strong></td>
+        <td style="text-align: right;"><%= top_user['coins'] %></td>
+        <td style="text-align: right;"><%= top_user['value'] %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+
+  <div class="col-sm-6 col-xs-12">
+    <h2>Coins</h2>
+    <table class="table">
+      <% @coins_by_type.each_with_index do |coin, index| %>
+      <tr>
+        <td><%= coin['coin'] %> <%= coin['currency'] %></td>
+        <td style="text-align: right;"><%= coin['amount'] %></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 </div>
 
 <div class="row">
   <div class="col-sm-12">
-    <h2>By Month</h2>
+    <h2>Monthly Pickups</h2>
     <div id="monthly-chart" style="height: 300px;"></div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Coin Map</h2>
+    <div id="map-canvas" style="height: 300px;"></div>
+  </div>
+</div>
+
+<nav>
+  <ul class="pagination">
+    <% @years.each do |y| %>
+    <% if y == @year %>
+    <li class="active">
+    <% else %>
+    <li>
+    <% end %>
+      <%= link_to y, :year => y %>
+    </li>
+    <% end %>
+  </ul>
+</nav>
+
 
 <script type="text/javascript">
   $(document).ready(function() {
