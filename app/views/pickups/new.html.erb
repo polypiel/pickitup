@@ -11,6 +11,8 @@ function onLocationFound(position) {
   $("#pickup_latitude").val(position.coords.latitude);
   $("#pickup_longitude").val(position.coords.longitude);
   searchLocationText(position.coords.latitude, position.coords.longitude);
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({location: {lat: position.coords.latitude, lng: position.coords.longitude}}, showLocationHints);
 }
 
 function handle_error(err) {
@@ -21,6 +23,15 @@ function handle_error(err) {
 
   if (err.code == 3) {
     navigator.geolocation.getCurrentPosition(onLocationFound, handle_error, {timeout: POSITION_TIMEOUT, enableHighAccuracy: false});
+  }
+}
+
+function showLocationHints(result, status) {
+  console.debug("Hints found: " + result);
+  if (status == google.maps.GeocoderStatus.OK) {
+    for (const l of result) {
+      $("#location-hints").append('<span class="label label-default">' + l.formatted_address + '</span>')
+    }
   }
 }
 
