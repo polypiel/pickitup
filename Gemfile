@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby "2.7.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.7.2'
+gem 'rails', '5.1.6.2'
 # Databases for Active Record
 group :production do
   gem 'pg', '0.20'
