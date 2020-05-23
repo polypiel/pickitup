@@ -14,7 +14,11 @@ class Pickup < ApplicationRecord
 
   date_time_attribute :picked_at
 
+  SUPPORTED_FILTERS = [:year, :picker_id, :has_coords, :has_not_coords]
 #  scope :coin, -> (coin_id) { where coin: coin_id }
+
+ # It only works in Postgres
+  scope :wallet_id, -> (wallet) {where "wallet_id = ?", wallet}
   scope :year, -> (year)  {where "EXTRACT(YEAR FROM picked_at) = ?", year }
   scope :picker_id, -> (id) { where picker_id: id }
 #  scope :handed_over, -> (handed_over) { where handed_over: ActiveRecord::ConnectionAdapters::Column.value_to_boolean(handed_over) }
@@ -51,6 +55,12 @@ class Pickup < ApplicationRecord
       all.each do |p|
         csv << p.to_csv
       end
+    end
+  end
+
+  def self.filter(attributes)
+    attributes.permit(SUPPORTED_FILTERS).to_hash.reduce(all) do |scope, (key, value)|
+      value.present? ? scope.send(key, value): scope
     end
   end
 end

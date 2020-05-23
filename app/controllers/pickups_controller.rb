@@ -6,18 +6,24 @@ class PickupsController < ApplicationController
   # GET /pickups.json
   def index
     wallet_id = get_logged_user.wallet.id
+    params['wallet_id'] = wallet_id
     @pickers = wallet_pickers
-    if not params.key?('coordinates') or params['coordinates'].blank?
-      @pickups = Pickup.where(wallet_id: wallet_id).filter(params.slice(:year, :picker_id)).order(picked_at: :desc).page(params[:page]).per(20)
-    elsif params['coordinates'] == 'true'
+
+    if params['coordinates'] == 'true'
       params[:has_coords] = true
       params[:has_not_coords] = nil
-      @pickups = Pickup.where(wallet_id: wallet_id).filter(params.slice(:year, :picker_id, :has_coords)).order(picked_at: :desc).page(params[:page]).per(20)
-    else
+    elsif params['coordinates'] == 'false'
       params[:has_not_coords] = true
       params[:has_coords] = nil
-      @pickups = Pickup.where(wallet_id: wallet_id).filter(params.slice(:year, :picker_id, :has_not_coords)).order(picked_at: :desc).page(params[:page]).per(20)
     end
+
+    @pickups = Pickup
+      #.where(wallet_id: wallet_id)
+      .filter(params)
+      .order(picked_at: :desc)
+      .page(params[:page])
+      .per(20)
+
     @show_filter_form = (!(params[:year].blank?)) | (!(params[:picker_id].blank?)) | (!(params[:coordinates].blank?))
     @years = Pickup.pluck('DISTINCT year').sort.reverse
     @year = (params['year'] || @years.max).to_i
