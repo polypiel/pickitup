@@ -14,7 +14,7 @@ class Pickup < ApplicationRecord
 
   date_time_attribute :picked_at
 
-  SUPPORTED_FILTERS = [:year, :picker_id, :has_coords, :has_not_coords]
+  SUPPORTED_FILTERS = [:wallet_id, :year, :picker_id, :has_coords, :has_not_coords]
 #  scope :coin, -> (coin_id) { where coin: coin_id }
 
  # It only works in Postgres
