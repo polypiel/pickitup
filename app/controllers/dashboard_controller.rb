@@ -26,6 +26,8 @@ class DashboardController < ApplicationController
 
     all = Pickup.where(wallet_id: wallet_id)
     @pickups_with_location = all.where(year: @year).select { |p| p.has_coordinates? }
+    @lat_center = @pickups_with_location.map { |p| p.latitude }.sum(0.0) / @pickups_with_location.length
+    @lon_center = @pickups_with_location.map { |p| p.longitude }.sum(0.0) / @pickups_with_location.length
     @users = @top_users.map { |u| u['username']}
     @pickups_by_month = monthly_pickups all
     # by user too

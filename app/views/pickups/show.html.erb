@@ -23,8 +23,8 @@
     <h3><% if @pickup.has_coordinates? %><i class="fa fa-location-arrow"></i> <% end %>Location</h3>
     <div id="map-canvas" style="height: 300px;"></div>
 
-    <input id="pac-input" type="text" placeholder="Enter location" style="width: 100%;" value="<%= @pickup.location %>"
-      <% if @pickup.has_coordinates? %> disabled<% end %>>
+    <input id="pac-input" type="text" style="width: 100%;" value="<%= @pickup.location %>"
+      <% if @pickup.has_coordinates? %> disabled<% else %> placeholder="Enter location"<% end %>>
     <%= form_for(@pickup, :url =>  {:action => 'update_coordinates'}, :html => {:role => 'form'}) do |f| %>
       <%= f.hidden_field :longitude %>
       <%= f.hidden_field :latitude %>
@@ -38,82 +38,42 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-  var coinLatlng = new google.maps.LatLng(
-    <%= @pickup.has_coordinates? ? @pickup.latitude : 40.416775 %>, 
-    <%= @pickup.has_coordinates? ? @pickup.longitude : -3.703790 %>);
-  var mapOptions = { 
-    center: coinLatlng, 
-    zoom: 13, 
-    mapTypeId: 'roadmap', 
-    disableDefaultUI: true,
-    zoomControl: true,
-  };
-  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  let lonLat = [<%= @pickup.longitude %>, <%= @pickup.latitude %>];
 
-
-  <% if @pickup.has_coordinates? %>
-  new google.maps.Marker({
-      position: coinLatlng,
-      map: map,
-      title: '<%= @pickup.location %>'
+<% if @pickup.has_coordinates? %>
+  var marker = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat(lonLat))
   });
-  <% else %>
-  
-  // Create the search box and link it to the UI element.
-  var input = document.getElementById('pac-input');
-  var searchBox = new google.maps.places.SearchBox(input);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  marker.setStyle(
+    new ol.style.Style({
+      image: new ol.style.Icon({
+        color: '#c3886a',
+        crossOrigin: 'anonymous',
+        // For Internet Explorer 11
+        imgSize: [20, 20],
+        src: '<%= asset_path("dot.svg") %>',
+      }),
+    })
+  );
 
-  // Bias the SearchBox results towards current map's viewport.
-  map.addListener('bounds_changed', function() {
-    searchBox.setBounds(map.getBounds());
+  var vectorSource = new ol.source.Vector({features: [marker]});
+  var vectorLayer = new ol.layer.Vector({source: vectorSource});
+
+  var map = new ol.Map({
+    target: document.getElementById('map-canvas'),
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      }), 
+      vectorLayer
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat(lonLat),
+      zoom: 7
+    })
   });
-
-  var markers = [];
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
-  searchBox.addListener('places_changed', function() {
-    var places = searchBox.getPlaces();
-    if (places.length == 0) {
-      return;
-    }
-
-    // Clear out the old markers.
-    markers.forEach(function(marker) {
-      marker.setMap(null);
-    });
-    markers = [];
-
-    // For each place, get the icon, name and location.
-    var bounds = new google.maps.LatLngBounds();
-    places.forEach(function(place) {
-      if (!place.geometry) {
-        console.warn("Returned place contains no geometry");
-        return;
-      }
-
-      $("#pickup_latitude").val(place.geometry.location.lat);
-      $("#pickup_longitude").val(place.geometry.location.lng);
-      $("#pickup_location").val(input.value);
-      $("#saveCoordinatesBtn").removeClass('hidden');
-
-      // Create a marker for each place.
-      markers.push(new google.maps.Marker({
-        map: map,
-        title: place.name,
-        position: place.geometry.location,
-        draggable:true,
-      }));
-
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
-    });
-    map.fitBounds(bounds);
-  });
-  <% end %>
+ <% else %>
+    // TODO no coordinates case
+<% end %>
 });
 </script>

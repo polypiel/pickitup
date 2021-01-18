@@ -55,7 +55,7 @@
 <div class="row">
   <div class="col-sm-12">
     <h2>Coin Map</h2>
-    <div id="map-canvas" style="height: 300px;"></div>
+    <div id="map-canvas" style="height: 300px; width: 100%;"></div>
   </div>
 </div>
 
@@ -83,6 +83,7 @@
       <% } %>
     ];
 
+/*
     var bounds = new google.maps.LatLngBounds();
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
       mapTypeId: 'roadmap', 
@@ -98,7 +99,45 @@
       bounds.extend(marker.position);
     }
     map.fitBounds(bounds);
+*/
 
+  // https://openlayers.org/en/latest/examples/icon-color.html
+  var coinMarkers = coins.map( it => {
+    var marker = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([it.lon, it.lat]))
+    });
+    
+    marker.setStyle(
+      new ol.style.Style({
+        image: new ol.style.Icon({
+          color: '#c3886a',
+          crossOrigin: 'anonymous',
+          // For Internet Explorer 11
+          imgSize: [20, 20],
+          src: '<%= asset_path("dot.svg") %>',
+        }),
+      })
+    );
+    return marker;
+  });
+
+  var vectorSource = new ol.source.Vector({features: coinMarkers});
+  var vectorLayer = new ol.layer.Vector({source: vectorSource});
+
+  var map = new ol.Map({
+    target: document.getElementById('map-canvas'),
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      }), 
+      vectorLayer
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([<%= @lon_center %>, <%= @lat_center %>]),
+      zoom: 12
+    })
+  });
+    
     // Monthly chart
     c3.generate({
       bindto: '#monthly-chart',

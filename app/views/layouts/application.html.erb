@@ -33,8 +33,9 @@
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <!-- Google maps -->
-  <script src='https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API"] %>&libraries=places'></script>
+  <!-- Open layers -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>

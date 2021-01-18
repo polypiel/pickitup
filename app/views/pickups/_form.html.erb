@@ -68,7 +68,6 @@
 <% end %>
 
 <script type="text/javascript">
-  var GMAPS_TIMEOUT = 5000;
 
   function isDateControlSupported() {
     var tester = document.createElement('input');
@@ -77,28 +76,8 @@
     return tester.type === 'date' && tester.value === '';
   }
 
-  function isGmapsLoaded() {
-    return typeof google === 'object' && typeof google.maps === 'object';
-  }
-
   function searchLocationText(lat, lng) {
-    if (!isGmapsLoaded()) {
-      console.error("Google maps could not be found");
-      return;
-    }
-
-    var latlng = new google.maps.LatLng(lat, lng);
-    var geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          $("#pickup_location").val(results[1].formatted_address);
-        }
-      } else {
-        console.error("Google maps error: " + status);
-      }
-    });
+    // TODO search for text location
   }
 
   $(document).ready(function() {
@@ -114,20 +93,6 @@
 
   $(document).ready(function() {
     var input = document.getElementById('pickup_location');
-    var searchBox = new google.maps.places.SearchBox(input);
-    searchBox.addListener('places_changed', function() {
-      var places = searchBox.getPlaces();
-      if (places.length == 0) {
-        return;
-      }
-      places.forEach(function(place) {
-        if (!place.geometry) {
-          console.warn("Returned place contains no geometry");
-          return;
-        }
-        $("#pickup_latitude").val(place.geometry.location.lat);
-        $("#pickup_longitude").val(place.geometry.location.lng);
-      });
-    });
+    // TODO init search location
   });
 </script>
