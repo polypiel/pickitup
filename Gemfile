@@ -5,7 +5,7 @@ ruby "3.0.2"
 gem 'rails', '6.1.6.1'
 # Databases for Active Record
 group :production do
-  gem 'pg', '0.20'
+  gem 'pg', '1.1'
   # webserver
   gem 'puma'
 end
